@@ -16,12 +16,19 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:logging" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02ff19fa-1125-41c4-ad49-e101472094bf" name="Default Changelist" comment="">
+    <list default="true" id="02ff19fa-1125-41c4-ad49-e101472094bf" name="Default Changelist" comment="Creación de aplicación Logging">
+      <change afterPath="$PROJECT_DIR$/Logging/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TFG/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/TFG/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,15 +36,23 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1eo3A0wYOUP9VBjBSkKfdKvgixP" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
@@ -81,8 +96,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1594973970707</updated>
-      <workItem from="1594974000312" duration="902000" />
+      <workItem from="1594974000312" duration="7262000" />
     </task>
+    <task id="LOCAL-00001" summary="Creación de aplicación Logging">
+      <created>1594975048836</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1594975048836</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -93,11 +116,28 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="logging" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Creación de aplicación Logging" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creación de aplicación Logging" />
   </component>
   <component name="WindowStateProjectService">
     <state x="482" y="124" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594974748505">
@@ -120,9 +160,13 @@
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
     <state width="1398" height="231" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594974899754" />
-    <state x="354" y="297" key="Vcs.Push.Dialog.v2" timestamp="1594974380816">
+    <state x="354" y="297" key="Vcs.Push.Dialog.v2" timestamp="1594975416520">
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
-    <state x="354" y="297" key="Vcs.Push.Dialog.v2/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594974380816" />
+    <state x="354" y="297" key="Vcs.Push.Dialog.v2/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594975416520" />
+    <state x="683" y="214" width="670" height="676" key="search.everywhere.popup" timestamp="1594976786150">
+      <screen x="0" y="23" width="1920" height="1006" />
+    </state>
+    <state x="683" y="214" width="670" height="676" key="search.everywhere.popup/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594976786150" />
   </component>
 </project>
