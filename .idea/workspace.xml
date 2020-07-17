@@ -20,15 +20,14 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:logging" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02ff19fa-1125-41c4-ad49-e101472094bf" name="Default Changelist" comment="Creación de aplicación Logging">
-      <change afterPath="$PROJECT_DIR$/Logging/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/admin.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,6 +132,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -144,22 +144,22 @@
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
     <state x="482" y="124" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594974748505" />
-    <state width="1398" height="231" key="GridCell.Tab.0.bottom" timestamp="1594974899754">
+    <state width="1398" height="231" key="GridCell.Tab.0.bottom" timestamp="1594988883007">
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
-    <state width="1398" height="231" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594974899754" />
-    <state width="1398" height="231" key="GridCell.Tab.0.center" timestamp="1594974899754">
+    <state width="1398" height="231" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594988883007" />
+    <state width="1398" height="231" key="GridCell.Tab.0.center" timestamp="1594988883007">
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
-    <state width="1398" height="231" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594974899754" />
-    <state width="1398" height="231" key="GridCell.Tab.0.left" timestamp="1594974899753">
+    <state width="1398" height="231" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594988883007" />
+    <state width="1398" height="231" key="GridCell.Tab.0.left" timestamp="1594988883006">
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
-    <state width="1398" height="231" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594974899753" />
-    <state width="1398" height="231" key="GridCell.Tab.0.right" timestamp="1594974899754">
+    <state width="1398" height="231" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594988883006" />
+    <state width="1398" height="231" key="GridCell.Tab.0.right" timestamp="1594988883007">
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
-    <state width="1398" height="231" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594974899754" />
+    <state width="1398" height="231" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594988883007" />
     <state x="354" y="297" key="Vcs.Push.Dialog.v2" timestamp="1594975416520">
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
