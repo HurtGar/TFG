@@ -10,7 +10,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43371002-1056-4129-80e2-639d525a55f7" name="Default Changelist" comment="Primer commit" />
+    <list default="true" id="43371002-1056-4129-80e2-639d525a55f7" name="Default Changelist" comment="Primer commit">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a2e944fa-16b6-49cd-8c8a-cfa2f7aeb0dc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a2e944fa-16b6-49cd-8c8a-cfa2f7aeb0dc/storage_v2/_src_/database/proment.i6mR7Q.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a2e944fa-16b6-49cd-8c8a-cfa2f7aeb0dc/storage_v2/_src_/database/proment.i6mR7Q/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a2e944fa-16b6-49cd-8c8a-cfa2f7aeb0dc/storage_v2/_src_/database/proment.i6mR7Q/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a2e944fa-16b6-49cd-8c8a-cfa2f7aeb0dc/storage_v2/_src_/database/proment.i6mR7Q/schema/prueba.0fObxQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a2e944fa-16b6-49cd-8c8a-cfa2f7aeb0dc/storage_v2/_src_/database/proment.i6mR7Q/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,30 +46,6 @@
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RunManager">
-    <configuration name="TFG" type="Python.DjangoServer" factoryName="Django server">
-      <module name="TFG" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-        <env name="DJANGO_SETTINGS_MODULE" value="Proment.settings" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
-      <option name="host" value="" />
-      <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="http://127.0.0.1:8000/" />
-      <option name="runTestServer" value="false" />
-      <option name="runNoReload" value="false" />
-      <option name="useCustomRunCommand" value="false" />
-      <option name="customRunCommand" value="" />
-      <method v="2" />
-    </configuration>
     <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
       <module name="TFG" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -100,7 +85,8 @@
       <workItem from="1594290290795" duration="3653000" />
       <workItem from="1594374227948" duration="2224000" />
       <workItem from="1594633978348" duration="3146000" />
-      <workItem from="1594805790053" duration="18137000" />
+      <workItem from="1594805790053" duration="18405000" />
+      <workItem from="1594915903167" duration="3000" />
     </task>
     <servers />
   </component>
@@ -117,6 +103,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Primer commit" />
@@ -139,22 +126,22 @@
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
     <state x="100" y="123" width="1720" height="806" key="DiffContextDialog/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594205580553" />
-    <state width="1398" height="230" key="GridCell.Tab.0.bottom" timestamp="1594914301789">
+    <state width="1398" height="230" key="GridCell.Tab.0.bottom" timestamp="1594915899778">
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
-    <state width="1398" height="230" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594914301789" />
-    <state width="1398" height="230" key="GridCell.Tab.0.center" timestamp="1594914301788">
+    <state width="1398" height="230" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594915899778" />
+    <state width="1398" height="230" key="GridCell.Tab.0.center" timestamp="1594915899777">
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
-    <state width="1398" height="230" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594914301788" />
-    <state width="1398" height="230" key="GridCell.Tab.0.left" timestamp="1594914301787">
+    <state width="1398" height="230" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594915899777" />
+    <state width="1398" height="230" key="GridCell.Tab.0.left" timestamp="1594915899776">
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
-    <state width="1398" height="230" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594914301787" />
-    <state width="1398" height="230" key="GridCell.Tab.0.right" timestamp="1594914301789">
+    <state width="1398" height="230" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594915899776" />
+    <state width="1398" height="230" key="GridCell.Tab.0.right" timestamp="1594915899777">
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
-    <state width="1398" height="230" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594914301789" />
+    <state width="1398" height="230" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594915899777" />
     <state x="469" y="165" key="SettingsEditor" timestamp="1594914187999">
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
