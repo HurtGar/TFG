@@ -14,6 +14,9 @@ class Rol(models.Model):
         db_table = 'roles'
         verbose_name_plural = 'Roles'
 
+    def __str__(self):
+        return self.descrol
+
 
 class Usuario(models.Model):
     estado_enum = (
@@ -36,6 +39,8 @@ class Usuario(models.Model):
         db_table = 'usuarios'
         verbose_name_plural = 'Usuarios'
 
+    def __str__(self):
+        return self.nombre + " " + self.primerapellido
 
 class Tareasusuario(models.Model):
     tareas_idtarea = models.ForeignKey('Tarea', on_delete=models.DO_NOTHING)
@@ -58,6 +63,9 @@ class RegistroEntradaUsuario(models.Model):
         db_table = 'registroEntradaUsuarios'
         verbose_name_plural = 'Registroentradausuarios'
 
+    def __str__(self):
+        return self.fechaacceso + " " + self.horaacceso
+
 
 # ---------Proyecto---------
 
@@ -70,6 +78,9 @@ class Prioridad(models.Model):
         db_table = 'prioridades'
         verbose_name_plural = 'Prioridades'
 
+    def __str__(self):
+        return self.descprioridad
+
 
 class Estado(models.Model):
     idestado = models.AutoField(primary_key=True)
@@ -79,9 +90,13 @@ class Estado(models.Model):
         db_table = 'estados'
         verbose_name_plural = 'Estados'
 
+    def __str__(self):
+        return self.descestado
+
 
 class Proyecto(models.Model):
     idproyecto = models.AutoField(primary_key=True)
+    nombreproyecto = models.CharField(max_length=100)
     descproyecto = models.CharField(max_length=500)
     inicioproyecto = models.DateField()
     finproyecto = models.DateField()
@@ -91,6 +106,8 @@ class Proyecto(models.Model):
         db_table = 'proyectos'
         verbose_name_plural = 'Proyectos'
 
+    def __str__(self):
+        return self.nombreproyecto
 
 class Bloque(models.Model):
     idbloque = models.AutoField(primary_key=True)
@@ -105,6 +122,9 @@ class Bloque(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['idbloque', 'proyecto_idproyecto'], name='constraint_bloque_proyecto'),
         ]
+
+    def __str__(self):
+        return self.nombrebloque
 
 
 class Tarea(models.Model):
@@ -132,6 +152,8 @@ class Tarea(models.Model):
                                     name='constraint_idtarea_prioridades'),
         ]
 
+    def __str__(self):
+        return self.nombretarea
 
 class HistorialModificacionTarea(models.Model):
     idhistorico = models.AutoField(primary_key = True)
@@ -150,3 +172,6 @@ class HistorialModificacionTarea(models.Model):
             models.UniqueConstraint(fields=['idhistorico','tareas_idtarea'], name='constraint_historico_tarea'),
             models.UniqueConstraint(fields=['idhistorico','idusuario'], name='constraint_historico_usuario'),
         ]
+
+    def __str__(self):
+        return self.fechahistorico + " " + self.horahistorico
