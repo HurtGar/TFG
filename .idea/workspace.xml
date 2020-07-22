@@ -26,11 +26,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02ff19fa-1125-41c4-ad49-e101472094bf" name="Default Changelist" comment="Creación de aplicación Logging">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/migrations/0002_proyecto_nombreproyecto.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/serializer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/serializer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logging/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TFG/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/TFG/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TFG/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/TFG/urls.py" afterDir="false" />
@@ -40,10 +38,14 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -65,6 +67,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -115,7 +118,7 @@
       <option name="presentableId" value="Default" />
       <updated>1594973970707</updated>
       <workItem from="1594974000312" duration="7262000" />
-      <workItem from="1595263302120" duration="2124000" />
+      <workItem from="1595263302120" duration="17284000" />
     </task>
     <task id="LOCAL-00001" summary="Creación de aplicación Logging">
       <created>1594975048836</created>
@@ -165,25 +168,25 @@
     </state>
     <state x="-1078" y="111" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1595263341255" />
     <state x="482" y="124" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594974748505" />
-    <state width="1398" height="230" key="GridCell.Tab.0.bottom" timestamp="1595265497270">
+    <state width="1398" height="213" key="GridCell.Tab.0.bottom" timestamp="1595414651953">
       <screen x="-1440" y="23" width="1440" height="877" />
     </state>
-    <state width="1398" height="230" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1595265497270" />
+    <state width="1398" height="213" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1595414651953" />
     <state width="1536" height="230" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594989012917" />
-    <state width="1398" height="230" key="GridCell.Tab.0.center" timestamp="1595265497267">
+    <state width="1398" height="213" key="GridCell.Tab.0.center" timestamp="1595414651951">
       <screen x="-1440" y="23" width="1440" height="877" />
     </state>
-    <state width="1398" height="230" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1595265497267" />
+    <state width="1398" height="213" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1595414651951" />
     <state width="1536" height="230" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594989012916" />
-    <state width="1398" height="230" key="GridCell.Tab.0.left" timestamp="1595265497267">
+    <state width="1398" height="213" key="GridCell.Tab.0.left" timestamp="1595414651951">
       <screen x="-1440" y="23" width="1440" height="877" />
     </state>
-    <state width="1398" height="230" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1595265497267" />
+    <state width="1398" height="213" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1595414651951" />
     <state width="1536" height="230" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594989012915" />
-    <state width="1398" height="230" key="GridCell.Tab.0.right" timestamp="1595265497268">
+    <state width="1398" height="213" key="GridCell.Tab.0.right" timestamp="1595414651952">
       <screen x="-1440" y="23" width="1440" height="877" />
     </state>
-    <state width="1398" height="230" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1595265497268" />
+    <state width="1398" height="213" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1595414651952" />
     <state width="1536" height="230" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594989012916" />
     <state x="354" y="297" key="Vcs.Push.Dialog.v2" timestamp="1594975416520">
       <screen x="0" y="23" width="1920" height="1006" />

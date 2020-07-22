@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import rest_framework
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -36,9 +37,23 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Logging',
+    'rest_framework.authtoken',
     'rest_framework',
     'corsheaders'
 ]
+
+# SI DEFINIMOS AQUÍ LOS PERMISOS DE AUTENTICACIÓN, NO PODREMOS ACCEDER A NUESTRA APLICACIÓN
+# ESTOS DATOS HAN DE AÑADIRSE EN LA VISTA QUE QUEREMOS PROTEGER. VER views.py MÉTODO UsuarioList
+# # Diccionario para que la autenticación por defecto sea un Token.
+# # Ahora, la ruta está protegida por su acceso mediante un Token
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework.authentication.TokenAuthentication',
+#     ),
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticated',
+#     ),
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

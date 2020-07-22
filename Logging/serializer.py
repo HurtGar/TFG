@@ -9,8 +9,16 @@ from Logging.models import *
 
 # Proyecto
 class ProyectoSerializer(serializers.ModelSerializer):
+    # En class Meta: definimos los cambos que queremos y la configuración del serializador.
     class Meta:
         model = Proyecto
         # Debemos indicar los campos que queremos serializar. Se debe crear una lista.
         # Si queremos serializar todos los campos debemos usar __all__, sin listas.
+        fields = '__all__'
+
+
+# Usuarios
+class UsuarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
         fields = '__all__'
