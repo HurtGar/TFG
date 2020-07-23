@@ -10,24 +10,24 @@ from django.views.generic.edit import FormView
 from rest_framework import generics, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from Logging.serializer import *
+from Login.serializer import *
 
 
 # Create your views here.
-
 class UsuariosList(generics.ListCreateAPIView):
     serializer_class = UsuarioSerializer
     queryset = Usuario.objects.all()
+    #queryset = Usuario.objects.filter(primerapellido = 'Hurtado')
     # Solo se podrá acceder a esta vista si está registrado el token
     # Importante definirlo como una lista (...,)
     permission_classes = (IsAuthenticated,)
 
-    # Revisar porque no funciona si añado esto
-    # authentication_classes = (TokenAuthentication,)
+    # Revisar porque no funciona en Chrome. En Postman si permite realizar peticiones y obtener resultados.
+    authentication_classes = [TokenAuthentication]
 
 
 class ProyectosList(generics.ListCreateAPIView):

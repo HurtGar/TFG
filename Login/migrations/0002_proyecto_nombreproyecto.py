@@ -8,7 +8,7 @@ from django.utils.timezone import utc
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Logging', '0001_initial'),
+        ('Login', '0001_initial'),
     ]
 
     operations = [

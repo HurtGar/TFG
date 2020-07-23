@@ -84,9 +84,9 @@ class Migration(migrations.Migration):
                 ('fechaInicio', models.DateField()),
                 ('fechafin', models.DateField()),
                 ('fechaactualizacion', models.DateTimeField()),
-                ('bloques_idbloque', models.ForeignKey(db_column='bloques_idbloque', on_delete=django.db.models.deletion.CASCADE, to='Logging.Bloque')),
-                ('estados_idestado', models.ForeignKey(db_column='estados_idestado', null=True, on_delete=django.db.models.deletion.SET_NULL, to='Logging.Estado')),
-                ('prioridades_idprioridad', models.ForeignKey(db_column='prioridades_idprioridad', null=True, on_delete=django.db.models.deletion.SET_NULL, to='Logging.Prioridad')),
+                ('bloques_idbloque', models.ForeignKey(db_column='bloques_idbloque', on_delete=django.db.models.deletion.CASCADE, to='Login.Bloque')),
+                ('estados_idestado', models.ForeignKey(db_column='estados_idestado', null=True, on_delete=django.db.models.deletion.SET_NULL, to='Login.Estado')),
+                ('prioridades_idprioridad', models.ForeignKey(db_column='prioridades_idprioridad', null=True, on_delete=django.db.models.deletion.SET_NULL, to='Login.Prioridad')),
             ],
             options={
                 'verbose_name_plural': 'Tareas',
@@ -97,7 +97,7 @@ class Migration(migrations.Migration):
             name='Tareasusuario',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('tareas_idtarea', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='Logging.Tarea')),
+                ('tareas_idtarea', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='Login.Tarea')),
             ],
             options={
                 'db_table': 'tareasusuario',
@@ -115,8 +115,8 @@ class Migration(migrations.Migration):
                 ('password', models.CharField(max_length=200)),
                 ('fecharegistro', models.DateTimeField()),
                 ('estado', models.IntegerField(choices=[(0, 'Inhabilitado'), (1, 'Habilitado')], default=0)),
-                ('roles_idrol', models.ForeignKey(blank=True, db_column='roles_idrol', null=True, on_delete=django.db.models.deletion.SET_NULL, to='Logging.Rol')),
-                ('tareas', models.ManyToManyField(through='Logging.Tareasusuario', to='Logging.Tarea')),
+                ('roles_idrol', models.ForeignKey(blank=True, db_column='roles_idrol', null=True, on_delete=django.db.models.deletion.SET_NULL, to='Login.Rol')),
+                ('tareas', models.ManyToManyField(through='Login.Tareasusuario', to='Login.Tarea')),
             ],
             options={
                 'verbose_name_plural': 'Usuarios',
@@ -126,7 +126,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='tareasusuario',
             name='usuarios_idusuario',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='Logging.Usuario'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='Login.Usuario'),
         ),
         migrations.CreateModel(
             name='RegistroEntradaUsuario',
@@ -135,7 +135,7 @@ class Migration(migrations.Migration):
                 ('fechaacceso', models.DateField()),
                 ('horaacceso', models.TimeField()),
                 ('ipacceso', models.CharField(max_length=45)),
-                ('usuario_idusuario', models.ForeignKey(db_column='usuario_idusuario', on_delete=django.db.models.deletion.DO_NOTHING, to='Logging.Usuario')),
+                ('usuario_idusuario', models.ForeignKey(db_column='usuario_idusuario', on_delete=django.db.models.deletion.DO_NOTHING, to='Login.Usuario')),
             ],
             options={
                 'verbose_name_plural': 'Registroentradausuarios',
@@ -149,7 +149,7 @@ class Migration(migrations.Migration):
                 ('fechahistorico', models.DateField()),
                 ('horahistorico', models.TimeField()),
                 ('idusuario', models.IntegerField()),
-                ('tareas_idtarea', models.ForeignKey(db_column='tareas_idtarea', on_delete=django.db.models.deletion.CASCADE, to='Logging.Tarea')),
+                ('tareas_idtarea', models.ForeignKey(db_column='tareas_idtarea', on_delete=django.db.models.deletion.CASCADE, to='Login.Tarea')),
             ],
             options={
                 'verbose_name_plural': 'HistorialModificacionesTareas',
@@ -159,7 +159,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='bloque',
             name='proyecto_idproyecto',
-            field=models.ForeignKey(db_column='proyecto_idproyecto', on_delete=django.db.models.deletion.CASCADE, to='Logging.Proyecto'),
+            field=models.ForeignKey(db_column='proyecto_idproyecto', on_delete=django.db.models.deletion.CASCADE, to='Login.Proyecto'),
         ),
         migrations.AddConstraint(
             model_name='tareasusuario',

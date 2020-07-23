@@ -4,7 +4,7 @@
 
 # Debemos instalar dos paquetes: pip install djangorestframework && pip install django-cors-headers
 from rest_framework import serializers
-from Logging.models import *
+from Login.models import *
 
 
 # Proyecto

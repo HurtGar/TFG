@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Logging.models import Tarea,HistorialModificacionTarea,Usuario, Proyecto, Prioridad, RegistroEntradaUsuario,Tareasusuario,Estado,Rol,Bloque
+from Login.models import Tarea,HistorialModificacionTarea,Usuario, Proyecto, Prioridad, RegistroEntradaUsuario,Tareasusuario,Estado,Rol,Bloque
 
 # Register your models here.
 
