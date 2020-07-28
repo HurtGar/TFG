@@ -15,15 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from rest_framework.authtoken import views
-from Login.views import UsuariosList, ProyectosList, Login, Logout
+
+from rest_framework.authtoken import views as vw
+from rest_framework.urlpatterns import format_suffix_patterns
+
+from Login import views
+from Login.views import UsuariosList
 
 urlpatterns = [
+    path('', views.index),
     path('admin/', admin.site.urls),
-    path('proyectos/', ProyectosList.as_view(), name='list_proyectos'),
     path('usuarios/', UsuariosList.as_view(), name='list_usuarios'),
-    path('api_generate_token/', views.obtain_auth_token),
-    path('login/', Login.as_view(), name='login'),
-    path('logout/', Logout.as_view(), name ='logout')
+    path('api_generate_token/', vw.obtain_auth_token),
+    path('login/', include('Login.urls')),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)

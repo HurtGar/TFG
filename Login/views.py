@@ -1,7 +1,9 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.http import Http404
 from django.http import HttpResponseRedirect
 # Paquetes necesarios para el loging y logout con Token
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
@@ -10,18 +12,23 @@ from django.views.generic.edit import FormView
 from rest_framework import generics, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from Login.serializer import *
 
 
+# INDEX DE PRUEBA
+def index(request):
+    return render(request, '../templates/index.html')
+
+
 # Create your views here.
 class UsuariosList(generics.ListCreateAPIView):
     serializer_class = UsuarioSerializer
     queryset = Usuario.objects.all()
-    #queryset = Usuario.objects.filter(primerapellido = 'Hurtado')
+
     # Solo se podrá acceder a esta vista si está registrado el token
     # Importante definirlo como una lista (...,)
     permission_classes = (IsAuthenticated,)
@@ -30,7 +37,24 @@ class UsuariosList(generics.ListCreateAPIView):
     authentication_classes = [TokenAuthentication]
 
 
-class ProyectosList(generics.ListCreateAPIView):
+class ListarProyecto(APIView):
+    permission_classes = [IsAuthenticated]
+
+    # authentication_classes = [TokenAuthentication]
+
+    def get_object(self, pk):
+        try:
+            return Proyecto.objects.get(idproyecto=pk)
+        except Proyecto.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        proyecto = self.get_object(pk)
+        serializers = ProyectoSerializer(proyecto)
+        return Response(serializers.data)
+
+
+class ListarTodosLosProyectos(generics.ListAPIView):
     serializer_class = ProyectoSerializer
     queryset = Proyecto.objects.all()  # Obtener todos los datos de Proyecto.
 
