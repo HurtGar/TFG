@@ -15,6 +15,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from Proyectos.serializer import *
 
 from Login.serializer import *
 
@@ -35,28 +36,6 @@ class UsuariosList(generics.ListCreateAPIView):
 
     # Revisar porque no funciona en Chrome. En Postman si permite realizar peticiones y obtener resultados.
     authentication_classes = [TokenAuthentication]
-
-
-class ListarProyecto(APIView):
-    permission_classes = [IsAuthenticated]
-
-    # authentication_classes = [TokenAuthentication]
-
-    def get_object(self, pk):
-        try:
-            return Proyecto.objects.get(idproyecto=pk)
-        except Proyecto.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk, format=None):
-        proyecto = self.get_object(pk)
-        serializers = ProyectoSerializer(proyecto)
-        return Response(serializers.data)
-
-
-class ListarTodosLosProyectos(generics.ListAPIView):
-    serializer_class = ProyectoSerializer
-    queryset = Proyecto.objects.all()  # Obtener todos los datos de Proyecto.
 
 
 class Login(FormView):

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+
 import rest_framework
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Login',
+    'Proyectos',
     'rest_framework.authtoken',
     'rest_framework',
     'corsheaders'
@@ -54,6 +56,7 @@ INSTALLED_APPS = [
 #         'rest_framework.permissions.IsAuthenticated',
 #     ),
 # }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

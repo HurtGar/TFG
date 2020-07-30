@@ -15,19 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from django.conf.urls import url
 from rest_framework.authtoken import views as vw
 from rest_framework.urlpatterns import format_suffix_patterns
-
 from Login import views
 from Login.views import UsuariosList
 
+
 urlpatterns = [
-    path('', views.index),
+    path(r'', views.index),
     path('admin/', admin.site.urls),
     path('usuarios/', UsuariosList.as_view(), name='list_usuarios'),
     path('api_generate_token/', vw.obtain_auth_token),
     path('login/', include('Login.urls')),
+    path('proyectos/', include('Proyectos.urls')),
 ]
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+#urlpatterns = format_suffix_patterns(urlpatterns)
