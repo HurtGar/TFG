@@ -96,13 +96,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'OPTIONS': {
-            'options': '-c search_path=gestion'
+            'options': '-c search_path=gestion,public'
         },
         'HOST': 'localhost',
         'NAME': 'proment',
         'USER': 'adrian',
         'PASSWORD': 'adrian',
-        'PORT': '5432'
+        'PORT': '5432',
     }
 }
 

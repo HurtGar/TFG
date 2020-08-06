@@ -70,6 +70,9 @@ class Tarea(models.Model):
     fechaInicio = models.DateField()
     fechafin = models.DateField()
     fechaactualizacion = models.DateTimeField()
+    horasestimacion = models.IntegerField()
+    horasactuales = models.IntegerField()
+    horasrestantes = models.IntegerField()
     estados_idestado = models.ForeignKey(Estado, on_delete=models.SET_NULL, null=True, db_column='estados_idestado')
     prioridades_idprioridad = models.ForeignKey(Prioridad, on_delete=models.SET_NULL, null=True,
                                                 db_column='prioridades_idprioridad')
@@ -94,14 +97,11 @@ class Tarea(models.Model):
 
 class HistorialModificacionTarea(models.Model):
     idhistorico = models.AutoField(primary_key=True)
-    fechahistorico = models.DateField()
-    horahistorico = models.TimeField()
+    fechahistorico = models.DateTimeField()
     idusuario = models.IntegerField()
-    # usuarios_idusuario = models.ForeignKey('Usuario', on_delete=models.DO_NOTHING, db_column='usuarios_idusuario')
+    motivo = models.CharField(max_length=100)
+    deschistorico = models.TextField(max_length=1000)
     tareas_idtarea = models.ForeignKey(Tarea, on_delete=models.CASCADE, db_column='tareas_idtarea')
-
-    # bloques_idbloque = models.ForeignKey('Bloque', on_delete=models.CASCADE, db_column='bloques_idbloque')
-    # proyectos_idproyecto = models.ForeignKey('Proyecto', on_delete=models.CASCADE, db_column='proyectos_idproyecto')
 
     class Meta:
         db_table = 'historialModificacionesTareas'

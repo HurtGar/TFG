@@ -26,25 +26,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02ff19fa-1125-41c4-ad49-e101472094bf" name="Default Changelist" comment="Creación de aplicación Logging">
-      <change afterPath="$PROJECT_DIR$/Proyectos/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Proyectos/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Proyectos/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Proyectos/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Proyectos/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Proyectos/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Proyectos/serializer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Proyectos/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Proyectos/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Proyectos/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Login/migrations/0002_auto_20200806_1847.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proyectos/test/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proyectos/test/test_proyectos_models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proyectos/test/test_proyectos_views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bd/dump-proment-202007301823.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bd/dump-proment-202007301824.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bd/inserts_iniciales.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Login/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Login/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Login/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/Login/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Login/migrations/0002_proyecto_nombreproyecto.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Login/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Login/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Login/serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Login/serializer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Login/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/Login/tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Login/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Login/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Login/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Login/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Proyectos/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/Proyectos/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Proyectos/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Proyectos/serializer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Proyectos/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Proyectos/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TFG/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/TFG/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TFG/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/TFG/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +95,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Proyectos/tests" />
       <recent name="$PROJECT_DIR$/Login" />
       <recent name="$PROJECT_DIR$/Logging" />
     </key>
@@ -135,7 +140,10 @@
       <workItem from="1595263302120" duration="21566000" />
       <workItem from="1595848378559" duration="3065000" />
       <workItem from="1595948569516" duration="8041000" />
-      <workItem from="1596103865846" duration="4329000" />
+      <workItem from="1596103865846" duration="5930000" />
+      <workItem from="1596183072595" duration="8136000" />
+      <workItem from="1596443548723" duration="5751000" />
+      <workItem from="1596701285634" duration="8844000" />
     </task>
     <task id="LOCAL-00001" summary="Creación de aplicación Logging">
       <created>1594975048836</created>
@@ -185,30 +193,50 @@
     </state>
     <state x="-1078" y="111" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1595263341255" />
     <state x="482" y="124" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1594974748505" />
-    <state width="1878" height="211" key="GridCell.Tab.0.bottom" timestamp="1596120871729">
+    <state width="1878" height="209" key="GridCell.Tab.0.bottom" timestamp="1596732659882">
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
-    <state width="1398" height="211" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1596120088608" />
-    <state width="1878" height="211" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1596120871729" />
+    <state width="1398" height="176" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1596194647114" />
+    <state width="1878" height="209" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1596732659882" />
     <state width="1398" height="213" key="GridCell.Tab.0.bottom/0.23.1440.826@0.23.1440.826" timestamp="1595531560986" />
-    <state width="1878" height="211" key="GridCell.Tab.0.center" timestamp="1596120871728">
+    <state width="1398" height="176" key="GridCell.Tab.0.bottom/0.23.1920.1006@0.23.1920.1006" timestamp="1596213578724" />
+    <state width="1878" height="209" key="GridCell.Tab.0.center" timestamp="1596732659880">
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
-    <state width="1398" height="211" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1596120088608" />
-    <state width="1878" height="211" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1596120871728" />
+    <state width="1398" height="176" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1596194647113" />
+    <state width="1878" height="209" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1596732659880" />
     <state width="1398" height="213" key="GridCell.Tab.0.center/0.23.1440.826@0.23.1440.826" timestamp="1595531560986" />
-    <state width="1878" height="211" key="GridCell.Tab.0.left" timestamp="1596120871727">
+    <state width="1398" height="176" key="GridCell.Tab.0.center/0.23.1920.1006@0.23.1920.1006" timestamp="1596213578723" />
+    <state width="1878" height="209" key="GridCell.Tab.0.left" timestamp="1596732659879">
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
-    <state width="1398" height="211" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1596120088607" />
-    <state width="1878" height="211" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1596120871727" />
+    <state width="1398" height="176" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1596194647113" />
+    <state width="1878" height="209" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1596732659879" />
     <state width="1398" height="213" key="GridCell.Tab.0.left/0.23.1440.826@0.23.1440.826" timestamp="1595531560985" />
-    <state width="1878" height="211" key="GridCell.Tab.0.right" timestamp="1596120871728">
+    <state width="1398" height="176" key="GridCell.Tab.0.left/0.23.1920.1006@0.23.1920.1006" timestamp="1596213578722" />
+    <state width="1878" height="209" key="GridCell.Tab.0.right" timestamp="1596732659881">
       <screen x="0" y="23" width="1920" height="1006" />
     </state>
-    <state width="1398" height="211" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1596120088608" />
-    <state width="1878" height="211" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1596120871728" />
+    <state width="1398" height="176" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1006@-1440.23.1440.877" timestamp="1596194647114" />
+    <state width="1878" height="209" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1596732659881" />
     <state width="1398" height="213" key="GridCell.Tab.0.right/0.23.1440.826@0.23.1440.826" timestamp="1595531560986" />
+    <state width="1398" height="176" key="GridCell.Tab.0.right/0.23.1920.1006@0.23.1920.1006" timestamp="1596213578724" />
+    <state width="1878" height="337" key="GridCell.Tab.1.bottom" timestamp="1596621683489">
+      <screen x="0" y="23" width="1920" height="1006" />
+    </state>
+    <state width="1878" height="337" key="GridCell.Tab.1.bottom/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1596621683489" />
+    <state width="1878" height="337" key="GridCell.Tab.1.center" timestamp="1596621683454">
+      <screen x="0" y="23" width="1920" height="1006" />
+    </state>
+    <state width="1878" height="337" key="GridCell.Tab.1.center/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1596621683454" />
+    <state width="1878" height="337" key="GridCell.Tab.1.left" timestamp="1596621683452">
+      <screen x="0" y="23" width="1920" height="1006" />
+    </state>
+    <state width="1878" height="337" key="GridCell.Tab.1.left/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1596621683452" />
+    <state width="1878" height="337" key="GridCell.Tab.1.right" timestamp="1596621683488">
+      <screen x="0" y="23" width="1920" height="1006" />
+    </state>
+    <state width="1878" height="337" key="GridCell.Tab.1.right/-1440.23.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1596621683488" />
     <state x="354" y="297" key="Vcs.Push.Dialog.v2" timestamp="1594975416520">
       <screen x="0" y="23" width="1920" height="1006" />
     </state>

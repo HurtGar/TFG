@@ -15,7 +15,6 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from Proyectos.serializer import *
 
 from Login.serializer import *
 
@@ -36,6 +35,45 @@ class UsuariosList(generics.ListCreateAPIView):
 
     # Revisar porque no funciona en Chrome. En Postman si permite realizar peticiones y obtener resultados.
     authentication_classes = [TokenAuthentication]
+
+
+class ListarPermisosRoles(APIView):
+    def get_object(self):
+        try:
+            return PermisosRoles.objects.all()
+        except PermisosRoles.DoesNotExist:
+            raise Http404
+
+    def get(self, request, format=None):
+        permisos_roles = self.get_object()
+        serializer = PermisosRolesSerializer(permisos_roles, many=True)
+        return Response(serializer.data)
+
+
+class ListarPermisos(APIView):
+    def get_object(self):
+        try:
+            return Permisos.objects.all()
+        except Permisos.DoesNotExist:
+            raise Http404
+
+    def get(self, request, format=None):
+        permisos = self.get_object()
+        serializer = PermisosSerializer(permisos, many = True)
+        return Response(serializer.data)
+
+
+class ListarRoles(APIView):
+    def get_object(self):
+        try:
+            return Rol.objects.all()
+        except Rol.DoesNotExist:
+            raise Http404
+
+    def get(self, request, format=None):
+        rol = self.get_object()
+        serializer = RolesSerializer(rol, many = True)
+        return Response(serializer.data)
 
 
 class Login(FormView):
