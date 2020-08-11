@@ -5,36 +5,42 @@
 # Debemos instalar dos paquetes: pip install djangorestframework && pip install django-cors-headers
 from rest_framework import serializers
 from Login.models import *
+from Proyectos.serializer import TareaSerializer
 
 
 # Usuarios
-class UsuarioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Usuario
-        fields = '__all__'
 
 
 class PermisosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Permisos
-        fields = '__all__'
+        fields = ['idpermiso', 'nombrepermiso', 'codigonombre']
 
 
 class RolesSerializer(serializers.ModelSerializer):
-    permisos = PermisosSerializer(many= True, read_only=True)
+    permisos = PermisosSerializer(many=True, read_only=True)
 
     class Meta:
         model = Rol
-        fields = ['idrol','descrol','nivelrol','permisos']
+        fields = ['idrol', 'descrol', 'nivelrol', 'permisos']
+
+
+class UsuarioSerializer(serializers.ModelSerializer):
+    roles = RolesSerializer(many=True, read_only=True)
+    tareas = TareaSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Usuario
+        fields = '__all__'
 
 
 class PermisosRolesSerializer(serializers.ModelSerializer):
-    permisos = serializers.StringRelatedField(many=True, read_only=True)
-    roles = serializers.StringRelatedField(many=True, read_only=True)
+    permisos = PermisosSerializer(many=True, read_only=True)
+    roles = RolesSerializer(many=True, read_only=True)
 
     class Meta:
         model = PermisosRoles
-        fields = ['id','permisos_idpermiso','roles_idrol','permisos','roles']
+        fields = ['id', 'permisos', 'roles']
 
 
 class RolesUsuariosSerializer(serializers.ModelSerializer):

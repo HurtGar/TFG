@@ -49,7 +49,7 @@ class Bloque(models.Model):
     nombrebloque = models.CharField(max_length=100)
     descbloque = models.CharField(max_length=1000)
     fechacreacion = models.DateTimeField()
-    proyecto_idproyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE, db_column='proyecto_idproyecto')
+    proyecto_idproyecto = models.ForeignKey(Proyecto,related_name='proyecto', on_delete=models.CASCADE, db_column='proyecto_idproyecto')
 
     class Meta:
         db_table = 'bloques'
@@ -73,12 +73,10 @@ class Tarea(models.Model):
     horasestimacion = models.IntegerField()
     horasactuales = models.IntegerField()
     horasrestantes = models.IntegerField()
-    estados_idestado = models.ForeignKey(Estado, on_delete=models.SET_NULL, null=True, db_column='estados_idestado')
-    prioridades_idprioridad = models.ForeignKey(Prioridad, on_delete=models.SET_NULL, null=True,
+    estados_idestado = models.ForeignKey(Estado,related_name='estado', on_delete=models.SET_NULL, null=True, db_column='estados_idestado')
+    prioridades_idprioridad = models.ForeignKey(Prioridad,related_name='prioridad', on_delete=models.SET_NULL, null=True,
                                                 db_column='prioridades_idprioridad')
-    bloques_idbloque = models.ForeignKey(Bloque, on_delete=models.CASCADE, db_column='bloques_idbloque')
-
-    # proyectos_idproyecto = models.ForeignKey('Proyecto', on_delete=models.CASCADE, db_column='proyectos_idproyecto')
+    bloques_idbloque = models.ForeignKey(Bloque,related_name='bloque', on_delete=models.CASCADE, db_column='bloques_idbloque')
 
     class Meta:
         db_table = 'tareas'

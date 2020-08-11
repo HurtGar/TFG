@@ -22,7 +22,7 @@ class Rol(models.Model):
     idrol = models.AutoField(primary_key=True)
     descrol = models.CharField(max_length=45)
     nivelrol = models.IntegerField()
-    permisos = models.ManyToManyField(Permisos, through='PermisosRoles', through_fields=('roles_idrol',
+    permisos = models.ManyToManyField(Permisos, related_name='permiso',through='PermisosRoles', through_fields=('roles_idrol',
                                                                                          'permisos_idpermiso'))
 
     class Meta:
@@ -47,9 +47,9 @@ class Usuario(models.Model):
     password = models.CharField(max_length=200)
     fecharegistro = models.DateTimeField()
     estado = models.IntegerField(choices=estado_enum, default=0)
-    tareas = models.ManyToManyField(Tarea, through='Tareasusuario',
+    tareas = models.ManyToManyField(Tarea, through='Tareasusuario',related_name='tarea',
                                     through_fields=('usuarios_idusuario', 'tareas_idtarea'))
-    roles = models.ManyToManyField(Rol, through='RolesUsuarios', through_fields=( 'usuarios_idusuario','roles_idrol'))
+    roles = models.ManyToManyField(Rol, related_name='rol',through='RolesUsuarios', through_fields=( 'usuarios_idusuario','roles_idrol'))
 
     class Meta:
         db_table = 'usuarios'

@@ -13,14 +13,10 @@ class ProyectoSerializer(serializers.ModelSerializer):
 
 
 class BloqueSerializer(serializers.ModelSerializer):
+    proyecto_idproyecto = ProyectoSerializer()
+
     class Meta:
         model = Bloque
-        fields = '__all__'
-
-
-class TareaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tarea
         fields = '__all__'
 
 
@@ -42,3 +38,15 @@ class EstadoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class TareaSerializer(serializers.ModelSerializer):
+    # bloque = BloqueSerializer(many=True, read_only=True)
+    # estado = EstadoSerializer(many=True, read_only=True)
+    # prioridad = PrioridadSerializer(many=True, read_only=True)
+
+    bloques_idbloque = BloqueSerializer()
+    estados_idestado = EstadoSerializer()
+    prioridades_idprioridad = PrioridadSerializer()
+
+    class Meta:
+        model = Tarea
+        fields = '__all__'
