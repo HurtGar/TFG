@@ -6,11 +6,11 @@ from rest_framework import serializers
 class ProyectoSerializer(serializers.ModelSerializer):
     # En class Meta: definimos los cambos que queremos y la configuración del serializador.
     class Meta:
+
         model = Proyecto
         # Debemos indicar los campos que queremos serializar. Se debe crear una lista.
         # Si queremos serializar todos los campos debemos usar __all__, sin listas.
         fields = '__all__'
-
 
 class BloqueSerializer(serializers.ModelSerializer):
     proyecto_idproyecto = ProyectoSerializer()

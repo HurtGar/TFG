@@ -8,14 +8,13 @@ from rest_framework.views import APIView
 from Proyectos.serializer import *
 from Login.models import *
 
-# Create your views here.
+"""
+Views to obtain data related to the Projects table of the DB
+"""
 
 
-"""Vistas para obtener datos relacionados con la tabla Proyectos de la BD"""
-
-
-class ListarProyecto(APIView):
-    """Clase para obtener los datos de un proyecto en concreto."""
+class GetOneProjectFromAnUser(APIView):
+    """Class to get one project of an user"""
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
 
@@ -68,8 +67,57 @@ class ListarProyecto(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class ListarTodosLosProyectos(APIView):
+class GetAllProjectFromAnUser(APIView):
     """generics.ListAPIView"""
+
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    # def get_object(self, pk):
+    #     """Función que obtiene los datos de todos los proyectos
+    #
+    #         :returns Objeto Proyecto con todos los proyectos de la BD
+    #
+    #         :exception Error 404 si no hay proyectos en la BD.
+    #     """
+    #     try:
+    #         listaProyectos = []
+    #         listaProyectos.append(Tareasusuario.objects.get())
+    #         return Proyecto.objects.filter()
+    #     except Proyecto.DoesNotExist:
+    #         raise Http404
+    #
+    # def get(self, request, pk, format=None):
+    #     proyectos = self.get_object()  # Obtener todos los datos de Proyecto.
+    #     serializer = ProyectoSerializer(proyectos,
+    #                                     many=True)  # Cuando llamamos a .all(), debemos habilitar many = True para indicar que
+    #     # podemos recibir más de un resultado en el serializer
+    #     return Response(serializer.data)
+    def get_object(self, pk_usuario):
+        try:
+            tareas = Tareasusuario.objects.all()
+            lista_proyectos = []
+            for recorrer_tareas in tareas:
+                if recorrer_tareas.__class__.objects.filter(usuarios_idusuario_id=pk_usuario):
+                    tarea = Tarea.objects.get(idtarea=recorrer_tareas.tareas_idtarea_id)
+                    bloque = Bloque.objects.get(idbloque=tarea.bloques_idbloque_id)
+                    proyecto_id = Proyecto.objects.get(idproyecto=bloque.proyecto_idproyecto_id)
+                    if not lista_proyectos.__contains__(proyecto_id.idproyecto):
+                        lista_proyectos.append(proyecto_id.idproyecto)
+
+            return Proyecto.objects.filter(idproyecto__in=lista_proyectos)
+
+        except Tareasusuario.DoesNotExist:
+            raise Http404
+
+    def get(self, request, id_usuario, format=None):
+        proyectos = self.get_object(id_usuario)
+        serializer = ProyectoSerializer(proyectos, many=True)
+        return Response(serializer.data)
+
+
+class GetAllProject(APIView):
+    """Class to obtain """
 
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
@@ -124,7 +172,7 @@ class ListarPrioridades(APIView):
         except Prioridad.DoesNotExist:
             raise Http404
 
-    def get(self, request, format = None):
+    def get(self, request, format=None):
         prioridades = self.get_object()
         serializer = PrioridadSerializer(prioridades, many=True)
 
