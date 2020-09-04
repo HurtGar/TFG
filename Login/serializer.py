@@ -5,11 +5,10 @@
 # Debemos instalar dos paquetes: pip install djangorestframework && pip install django-cors-headers
 from rest_framework import serializers
 from Login.models import *
-from Proyectos.serializer import TareaSerializer
+from Proyectos.serializer import ProyectoSerializer
 
 
 # Usuarios
-
 
 class PermisosSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,7 +26,7 @@ class RolesSerializer(serializers.ModelSerializer):
 
 class UsuarioSerializer(serializers.ModelSerializer):
     roles = RolesSerializer(many=True, read_only=True)
-    tareas = TareaSerializer(many=True, read_only=True)
+    proyectos = ProyectoSerializer(many=True, read_only=True)
 
     class Meta:
         model = Usuario
@@ -49,9 +48,11 @@ class RolesUsuariosSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class TareasUsuariosSerializer(serializers.ModelSerializer):
+class ProyectoUsuarioSerializer(serializers.ModelSerializer):
+    proyectos_idproyecto = ProyectoSerializer()
+    usuarios_idusuario = UsuarioSerializer()
     class Meta:
-        model = Tareasusuario
+        model = ProyectosUsuarios
         fields = '__all__'
 
 

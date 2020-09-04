@@ -1,8 +1,9 @@
 from django.db import models
 from Proyectos.models import *
 
+
 # ---------Usuarios---------
-from Proyectos.models import Tarea
+from Proyectos.models import Proyecto
 
 
 class Permisos(models.Model):
@@ -22,8 +23,9 @@ class Rol(models.Model):
     idrol = models.AutoField(primary_key=True)
     descrol = models.CharField(max_length=45)
     nivelrol = models.IntegerField()
-    permisos = models.ManyToManyField(Permisos, related_name='permiso',through='PermisosRoles', through_fields=('roles_idrol',
-                                                                                         'permisos_idpermiso'))
+    permisos = models.ManyToManyField(Permisos, related_name='permiso', through='PermisosRoles',
+                                      through_fields=('roles_idrol',
+                                                      'permisos_idpermiso'))
 
     class Meta:
         db_table = 'roles'
@@ -47,9 +49,10 @@ class Usuario(models.Model):
     password = models.CharField(max_length=200)
     fecharegistro = models.DateTimeField()
     estado = models.IntegerField(choices=estado_enum, default=0)
-    tareas = models.ManyToManyField(Tarea, through='Tareasusuario',related_name='tarea',
-                                    through_fields=('usuarios_idusuario', 'tareas_idtarea'))
-    roles = models.ManyToManyField(Rol, related_name='rol',through='RolesUsuarios', through_fields=( 'usuarios_idusuario','roles_idrol'))
+    proyectos = models.ManyToManyField(Proyecto, through='ProyectosUsuarios', related_name='proyectos',
+                                       through_fields=('usuarios_idusuario', 'proyectos_idproyecto'))
+    roles = models.ManyToManyField(Rol, related_name='rol', through='RolesUsuarios',
+                                   through_fields=('usuarios_idusuario', 'roles_idrol'))
 
     class Meta:
         db_table = 'usuarios'
@@ -59,17 +62,16 @@ class Usuario(models.Model):
         return self.nombre + " " + self.primerapellido
 
 
-class Tareasusuario(models.Model):
-    tareas_idtarea = models.ForeignKey(Tarea, on_delete=models.DO_NOTHING)
+class ProyectosUsuarios(models.Model):
+    proyectos_idproyecto = models.ForeignKey(Proyecto, on_delete=models.DO_NOTHING)
     usuarios_idusuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
 
     class Meta:
-        db_table = 'tareasusuario'
+        db_table = 'proyectosusuarios'
         constraints = [
-            models.UniqueConstraint(fields=['tareas_idtarea', 'usuarios_idusuario'], name='constraint_tareas_usuario')
+            models.UniqueConstraint(fields=['proyectos_idproyecto', 'usuarios_idusuario'],
+                                    name='constraint_proyectos_usuario')
         ]
-
-
 
 
 class RolesUsuarios(models.Model):
@@ -85,7 +87,6 @@ class RolesUsuarios(models.Model):
 
     def __str__(self):
         return 'idUsuario=' + str(self.usuarios_idusuario) + ' ,idRol=' + str(self.roles_idrol)
-
 
 
 class PermisosRoles(models.Model):
