@@ -48,8 +48,11 @@ class Bloque(models.Model):
     idbloque = models.AutoField(primary_key=True)
     nombrebloque = models.CharField(max_length=100)
     descbloque = models.CharField(max_length=1000)
+    iniciobloque = models.DateField()
+    finbloque = models.DateField()
     fechacreacion = models.DateTimeField()
-    proyecto_idproyecto = models.ForeignKey(Proyecto,related_name='proyecto', on_delete=models.CASCADE, db_column='proyecto_idproyecto')
+    proyecto_idproyecto = models.ForeignKey(Proyecto, related_name='proyecto_bloque', on_delete=models.CASCADE,
+                                            db_column='proyecto_idproyecto')
 
     class Meta:
         db_table = 'bloques'
@@ -67,16 +70,21 @@ class Tarea(models.Model):
     nombretarea = models.CharField(max_length=100)
     desctarea = models.CharField(max_length=5000)
     fechacreacion = models.DateTimeField()
-    fechaInicio = models.DateField()
+    fechainicio = models.DateField()
     fechafin = models.DateField()
     fechaactualizacion = models.DateTimeField()
     horasestimacion = models.IntegerField()
     horasactuales = models.IntegerField()
     horasrestantes = models.IntegerField()
-    estados_idestado = models.ForeignKey(Estado,related_name='estado', on_delete=models.SET_NULL, null=True, db_column='estados_idestado')
-    prioridades_idprioridad = models.ForeignKey(Prioridad,related_name='prioridad', on_delete=models.SET_NULL, null=True,
+    estados_idestado = models.ForeignKey(Estado, related_name='estado', on_delete=models.SET_NULL, null=True,
+                                         db_column='estados_idestado')
+    prioridades_idprioridad = models.ForeignKey(Prioridad, related_name='prioridad', on_delete=models.SET_NULL,
+                                                null=True,
                                                 db_column='prioridades_idprioridad')
-    bloques_idbloque = models.ForeignKey(Bloque,related_name='bloque', on_delete=models.CASCADE, db_column='bloques_idbloque')
+    bloques_idbloque = models.ForeignKey(Bloque, related_name='bloque', on_delete=models.CASCADE,
+                                         db_column='bloques_idbloque')
+    proyectos_idproyecto = models.ForeignKey(Proyecto, related_name='proyecto_tarea', on_delete=models.CASCADE,
+                                             db_column='proyectos_idproyecto')
 
     class Meta:
         db_table = 'tareas'
@@ -110,4 +118,4 @@ class HistorialModificacionTarea(models.Model):
         ]
 
     def __str__(self):
-        return self.fechahistorico + " " + self.horahistorico
+        return self.fechahistorico + " - " + self.deschistorico

@@ -1,7 +1,6 @@
 from django.db import models
 from Proyectos.models import *
 
-
 # ---------Usuarios---------
 from Proyectos.models import Proyecto
 
@@ -49,8 +48,10 @@ class Usuario(models.Model):
     password = models.CharField(max_length=200)
     fecharegistro = models.DateTimeField()
     estado = models.IntegerField(choices=estado_enum, default=0)
-    proyectos = models.ManyToManyField(Proyecto, through='ProyectosUsuarios', related_name='proyectos',
-                                       through_fields=('usuarios_idusuario', 'proyectos_idproyecto'))
+    tareas = models.ManyToManyField(Tarea, through='TareasUsuarios', related_name='tareas',
+                                    through_fields=(
+                                        'usuarios_idusuario', 'tareas_idtarea', 'proyectos_idproyecto',
+                                        'bloque_idbloque'))
     roles = models.ManyToManyField(Rol, related_name='rol', through='RolesUsuarios',
                                    through_fields=('usuarios_idusuario', 'roles_idrol'))
 
@@ -62,15 +63,16 @@ class Usuario(models.Model):
         return self.nombre + " " + self.primerapellido
 
 
-class ProyectosUsuarios(models.Model):
-    proyectos_idproyecto = models.ForeignKey(Proyecto, on_delete=models.DO_NOTHING)
+class TareasUsuarios(models.Model):
+    tareas_idtarea = models.ForeignKey(Tarea, on_delete=models.DO_NOTHING)
     usuarios_idusuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
 
     class Meta:
-        db_table = 'proyectosusuarios'
+        db_table = 'tareas_usuario'
         constraints = [
-            models.UniqueConstraint(fields=['proyectos_idproyecto', 'usuarios_idusuario'],
-                                    name='constraint_proyectos_usuario')
+            models.UniqueConstraint(
+                fields=['tareas_idtarea', 'usuarios_idusuario'],
+                name='constraint_tareas_usuario')
         ]
 
 

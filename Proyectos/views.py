@@ -22,16 +22,18 @@ class GetAllProjectFromAnUser(APIView):
 
     def get_object(self, id_usuario):
         try:
-            project = ProyectosUsuarios.objects.filter(usuarios_idusuario_id=id_usuario)
-            list_projects = []
-            for p in project:
-                if not list_projects.__contains__(p.proyectos_idproyecto):
-                    list_projects.append(p.proyectos_idproyecto_id)
-
-            return Proyecto.objects.filter(idproyecto__in=list_projects)
-
+            user_tasks = TareasUsuarios.objects.filter(usuarios_idusuario=id_usuario)
+            list_project = []
+            for ut in user_tasks:
+                if not list_project.__contains__(ut.tareas_idtarea):
+                    # Si accedemos a tareas_idtarea no estamos accediendo al id de la tarea,
+                    # sino a la tarea como objeto, es por ello que debemos acceder a su id añadiendo _id
+                    task = Tarea.objects.get(idtarea=ut.tareas_idtarea_id)
+                    list_project.append(task.proyectos_idproyecto_id)
         except Proyecto.DoesNotExist:
             raise Http404
+
+        return Proyecto.objects.filter(idproyecto__in=list_project)
 
     def get(self, request, id_usuario, format=None):
         project = self.get_object(id_usuario)
@@ -46,12 +48,11 @@ class GetOneProjectFromAnUser(APIView):
 
     def get_object(self, id_usuario, id_proyecto):
         try:
-            proyectos_usuario = ProyectosUsuarios.objects.filter(usuarios_idusuario_id=id_usuario)
-            for p in proyectos_usuario:
-                if p.__class__.objects.filter(proyectos_idproyecto_id=id_proyecto):
-                    proyecto = Proyecto.objects.get(idproyecto=p.proyectos_idproyecto_id)
-
-            return proyecto
+            user_tasks = TareasUsuarios.objects.filter(usuarios_idusuario=id_usuario)
+            for ut in user_tasks:
+                task = Tarea.objects.get(idtarea=ut.tareas_idtarea_id)
+                if task.proyectos_idproyecto_id == id_proyecto:
+                    return Proyecto.objects.get(idproyecto=id_proyecto)
 
         except Proyecto.DoesNotExist:
             raise Http404
@@ -97,13 +98,15 @@ class GetAllUsersFromAProject(APIView):
 
     def get_object(self, id_project):
         try:
-            users = ProyectosUsuarios.objects.filter(proyectos_idproyecto_id=id_project)
+            users = TareasUsuarios.objects.all()
             users_list = []
-            for u in users:
-                theUser = Usuario.objects.get(idusuario=u.usuarios_idusuario_id)
-                if not users_list.__contains__(theUser.idusuario):
-                    users_list.append(theUser.idusuario)
+            for us in users:
+                task = Tarea.objects.get(idtarea=us.tareas_idtarea_id)
+                if task.proyectos_idproyecto_id == id_project:
+                    users_list.append(us.usuarios_idusuario_id)
+
             return Usuario.objects.filter(idusuario__in=users_list)
+
         except Proyecto.DoesNotExist:
             raise Http404
 
