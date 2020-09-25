@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admindocs',
+    'django_docutils',
     'Login',
     'Proyectos',
     'rest_framework.authtoken',
@@ -45,7 +47,7 @@ INSTALLED_APPS = [
 ]
 
 # SI DEFINIMOS AQUÍ LOS PERMISOS DE AUTENTICACIÓN, NO PODREMOS ACCEDER A NUESTRA APLICACIÓN
-# ESTOS DATOS HAN DE AÑADIRSE EN LA VISTA QUE QUEREMOS PROTEGER. VER views.py MÉTODO UsuarioList
+# ESTOS DATOS HAN DE AÑADIRSE EN LA VISTA QUE QUEREMOS PROTEGER. VER viewsProject.py MÉTODO UsuarioList
 # # Diccionario para que la autenticación por defecto sea un Token.
 # # Ahora, la ruta está protegida por su acceso mediante un Token
 # REST_FRAMEWORK = {

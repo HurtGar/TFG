@@ -20,7 +20,7 @@ class Permisos(models.Model):
 
 class Rol(models.Model):
     idrol = models.AutoField(primary_key=True)
-    descrol = models.CharField(max_length=45)
+    descrol = models.CharField(max_length=45,null=True)
     nivelrol = models.IntegerField()
     permisos = models.ManyToManyField(Permisos, related_name='permiso', through='PermisosRoles',
                                       through_fields=('roles_idrol',

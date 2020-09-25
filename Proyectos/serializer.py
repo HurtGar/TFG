@@ -9,6 +9,12 @@ class ProyectoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class HistorialModificacionProyectoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HistorialModificacionProyecto
+        fields = '__all__'
+
+
 class BloqueSerializer(serializers.ModelSerializer):
     #proyecto_idproyecto = ProyectoSerializer()
 

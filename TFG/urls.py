@@ -20,15 +20,17 @@ from rest_framework.authtoken import views as vw
 from rest_framework.urlpatterns import format_suffix_patterns
 from Login import views
 from Login.views import UsuariosList
-
+from Proyectos.urls import urlsBloc, urlsProject
 
 urlpatterns = [
     path(r'', views.index),
     path('admin/', admin.site.urls),
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('usuarios/', UsuariosList.as_view(), name='list_usuarios'),
     path('api_generate_token/', vw.obtain_auth_token),
     path('login/', include('Login.urls')),
-    path('proyectos/', include('Proyectos.urls')),
+    path('proyectos/', include('Proyectos.urls.urlsProject')),
+    path('blocs/', include('Proyectos.urls.urlsBloc')),
 ]
 
 #urlpatterns = format_suffix_patterns(urlpatterns)
