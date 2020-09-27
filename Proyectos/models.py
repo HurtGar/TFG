@@ -1,7 +1,6 @@
 from Login.models import *
-
-
 # Create your models here.
+
 
 class Prioridad(models.Model):
     idprioridad = models.AutoField(primary_key=True)
@@ -28,6 +27,24 @@ class Estado(models.Model):
         return self.descestado
 
 
+class HistorialModificaciones(models.Model):
+    idhistorico = models.AutoField(primary_key=True)
+    fechahistorico = models.DateTimeField()
+    motivo = models.CharField(max_length=100)
+    deschistorico = models.TextField(max_length=1000, null=True)
+    usuarios_idusuario = models.IntegerField()
+
+    class Meta:
+        db_table = 'historial_modificaciones'
+        verbose_name_plural = 'HistorialModificaciones'
+        constraints = [
+            models.UniqueConstraint(fields=['idhistorico', 'usuarios_idusuario'], name='constraint_historico_usuario_proyecto'),
+        ]
+
+    def __str__(self):
+        return self.deschistorico + "-" + str(self.fechahistorico)
+
+
 class Proyecto(models.Model):
     idproyecto = models.AutoField(primary_key=True)
     nombreproyecto = models.CharField(max_length=100)
@@ -35,6 +52,10 @@ class Proyecto(models.Model):
     inicioproyecto = models.DateField(null=True)
     finproyecto = models.DateField(null=True)
     fechacreacion = models.DateTimeField()
+    modificaciones = models.ManyToManyField(HistorialModificaciones, through='HistorialModificacionProyecto',
+                                            related_name='modificaciones_proyecto',
+                                            through_fields=(
+                                                'proyectos_idproyecto','historialModificaciones_idhistorial'))
 
     class Meta:
         db_table = 'proyectos'
@@ -53,6 +74,10 @@ class Bloque(models.Model):
     fechacreacion = models.DateTimeField()
     proyecto_idproyecto = models.ForeignKey(Proyecto, related_name='proyecto_bloque', on_delete=models.CASCADE,
                                             db_column='proyecto_idproyecto')
+    modificaciones = models.ManyToManyField(HistorialModificaciones, through='HistorialModificacionBloque',
+                                            related_name='modificaciones_bloque',
+                                            through_fields=(
+                                                'bloques_idbloque','historialModificaciones_idhistorial'))
 
     class Meta:
         db_table = 'bloques'
@@ -85,6 +110,10 @@ class Tarea(models.Model):
                                          db_column='bloques_idbloque')
     proyectos_idproyecto = models.ForeignKey(Proyecto, related_name='proyecto_tarea', on_delete=models.CASCADE,
                                              db_column='proyectos_idproyecto')
+    modificaciones = models.ManyToManyField(HistorialModificaciones, through='HistorialModificacionTarea',
+                                            related_name='modificaciones_tarea',
+                                            through_fields=(
+                                                 'tareas_idtarea','historialModificaciones_idhistorial'))
 
     class Meta:
         db_table = 'tareas'
@@ -102,61 +131,66 @@ class Tarea(models.Model):
 
 
 class HistorialModificacionProyecto(models.Model):
-    idhistorico = models.AutoField(primary_key=True)
-    fechahistorico = models.DateTimeField()
-    idusuario = models.IntegerField()
-    motivo = models.CharField(max_length=100)
-    deschistorico = models.TextField(max_length=1000, null=True)
-    proyectos_idproyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE, db_column='proyectos_idproyecto')
+    historialModificaciones_idhistorial = models.ForeignKey(HistorialModificaciones, on_delete=models.DO_NOTHING)
+    proyectos_idproyecto = models.ForeignKey(Proyecto, on_delete=models.DO_NOTHING)
 
     class Meta:
-        db_table = 'historialModificacionesProyecto'
-        verbose_name_plural = 'HistorialModificacionesProyectos'
-        constraints = [
-            models.UniqueConstraint(fields=['idhistorico', 'proyectos_idproyecto'],
-                                    name='constraint_historico_proyecto'),
-            models.UniqueConstraint(fields=['idhistorico', 'idusuario'], name='constraint_historico_usuario_proyecto'),
-        ]
-
-    def __str__(self):
-        return self.fechahistorico.date() + " - " + self.deschistorico
+        db_table = 'historial_modificacion_proyecto'
+        unique_together = (('historialModificaciones_idhistorial', 'proyectos_idproyecto'),)
 
 
 class HistorialModificacionBloque(models.Model):
-    idhistorico = models.AutoField(primary_key=True)
-    fechahistorico = models.DateTimeField()
-    idusuario = models.IntegerField()
-    motivo = models.CharField(max_length=100)
-    deschistorico = models.TextField(max_length=1000, null=True)
-    bloques_idbloque = models.ForeignKey(Bloque, on_delete=models.CASCADE, db_column='tareas_idtarea')
+    historialModificaciones_idhistorial = models.ForeignKey(HistorialModificaciones, on_delete=models.DO_NOTHING)
+    bloques_idbloque = models.ForeignKey(Bloque, on_delete=models.DO_NOTHING)
 
     class Meta:
-        db_table = 'historialModificacionesBloque'
-        verbose_name_plural = 'HistorialModificacionesBloques'
-        constraints = [
-            models.UniqueConstraint(fields=['idhistorico', 'bloques_idbloque'], name='constraint_historico_bloque'),
-            models.UniqueConstraint(fields=['idhistorico', 'idusuario'], name='constraint_historico_usuario_bloque'),
-        ]
-
-    def __str__(self):
-        return self.fechahistorico + " - " + self.deschistorico
+        db_table = 'historial_modificacion_bloque'
+        unique_together = (('historialModificaciones_idhistorial', 'bloques_idbloque'),)
 
 
 class HistorialModificacionTarea(models.Model):
-    idhistorico = models.AutoField(primary_key=True)
-    fechahistorico = models.DateTimeField()
-    idusuario = models.IntegerField()
-    motivo = models.CharField(max_length=100)
-    deschistorico = models.TextField(max_length=1000, null=True)
-    tareas_idtarea = models.ForeignKey(Tarea, on_delete=models.CASCADE, db_column='tareas_idtarea')
+    historialModificaciones_idhistorial = models.ForeignKey(HistorialModificaciones, on_delete=models.DO_NOTHING)
+    tareas_idtarea = models.ForeignKey(Tarea, on_delete=models.DO_NOTHING)
 
     class Meta:
-        db_table = 'historialModificacionesTarea'
-        verbose_name_plural = 'HistorialModificacionesTareas'
-        constraints = [
-            models.UniqueConstraint(fields=['idhistorico', 'tareas_idtarea'], name='constraint_historico_tarea'),
-            models.UniqueConstraint(fields=['idhistorico', 'idusuario'], name='constraint_historico_usuario_tarea'),
-        ]
+        db_table = 'historial_modificacion_tarea'
+        unique_together = (('historialModificaciones_idhistorial', 'tareas_idtarea'),)
 
-    def __str__(self):
-        return self.fechahistorico + " - " + self.deschistorico
+# class HistorialModificacionBloque(models.Model):
+#     idhistorico = models.AutoField(primary_key=True)
+#     fechahistorico = models.DateTimeField()
+#     idusuario = models.IntegerField()
+#     motivo = models.CharField(max_length=100)
+#     deschistorico = models.TextField(max_length=1000, null=True)
+#     bloques_idbloque = models.ForeignKey(Bloque, on_delete=models.CASCADE, db_column='tareas_idtarea')
+#
+#     class Meta:
+#         db_table = 'historialModificacionesBloque'
+#         verbose_name_plural = 'HistorialModificacionesBloques'
+#         constraints = [
+#             models.UniqueConstraint(fields=['idhistorico', 'bloques_idbloque'], name='constraint_historico_bloque'),
+#             models.UniqueConstraint(fields=['idhistorico', 'idusuario'], name='constraint_historico_usuario_bloque'),
+#         ]
+#
+#     def __str__(self):
+#         return self.fechahistorico + " - " + self.deschistorico
+#
+#
+# class HistorialModificacionTarea(models.Model):
+#     idhistorico = models.AutoField(primary_key=True)
+#     fechahistorico = models.DateTimeField()
+#     idusuario = models.IntegerField()
+#     motivo = models.CharField(max_length=100)
+#     deschistorico = models.TextField(max_length=1000, null=True)
+#     tareas_idtarea = models.ForeignKey(Tarea, on_delete=models.CASCADE, db_column='tareas_idtarea')
+#
+#     class Meta:
+#         db_table = 'historialModificacionesTarea'
+#         verbose_name_plural = 'HistorialModificacionesTareas'
+#         constraints = [
+#             models.UniqueConstraint(fields=['idhistorico', 'tareas_idtarea'], name='constraint_historico_tarea'),
+#             models.UniqueConstraint(fields=['idhistorico', 'idusuario'], name='constraint_historico_usuario_tarea'),
+#         ]
+#
+#     def __str__(self):
+#         return self.fechahistorico + " - " + self.deschistorico

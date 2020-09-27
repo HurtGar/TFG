@@ -29,8 +29,8 @@ urlpatterns = [
     path('usuarios/', UsuariosList.as_view(), name='list_usuarios'),
     path('api_generate_token/', vw.obtain_auth_token),
     path('login/', include('Login.urls')),
-    path('proyectos/', include('Proyectos.urls.urlsProject')),
-    path('blocs/', include('Proyectos.urls.urlsBloc')),
+    path('project/', include('Proyectos.urls.urlsProject')),
+    path('bloc/', include('Proyectos.urls.urlsBloc')),
 ]
 
 #urlpatterns = format_suffix_patterns(urlpatterns)

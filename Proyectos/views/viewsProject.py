@@ -1,13 +1,13 @@
 from django.http import Http404
-from rest_framework import generics, status
+from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
-from Proyectos.serializer import *
-from Login.serializer import *
+from django.db.models import Sum
 from Login.models import *
+from Login.serializer import *
+from Proyectos.serializer import *
 
 """
 Views to obtain data related to the Projects table of the DB
@@ -93,12 +93,13 @@ class GetAllUsersFromAProject(APIView):
         :param id_project: Unique identifier of the project
         :return: A list of users of the project
         """
-        #También se puede usar queries directamente con el código de BD usando .raw(query).
+        # También se puede usar queries directamente con el código de BD usando .raw(query).
         try:
             return Usuario.objects.raw('''select distinct(idusuario) from gestion.usuarios u 
             inner join gestion.tareas_usuario tu on u.idusuario = tu.usuarios_idusuario_id 
             inner join gestion.tareas t on t.idtarea = tu.tareas_idtarea_id 
-            inner join gestion.proyectos p on t.proyectos_idproyecto = p.idproyecto where p.idproyecto = %s order by idusuario''', [id_project])
+            inner join gestion.proyectos p on t.proyectos_idproyecto = p.idproyecto where p.idproyecto = %s order by idusuario''',
+                                       [id_project])
 
         except Proyecto.DoesNotExist:
             raise Http404
@@ -146,21 +147,25 @@ class GetAllTaskFromAProject(APIView):
         return Response(serializer.data)
 
 
-class GetAllTaskFromABlock(APIView):
-    """"""
+class GetTotalHoursFromAProject(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
 
-    def get_objetc(self, id_project, id_bloc):
-        try:
-            return Tarea.objects.filter(bloques_idbloque=id_bloc, proyectos_idproyecto=id_project)
-        except Proyecto.DoesNotExist:
-            raise Http404
+    @staticmethod
+    def get_object(self, id_project):
+        project_list = Tarea.objects.filter(proyectos_idproyecto=id_project)
+        hoursCount = 0
+        for pl in project_list:
+            pass
+        asdf = Tarea.objects.filter(proyectos_idproyecto=id_project).aggregate(horasestimacion=Sum('horasestimacion'), horasactuales=Sum('horasactuales'))
+        return asdf
 
-    def get(self, request, id_project, id_bloc, format=None):
-        blocks = self.get_objetc(id_project, id_bloc)
-        serializer = TareaSerializer(blocks, many=True)
-        return Response(serializer.data)
+    def get(self, request, id_project):
+        #Cuando queremos hacer llamadas a funciones que no devuelven un objeto serializado,
+        #no hace falta hacer el serializer, devolvemos la respuesta directamente.
+        hours = self.get_object(self, id_project)
+        #Devolvemos horas actuales y horas estimación, las horas restantes las calcularemos en función de horasestimacion-horasactuales
+        return Response(hours)
 
 
 class GetRecordsChangesFromProject(APIView):
