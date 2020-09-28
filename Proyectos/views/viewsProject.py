@@ -153,12 +153,12 @@ class GetTotalHoursFromAProject(APIView):
 
     @staticmethod
     def get_object(self, id_project):
-        project_list = Tarea.objects.filter(proyectos_idproyecto=id_project)
-        hoursCount = 0
-        for pl in project_list:
-            pass
-        asdf = Tarea.objects.filter(proyectos_idproyecto=id_project).aggregate(horasestimacion=Sum('horasestimacion'), horasactuales=Sum('horasactuales'))
-        return asdf
+        try:
+            return Tarea.objects.filter(proyectos_idproyecto=id_project).aggregate(horasestimacion=Sum('horasestimacion'), horasactuales=Sum('horasactuales'))
+        except Proyecto.DoesNotExist:
+            raise Http404
+        except Exception:
+            raise Exception
 
     def get(self, request, id_project):
         #Cuando queremos hacer llamadas a funciones que no devuelven un objeto serializado,
@@ -166,6 +166,19 @@ class GetTotalHoursFromAProject(APIView):
         hours = self.get_object(self, id_project)
         #Devolvemos horas actuales y horas estimación, las horas restantes las calcularemos en función de horasestimacion-horasactuales
         return Response(hours)
+
+
+class GetProjectBetweenTwoDates(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request):
+        try:
+            project = Proyecto.objects.filter(inicioproyecto__gt=request.data['init_date'], finproyecto__lt=request.data['end_date'])
+            serializer = ProyectoSerializer(project,many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Proyecto.DoesNotExist:
+            raise Http404(status=status.HTTP_204_NO_CONTENT)
 
 
 class GetRecordsChangesFromProject(APIView):

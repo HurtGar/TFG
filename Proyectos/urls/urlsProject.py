@@ -11,6 +11,7 @@ urlpatterns = [
     path('<int:id_project>/tasks', viewsProject.GetAllTaskFromAProject.as_view(),
          name='listar_tareas_proyecto'),
     path('<int:id_project>/hours', viewsProject.GetTotalHoursFromAProject.as_view(), name='obtener_horas'),
+    path('search', viewsProject.GetProjectBetweenTwoDates.as_view(), name='buscar_proyecto'),
     path('<int:id_project>/records', viewsProject.GetRecordsChangesFromProject.as_view(),
          name='historico_proyecto'),
     path('create', viewsProject.CreateProject.as_view(), name='crear_proyecto'),
