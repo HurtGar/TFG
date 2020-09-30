@@ -172,13 +172,28 @@ class GetProjectBetweenTwoDates(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         try:
             project = Proyecto.objects.filter(inicioproyecto__gt=request.data['init_date'], finproyecto__lt=request.data['end_date'])
-            serializer = ProyectoSerializer(project,many=True)
+            serializer = ProyectoSerializer(project, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Proyecto.DoesNotExist:
-            raise Http404(status=status.HTTP_204_NO_CONTENT)
+            raise Http404()
+
+
+class GetCreatedProjectBetweenTwoDates(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    @staticmethod
+    def post(request):
+        try:
+            project = Proyecto.objects.filter(fechacreacion__gte=request.data['init_date'], fechacreacion__lte=request.data['end_date'])
+            serializer = ProyectoSerializer(project, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Proyecto.DoesNotExist:
+            raise Http404
 
 
 class GetRecordsChangesFromProject(APIView):

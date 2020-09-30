@@ -1,5 +1,6 @@
-from Proyectos.models import *
 from rest_framework import serializers
+
+from Proyectos.models import *
 
 
 # Proyecto
@@ -28,11 +29,17 @@ class BloqueSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class BloqueUpdateSerializer(serializers.ModelSerializer):
+    # proyecto_idproyecto = ProyectoSerializer()
+    class Meta:
+        model = Bloque
+        fields = ['proyecto_idproyecto']
+
+
 class TareaSerializer(serializers.ModelSerializer):
     # bloque = BloqueSerializer(many=True, read_only=True)
     # estado = EstadoSerializer(many=True, read_only=True)
     # prioridad = PrioridadSerializer(many=True, read_only=True)
-
 
     class Meta:
         model = Tarea
@@ -40,7 +47,6 @@ class TareaSerializer(serializers.ModelSerializer):
 
 
 class HistorialModificacionesSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = HistorialModificaciones
         fields = '__all__'

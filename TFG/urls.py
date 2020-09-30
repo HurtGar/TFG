@@ -30,7 +30,8 @@ urlpatterns = [
     path('api_generate_token/', vw.obtain_auth_token),
     path('login/', include('Login.urls')),
     path('project/', include('Proyectos.urls.urlsProject')),
-    path('bloc/', include('Proyectos.urls.urlsBloc')),
+    path('block/', include('Proyectos.urls.urlsBloc')),
+    path('task/',include('Proyectos.urls.urlsTask')),
 ]
 
 #urlpatterns = format_suffix_patterns(urlpatterns)

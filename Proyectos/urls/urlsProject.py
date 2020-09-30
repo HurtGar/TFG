@@ -1,5 +1,5 @@
 from django.urls import path
-from Proyectos.views import viewsProject, viewsBloc
+from Proyectos.views import viewsProject
 
 urlpatterns = [
     # Proyectos
@@ -12,6 +12,7 @@ urlpatterns = [
          name='listar_tareas_proyecto'),
     path('<int:id_project>/hours', viewsProject.GetTotalHoursFromAProject.as_view(), name='obtener_horas'),
     path('search', viewsProject.GetProjectBetweenTwoDates.as_view(), name='buscar_proyecto'),
+    path('search/created_date', viewsProject.GetCreatedProjectBetweenTwoDates.as_view(), name='buscar_fecha_creacion'),
     path('<int:id_project>/records', viewsProject.GetRecordsChangesFromProject.as_view(),
          name='historico_proyecto'),
     path('create', viewsProject.CreateProject.as_view(), name='crear_proyecto'),
