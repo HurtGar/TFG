@@ -24,6 +24,7 @@ from Proyectos.urls import urlsBloc, urlsProject
 
 urlpatterns = [
     path(r'', views.index),
+    path('get_token', views.GetToken.as_view(), name='get_token'),
     path('admin/', admin.site.urls),
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('usuarios/', UsuariosList.as_view(), name='list_usuarios'),

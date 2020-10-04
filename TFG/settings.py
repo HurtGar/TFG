@@ -100,7 +100,7 @@ DATABASES = {
         'OPTIONS': {
             'options': '-c search_path=gestion,public'
         },
-        'HOST': 'localhost',
+        'HOST': '192.168.1.133',    #Si quiero conectarlo a la
         'NAME': 'proment',
         'USER': 'adrian',
         'PASSWORD': 'adrian',

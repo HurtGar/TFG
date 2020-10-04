@@ -112,7 +112,7 @@ class GetBlocksBetweenTwoDates(APIView):
     @staticmethod
     def post(request):
         try:
-            blocks = Bloque.objects.filter(iniciobloque__gt=request.data['init_date'], finbloque__lt=request.data['end_date'])
+            blocks = Bloque.objects.filter(iniciobloque__gte=request.data['init_date'], finbloque__lte=request.data['end_date'])
             serializer = BloqueSerializer(blocks, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Bloque.DoesNotExist:

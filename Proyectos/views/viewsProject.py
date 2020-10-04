@@ -175,7 +175,7 @@ class GetProjectBetweenTwoDates(APIView):
     @staticmethod
     def post(request):
         try:
-            project = Proyecto.objects.filter(inicioproyecto__gt=request.data['init_date'], finproyecto__lt=request.data['end_date'])
+            project = Proyecto.objects.filter(inicioproyecto__gte=request.data['init_date'], finproyecto__lte=request.data['end_date'])
             serializer = ProyectoSerializer(project, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Proyecto.DoesNotExist:
