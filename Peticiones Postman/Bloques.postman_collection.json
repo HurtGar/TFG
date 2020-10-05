@@ -1,0 +1,430 @@
+{
+	"info": {
+		"_postman_id": "1ef18b6b-a5e6-4e7f-b300-48cdceb0a18b",
+		"name": "Bloques",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAllBlocsFromAnUser",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/block/user/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOneBlocFromAnUser",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/block/2/user/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block",
+						"2",
+						"user",
+						"1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUsersFromABlock",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/block/1/list_users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block",
+						"1",
+						"list_users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllTaskFromABlock",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/block/1/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block",
+						"1",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getHoursFromABlock",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/block/1/hours",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block",
+						"1",
+						"hours"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBlocksBetweenTwoDates",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"init_date\":\"2020-01-01\",\n    \"end_date\":\"2025-12-31\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/block/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCreatedBlocksBetweenTwoDates",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"init_date\":\"2020-01-01\",\n    \"end_date\":\"2025-12-31\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/block/search/created_date",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block",
+						"search",
+						"created_date"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getRecordsFromABlock",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/block/1/records",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block",
+						"1",
+						"records"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getRecordsFromABlock Copy",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"proyecto_idproyecto\":2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/block/1/assigment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block",
+						"1",
+						"assigment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateBlock",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombrebloque\": \"Proyecto creado desde Postman\",\n    \"descbloque\": \"Este proyecto ha sido creado desde postman\",\n    \"iniciobloque\": null,\n    \"finbloque\": null,\n    \"fechacreacion\": \"2020-09-09T22:22:22\",\n    \"proyecto_idproyecto\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/block/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateBlock",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombrebloque\": \"Proyecto modificado desde Postman\",\n    \"descbloque\": \"Este proyecto ha sido creado desde postman\",\n    \"iniciobloque\": null,\n    \"finbloque\": null,\n    \"fechacreacion\": \"2020-09-09T22:22:22\",\n    \"proyecto_idproyecto\":2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/block/1/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block",
+						"1",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteBlock",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/block/delete/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block",
+						"delete",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

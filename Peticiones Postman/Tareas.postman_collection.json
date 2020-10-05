@@ -1,0 +1,580 @@
+{
+	"info": {
+		"_postman_id": "e547c3d5-ea8a-453c-a515-41c36f379f72",
+		"name": "Tareas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAllTasksFromAnUser",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/task/user/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"task",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOneTaskFromAnUser",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/task/4/user/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"task",
+						"4",
+						"user",
+						"2"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUsersFromATask",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/task/1/list_users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"task",
+						"1",
+						"list_users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getHoursFromATask",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/task/1/hours",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"task",
+						"1",
+						"hours"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTasksBetweenTwoDates",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"init_date\":\"2020-01-01\",\n    \"end_date\":\"2025-12-31\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/task/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"task",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCreatedTasksBetweenTwoDates",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"init_date\":\"2020-01-01\",\n    \"end_date\":\"2025-12-31\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/task/search/created_date",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"task",
+						"search",
+						"created_date"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLastUpdatedTask",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/task/search/last_updated",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"task",
+						"search",
+						"last_updated"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getRecordsFromATask",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/task/1/records",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"task",
+						"1",
+						"records"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTasksWithAState",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token c79d3ee98926bd1204e67f264ee969753bd6e467"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/task/state/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"task",
+						"state",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTasksWithAPriority",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token c79d3ee98926bd1204e67f264ee969753bd6e467"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/task/priority/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"task",
+						"priority",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateAssignmentTask",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token c79d3ee98926bd1204e67f264ee969753bd6e467"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"old_usuarios_idusuario\":1,\n    \"usuarios_idusuario\":4\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/task/assignment/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"task",
+						"assignment",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createATaskAssignment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token c79d3ee98926bd1204e67f264ee969753bd6e467"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tareas_idtarea\":5,\n    \"usuarios_idusuario\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/task/create/assignment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"task",
+						"create",
+						"assignment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteATaskAssignment",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token c79d3ee98926bd1204e67f264ee969753bd6e467"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tareas_idtarea\":5,\n    \"usuarios_idusuario\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/task/delete/assignment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"task",
+						"delete",
+						"assignment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateBlock",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombrebloque\": \"Proyecto creado desde Postman\",\n    \"descbloque\": \"Este proyecto ha sido creado desde postman\",\n    \"iniciobloque\": null,\n    \"finbloque\": null,\n    \"fechacreacion\": \"2020-09-09T22:22:22\",\n    \"proyecto_idproyecto\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/block/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateBlock",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombreproyecto\": \"Proyecto creado desde Postman\",\n    \"descproyecto\": \"Este proyecto ha sido creado desde postman\",\n    \"inicioproyecto\": null,\n    \"finproyecto\": null,\n    \"fechacreacion\": \"2020-09-09T22:22:22\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/block/1/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block",
+						"1",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteBlock",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 03d9f45dab56b610a8c09d97064d59cce055d70c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/block/delete/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block",
+						"delete",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
