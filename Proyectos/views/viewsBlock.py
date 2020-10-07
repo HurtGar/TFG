@@ -229,3 +229,27 @@ class DeleteBlock(APIView):
         block = self.get_object(id_block)
         block.delete()
         return Response(status=status.HTTP_200_OK)
+
+
+class InsertRecord(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request, id_block):
+        try:
+            block = Bloque.objects.get(idbloque=id_block)
+            record = HistorialModificaciones(fechahistorico=request.data['fechahistorico'],
+                                             motivo=request.data['motivo'], deschistorico=request.data['deschistorico'],
+                                             usuarios_idusuario=request.data['usuarios_idusuario'])
+            if record:
+                record.save()
+                rec_hist = HistorialModificacionBloque(bloques_idbloque_id=block.idbloque,
+                                                         historialModificaciones_idhistorial_id=record.idhistorico)
+                rec_hist.save()
+                return Response(status=status.HTTP_200_OK)
+            else:
+                return Response({'error': 'No se ha podido guardar el proyecto en el historial.'},
+                                status=status.HTTP_400_BAD_REQUEST)
+
+        except Bloque.DoesNotExist:
+            raise Http404

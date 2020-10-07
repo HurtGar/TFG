@@ -1,11 +1,11 @@
+from django.db.models import Sum
 from django.http import Http404
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.db.models import Sum
-from Login.models import *
+
 from Login.serializer import *
 from Proyectos.serializer import *
 
@@ -154,17 +154,18 @@ class GetTotalHoursFromAProject(APIView):
     @staticmethod
     def get_object(self, id_project):
         try:
-            return Tarea.objects.filter(proyectos_idproyecto=id_project).aggregate(horasestimacion=Sum('horasestimacion'), horasactuales=Sum('horasactuales'))
+            return Tarea.objects.filter(proyectos_idproyecto=id_project).aggregate(
+                horasestimacion=Sum('horasestimacion'), horasactuales=Sum('horasactuales'))
         except Proyecto.DoesNotExist:
             raise Http404
         except Exception:
             raise Exception
 
     def get(self, request, id_project):
-        #Cuando queremos hacer llamadas a funciones que no devuelven un objeto serializado,
-        #no hace falta hacer el serializer, devolvemos la respuesta directamente.
+        # Cuando queremos hacer llamadas a funciones que no devuelven un objeto serializado,
+        # no hace falta hacer el serializer, devolvemos la respuesta directamente.
         hours = self.get_object(self, id_project)
-        #Devolvemos horas actuales y horas estimación, las horas restantes las calcularemos en función de horasestimacion-horasactuales
+        # Devolvemos horas actuales y horas estimación, las horas restantes las calcularemos en función de horasestimacion-horasactuales
         return Response(hours)
 
 
@@ -175,7 +176,8 @@ class GetProjectBetweenTwoDates(APIView):
     @staticmethod
     def post(request):
         try:
-            project = Proyecto.objects.filter(inicioproyecto__gte=request.data['init_date'], finproyecto__lte=request.data['end_date'])
+            project = Proyecto.objects.filter(inicioproyecto__gte=request.data['init_date'],
+                                              finproyecto__lte=request.data['end_date'])
             serializer = ProyectoSerializer(project, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Proyecto.DoesNotExist:
@@ -189,7 +191,8 @@ class GetCreatedProjectBetweenTwoDates(APIView):
     @staticmethod
     def post(request):
         try:
-            project = Proyecto.objects.filter(fechacreacion__gte=request.data['init_date'], fechacreacion__lte=request.data['end_date'])
+            project = Proyecto.objects.filter(fechacreacion__gte=request.data['init_date'],
+                                              fechacreacion__lte=request.data['end_date'])
             serializer = ProyectoSerializer(project, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Proyecto.DoesNotExist:
@@ -243,7 +246,7 @@ class UpdateProject(APIView):
         serializer = ProyectoSerializer(proyecto, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -263,8 +266,32 @@ class DeleteProject(APIView):
         """ Remove a project with de id = id_project
             :param id_project: Unique identifier of the project
             :param request:
-            :returns Response --> Respuesta del servidor con código 204.
+            :returns Response --> Respuesta del servidor con código 200-OK.
         """
         proyecto = self.get_object(id_project)
         proyecto.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_200_OK)
+
+
+class InsertRecord(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request, id_project):
+        try:
+            project = Proyecto.objects.get(idproyecto=id_project)
+            record = HistorialModificaciones(fechahistorico=request.data['fechahistorico'],
+                                             motivo=request.data['motivo'], deschistorico=request.data['deschistorico'],
+                                             usuarios_idusuario=request.data['usuarios_idusuario'])
+            if record:
+                record.save()
+                rec_hist = HistorialModificacionProyecto(proyectos_idproyecto_id=project.idproyecto,
+                                                         historialModificaciones_idhistorial_id=record.idhistorico)
+                rec_hist.save()
+                return Response(status=status.HTTP_200_OK)
+            else:
+                return Response({'error': 'No se ha podido guardar el proyecto en el historial.'},
+                                status=status.HTTP_400_BAD_REQUEST)
+
+        except Proyecto.DoesNotExist:
+            raise Http404

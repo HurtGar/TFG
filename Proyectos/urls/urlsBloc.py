@@ -17,5 +17,6 @@ urlpatterns = [
     path('create', viewsBlock.CreateBlock.as_view(), name='crear_bloque'),
     path('<int:id_block>/update', viewsBlock.UpdateBlock.as_view(), name='actualizar_bloque'),
     path('delete/<int:id_block>', viewsBlock.DeleteBlock.as_view(), name='borrar_bloque'),
+    path('<int:id_block>/insert_record', viewsBlock.InsertRecord.as_view(), name='insertar_historico'),
 
 ]

@@ -33,6 +33,8 @@ urlpatterns = [
     path('project/', include('Proyectos.urls.urlsProject')),
     path('block/', include('Proyectos.urls.urlsBloc')),
     path('task/',include('Proyectos.urls.urlsTask')),
+    path('state/', include('Proyectos.urls.urlsState')),
+    path('priority/', include('Proyectos.urls.urlsPriority')),
 ]
 
 #urlpatterns = format_suffix_patterns(urlpatterns)

@@ -179,6 +179,23 @@ class GetTasksWithAPriority(APIView):
         return Response(serializer.data)
 
 
+class GetTaskByPriorityIdAndStateId(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request):
+        try:
+            tasks = Tarea.objects.filter(prioridades_idprioridad_id=request.data['prioridades_idprioridad'],
+                                         estados_idestado_id=request.data['estados_idestado'])
+            if tasks:
+                serializer = TareaSerializer(tasks, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+        except Tarea.DoesNotExist:
+            Http404
+
+
 class CreateATaskAssignment(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
@@ -241,6 +258,83 @@ class DeleteATaskAssignment(APIView):
         except TareasUsuarios.DoesNotExist:
             raise Http404
 
-    # createTask
-    # updateTask
-    # deleteTask
+
+class CreateTask(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request):
+        serializer = TareaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UpdateTask(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def get_object(self, id_task):
+        try:
+            return Tarea.objects.get(idtarea=id_task)
+        except Tarea.DoesNotExist:
+            raise Http404
+
+    def put(self, request, id_task, format=None):
+        """Crear un nuevo elemento o reemplazar un proyecto."""
+        task = self.get_object(id_task)
+        serializer = TareaSerializer(task, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class DeleteTask(APIView):
+    """"""
+
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def get_object(self, id_task):
+        try:
+            return Tarea.objects.get(idtarea=id_task)
+        except Tarea.DoesNotExist:
+            raise Http404
+
+    def delete(self, request, id_task, format=None):
+        """ Remove a task with de id = id_task
+            :param id_task: Unique identifier of the task
+            :param request:
+            :returns Response --> Respuesta del servidor con código 204.
+        """
+        task = self.get_object(id_task)
+        task.delete()
+        return Response(status=status.HTTP_200_OK)
+
+
+class InsertRecord(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request, id_task):
+        try:
+            task = Tarea.objects.get(idtarea=id_task)
+            record = HistorialModificaciones(fechahistorico=request.data['fechahistorico'],
+                                             motivo=request.data['motivo'], deschistorico=request.data['deschistorico'],
+                                             usuarios_idusuario=request.data['usuarios_idusuario'])
+            if record:
+                record.save()
+                rec_hist = HistorialModificacionTarea(tareas_idtarea_id=task.idtarea,
+                                                      historialModificaciones_idhistorial_id=record.idhistorico)
+                rec_hist.save()
+                return Response(status=status.HTTP_200_OK)
+            else:
+                return Response({'error': 'No se ha podido guardar la tarea en el historial.'},
+                                status=status.HTTP_400_BAD_REQUEST)
+
+        except Tarea.DoesNotExist:
+            raise Http404
