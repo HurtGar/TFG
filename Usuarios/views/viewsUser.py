@@ -16,40 +16,14 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from Login.serializer import *
+from Usuarios.serializer import *
 
 
 # INDEX DE PRUEBA
 def index(request):
     return render(request, '../templates/index.html')
 
-
-class GetToken(APIView):
-    def post(self, request):
-        username = request.data.get('username')
-        password = request.data.get('password')
-        if username is None or password is None:
-            return Response({'error': 'Username or password incorrect.'}, status=status.HTTP_404_NOT_FOUND)
-        user = authenticate(username=username, password = password)
-
-        if not user:
-            return Response({'error': 'Invalid credentials.'}, status=status.HTTP_404_NOT_FOUND)
-
-        token = Token.objects.get(user=user)
-        return Response({'token': token.key}, status= status.HTTP_200_OK)
-
-
-# Create your views here.
-class UsuariosList(generics.ListCreateAPIView):
-    serializer_class = UsuarioSerializer
-    queryset = Usuario.objects.all()
-
-    # Solo se podrá acceder a esta vista si está registrado el token
-    # Importante definirlo como una lista (...,)
-    permission_classes = (IsAuthenticated,)
-
-    # Revisar porque no funciona en Chrome. En Postman si permite realizar peticiones y obtener resultados.
-    authentication_classes = [TokenAuthentication]
+""""""
 
 class ListarUsuarios(APIView):
     """INSERTAR COMENTARIOS"""
@@ -125,7 +99,7 @@ class Login(FormView):
             return HttpResponseRedirect(self.get_success_url())  # Con este parámetro volvemos a la dirección definida
             # en success_url
         else:
-            # Si no está autentificado, se vuelve a llamar a la función dispatch de la clase Login
+            # Si no está autentificado, se vuelve a llamar a la función dispatch de la clase Usuarios
             return super(Login, self).dispatch(request, *args, *kwargs)
 
     def form_valid(self, form):  # Aquí aplicamos los filtros necesarios para poder realizar el logueo.

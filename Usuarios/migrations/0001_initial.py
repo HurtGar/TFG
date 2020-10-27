@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
             name='PermisosRoles',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('permisos_idpermiso', models.ForeignKey(db_column='permisos_idpermiso', on_delete=django.db.models.deletion.DO_NOTHING, related_name='permisos', to='Login.permisos')),
+                ('permisos_idpermiso', models.ForeignKey(db_column='permisos_idpermiso', on_delete=django.db.models.deletion.DO_NOTHING, related_name='permisos', to='Usuarios.permisos')),
             ],
             options={
                 'db_table': 'permisos_roles',
@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
                 ('idrol', models.AutoField(primary_key=True, serialize=False)),
                 ('descrol', models.CharField(max_length=45, null=True)),
                 ('nivelrol', models.IntegerField()),
-                ('permisos', models.ManyToManyField(related_name='permiso', through='Login.PermisosRoles', to='Login.Permisos')),
+                ('permisos', models.ManyToManyField(related_name='permiso', through='Usuarios.PermisosRoles', to='Usuarios.Permisos')),
             ],
             options={
                 'verbose_name_plural': 'Roles',
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
             name='RolesUsuarios',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('roles_idrol', models.ForeignKey(db_column='roles_idrol', on_delete=django.db.models.deletion.CASCADE, to='Login.rol')),
+                ('roles_idrol', models.ForeignKey(db_column='roles_idrol', on_delete=django.db.models.deletion.CASCADE, to='Usuarios.rol')),
             ],
             options={
                 'db_table': 'roles_usuarios',
@@ -80,8 +80,8 @@ class Migration(migrations.Migration):
                 ('password', models.CharField(max_length=200)),
                 ('fecharegistro', models.DateTimeField()),
                 ('estado', models.IntegerField(choices=[(0, 'Inhabilitado'), (1, 'Habilitado')], default=0)),
-                ('roles', models.ManyToManyField(related_name='rol', through='Login.RolesUsuarios', to='Login.Rol')),
-                ('tareas', models.ManyToManyField(related_name='tareas', through='Login.TareasUsuarios', to='Proyectos.Tarea')),
+                ('roles', models.ManyToManyField(related_name='rol', through='Usuarios.RolesUsuarios', to='Usuarios.Rol')),
+                ('tareas', models.ManyToManyField(related_name='tareas', through='Usuarios.TareasUsuarios', to='Proyectos.Tarea')),
             ],
             options={
                 'verbose_name_plural': 'Usuarios',
@@ -91,12 +91,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='tareasusuarios',
             name='usuarios_idusuario',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='Login.usuario'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='Usuarios.usuario'),
         ),
         migrations.AddField(
             model_name='rolesusuarios',
             name='usuarios_idusuario',
-            field=models.ForeignKey(db_column='usuarios_idusuario', on_delete=django.db.models.deletion.CASCADE, to='Login.usuario'),
+            field=models.ForeignKey(db_column='usuarios_idusuario', on_delete=django.db.models.deletion.CASCADE, to='Usuarios.usuario'),
         ),
         migrations.CreateModel(
             name='RegistroEntradaUsuario',
@@ -104,7 +104,7 @@ class Migration(migrations.Migration):
                 ('idregistroacceso', models.AutoField(primary_key=True, serialize=False)),
                 ('fechaacceso', models.DateTimeField()),
                 ('ipacceso', models.CharField(max_length=45)),
-                ('usuario_idusuario', models.ForeignKey(db_column='usuario_idusuario', on_delete=django.db.models.deletion.DO_NOTHING, to='Login.usuario')),
+                ('usuario_idusuario', models.ForeignKey(db_column='usuario_idusuario', on_delete=django.db.models.deletion.DO_NOTHING, to='Usuarios.usuario')),
             ],
             options={
                 'verbose_name_plural': 'Registroentradausuarios',
@@ -114,7 +114,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='permisosroles',
             name='roles_idrol',
-            field=models.ForeignKey(db_column='roles_idrol', on_delete=django.db.models.deletion.DO_NOTHING, related_name='roles', to='Login.rol'),
+            field=models.ForeignKey(db_column='roles_idrol', on_delete=django.db.models.deletion.DO_NOTHING, related_name='roles', to='Usuarios.rol'),
         ),
         migrations.AddConstraint(
             model_name='tareasusuarios',

@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from Proyectos.serializer import *
-from Login.serializer import *
+from Usuarios.serializer import *
 
 """
 Views to obtain data related to the Blocs table of the DB

@@ -1,4 +1,4 @@
-from Login.models import *
+from Usuarios.models import *
 # Create your models here.
 
 

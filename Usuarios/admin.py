@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Login.models import Usuario, RegistroEntradaUsuario, TareasUsuarios, Rol
+from Usuarios.models import Usuario, RegistroEntradaUsuario, TareasUsuarios, Rol
 
 # Register your models here.
 admin.site.register(Usuario)

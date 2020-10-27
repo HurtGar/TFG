@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.admindocs',
     'django_docutils',
-    'Login',
+    'Usuarios',
     'Proyectos',
     'rest_framework.authtoken',
     'rest_framework',
@@ -100,7 +100,7 @@ DATABASES = {
         'OPTIONS': {
             'options': '-c search_path=gestion,public'
         },
-        'HOST': '192.168.1.133',    #Si quiero conectarlo a la
+        'HOST': '192.168.1.41',    #Si quiero conectarlo a la
         'NAME': 'proment',
         'USER': 'adrian',
         'PASSWORD': 'adrian',

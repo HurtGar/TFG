@@ -15,26 +15,28 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import url
 from rest_framework.authtoken import views as vw
-from rest_framework.urlpatterns import format_suffix_patterns
-from Login import views
-from Login.views import UsuariosList
-from Proyectos.urls import urlsBloc, urlsProject
+
+from Usuarios.views import viewsToken, viewsUser
 
 urlpatterns = [
-    path(r'', views.index),
-    path('get_token', views.GetToken.as_view(), name='get_token'),
+    path(r'', viewsUser.index),
+    # TOKEN
+    path('api_generate_token/', vw.obtain_auth_token),
+    path('get_token', viewsToken.GetToken.as_view(), name='get_token'),
+    # ADMIN
     path('admin/', admin.site.urls),
     path('admin/doc/', include('django.contrib.admindocs.urls')),
-    path('usuarios/', UsuariosList.as_view(), name='list_usuarios'),
-    path('api_generate_token/', vw.obtain_auth_token),
-    path('login/', include('Login.urls')),
+
+    # LOGIN
+    path('login/', include('Usuarios.urls')),
+
+    # USUARIOS
+
+    # PROYECTOS
     path('project/', include('Proyectos.urls.urlsProject')),
     path('block/', include('Proyectos.urls.urlsBloc')),
-    path('task/',include('Proyectos.urls.urlsTask')),
+    path('task/', include('Proyectos.urls.urlsTask')),
     path('state/', include('Proyectos.urls.urlsState')),
     path('priority/', include('Proyectos.urls.urlsPriority')),
 ]
-
-#urlpatterns = format_suffix_patterns(urlpatterns)
