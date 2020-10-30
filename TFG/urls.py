@@ -32,7 +32,7 @@ urlpatterns = [
     path('login/', include('Usuarios.urls')),
 
     # USUARIOS
-
+    path('users/', include('Usuarios.urls')),
     # PROYECTOS
     path('project/', include('Proyectos.urls.urlsProject')),
     path('block/', include('Proyectos.urls.urlsBloc')),
