@@ -1,0 +1,15 @@
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre tarea</th>
+            <th>Descripcion tarea</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataItem of ProjectList">
+            <td>{{dataItem.nombreproyecto}}</td>
+            <td>{{dataItem.descproyecto}}</td>
+        </tr>
+    </tbody>
+</table>

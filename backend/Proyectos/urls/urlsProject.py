@@ -3,7 +3,7 @@ from backend.Proyectos.views import viewsProject
 
 urlpatterns = [
     # Proyectos
-    path('user/<int:id_user>/', viewsProject.GetAllProjectFromAnUser.as_view(), name='proyectos_usuario'),
+    path('user/<int:id_user>', viewsProject.GetAllProjectFromAnUser.as_view(), name='proyectos_usuario'),
     path('<int:id_project>/user/<int:id_user>', viewsProject.GetOneProjectFromAnUser.as_view(), name='listar_proyecto'),
     path('<int:id_project>/list_users', viewsProject.GetAllUsersFromAProject.as_view(), name='listar_usuarios'),
     path('<int:id_project>/blocs', viewsProject.GetAllBlocksFromAProject.as_view(),
