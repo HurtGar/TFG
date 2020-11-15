@@ -3,20 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProjectComponent } from './project/project.component';
-import { ShowProjectsComponent } from './project/show-projects/show-projects.component';
-import { SharedService} from './shared.service';
+import { ProjectComponent } from './features/project/project.component';
+import { ListProjectComponent } from './features/project/containers/list-projects/list-projects.component';
+import { ProjectService} from './features/project/services/project.service';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { BlockComponent } from './block/block.component';
-import { TaskComponent } from './task/task.component';
-import { UserComponent } from './user/user.component';
+import { BlockComponent } from './features/block/block.component';
+import { TaskComponent } from './features/task/task.component';
+import { UserComponent } from './features/user/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProjectComponent,
-    ShowProjectsComponent,
+    ListProjectComponent,
     BlockComponent,
     TaskComponent,
     UserComponent
@@ -28,7 +28,7 @@ import { UserComponent } from './user/user.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [SharedService],
+  providers: [ProjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
