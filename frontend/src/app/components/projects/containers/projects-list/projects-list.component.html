@@ -1,0 +1,8 @@
+<div class="container-fluid">
+    <h2>Proyectos</h2>
+    <div class="list-group" *ngFor="let pro of projects;">
+        <div *ngFor="let mod of lastModification;">
+            <app-project-row [project]="pro" [lastModification]="mod"></app-project-row>
+        </div>
+    </div>
+</div>

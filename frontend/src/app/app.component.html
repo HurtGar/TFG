@@ -1,28 +1,14 @@
-<app-navbar></app-navbar>
-<div class="container-fluid">
+<div class="wrapper">
 
-  <div class="row">
+  <app-navbar></app-navbar>
+
+
+  <div class="row container-fluid">
 
     <app-sidenav></app-sidenav>
     <main class="col-md ml-sm-auto col-lg px-md-4">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed posuere magna. Sed augue risus, aliquam id
-        volutpat sit amet, pharetra non orci. Aenean convallis tortor quis nisl lacinia, pharetra dapibus libero luctus.
-        In a nisl scelerisque, aliquet sem id, elementum diam. Etiam sapien sapien, laoreet a est vehicula, consequat
-        faucibus leo. Donec vestibulum ante non dolor vestibulum, ac bibendum justo iaculis. Ut sagittis quam id sapien
-        hendrerit vehicula. Nunc sit amet mollis velit. Cras volutpat elit a mauris rhoncus, vitae luctus ligula
-        dignissim. In justo dolor, rutrum ac dolor vel, maximus dapibus ex. Phasellus mattis aliquam tincidunt. Mauris a
-        congue velit. Integer dignissim diam in augue mattis, in molestie leo facilisis. Donec posuere et metus vel
-        bibendum. Nulla quis odio vitae sapien venenatis ultricies in id lacus. Aliquam tempor commodo tellus sit amet
-        placerat.
-
-
-        In rhoncus mauris non arcu bibendum placerat. Ut eget elementum sem. Ut ornare hendrerit est id ullamcorper.
-        Curabitur aliquam ex eget laoreet viverra. Aliquam ut lacus fermentum, imperdiet sapien vel, imperdiet leo.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu ligula at nisl faucibus tincidunt ut sit amet
-        nisl. Proin ac magna arcu. Quisque accumsan sodales orci sodales fermentum. Orci varius natoque penatibus et
-        magnis dis parturient montes, nascetur ridiculus mus. Suspendisse lobortis tempus semper. In mattis, erat ut
-        malesuada egestas, eros eros ullamcorper lorem, eu scelerisque quam tellus non nisi.</p>
+      <router-outlet></router-outlet>
     </main>
   </div>
+  <app-footer></app-footer>
 </div>
-<app-footer></app-footer>

@@ -26,12 +26,20 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
   <script src="assets/jquery/jquery.js"></script>
-    <script>
-      $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
+  <script>
+    $(document).ready(function () {
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
       });
-    </script>
+
+    });
+    
+
+  </script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
 </body>
 
 </html>
