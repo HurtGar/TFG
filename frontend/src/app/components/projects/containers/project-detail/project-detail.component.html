@@ -1,0 +1,10 @@
+<div class="container-fluid">
+    <h2>Proyectos</h2>
+    <div *ngIf="project">
+        {{project | json}}
+        <app-project-view></app-project-view>
+    </div>
+    <div *ngIf="!project">
+        <h3>No hay proyecto</h3>
+    </div>
+</div>

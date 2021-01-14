@@ -1,0 +1,8 @@
+<a class="list-group-item list-group-item-action flex-column align-items-start" [routerLink]="[project.idproyecto]">
+    <div class="d-flex w-100 justify-content-between">
+      <h3 class="mb-1" >{{project.nombreproyecto}}</h3>
+      <small>Última modificación: {{lastModification.fechahistorico | date:'dd-MM-yyyy HH:mm:ss'}}</small>
+    </div>
+    <p class="mb-1">{{project.descproyecto}}</p>
+    <small>{{project.idproyecto}}</small>
+</a>
