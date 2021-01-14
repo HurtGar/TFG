@@ -216,6 +216,28 @@ class GetRecordsChangesFromProject(APIView):
         return Response(serializer.data)
 
 
+class GetLastModificationFromAProject(APIView):
+    """"""
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def get_object(self, id_project):
+        try:
+            return HistorialModificaciones.objects.raw('''
+                SELECT hm.* FROM gestion.historial_modificacion_proyecto hmp 
+                inner join gestion.historial_modificaciones hm on hmp."historialModificaciones_idhistorial_id" = hm.idhistorico
+                WHERE hmp.proyectos_idproyecto_id = %s order by hm.fechahistorico desc limit 1''', [id_project])
+
+
+        except HistorialModificaciones.DoesNotExist:
+            raise Http404
+
+    def get(self, request, id_project):
+        project = self.get_object(id_project)
+        serializer = HistorialModificacionesSerializer(project, many=True)
+        return Response(serializer.data)
+
+
 class CreateProject(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]

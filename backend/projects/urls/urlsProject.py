@@ -4,7 +4,7 @@ from projects.views import viewsProject
 urlpatterns = [
     # Proyectos
     path('user/<int:id_user>', viewsProject.GetAllProjectFromAnUser.as_view(), name='proyectos_usuario'),
-    path('<int:id_project>/user/<int:id_user>', viewsProject.GetOneProjectFromAnUser.as_view(), name='listar_proyecto'),
+    path('user/<int:id_user>/<int:id_project>', viewsProject.GetOneProjectFromAnUser.as_view(), name='listar_proyecto'),
     path('<int:id_project>/list_users', viewsProject.GetAllUsersFromAProject.as_view(), name='listar_usuarios'),
     path('<int:id_project>/blocs', viewsProject.GetAllBlocksFromAProject.as_view(),
          name='listar_bloques_proyecto'),
@@ -19,5 +19,6 @@ urlpatterns = [
     path('<int:id_project>/update', viewsProject.UpdateProject.as_view(), name='actualizar_proyecto'),
     path('delete/<int:id_project>', viewsProject.DeleteProject.as_view(), name='borrar_proyecto'),
     path('<int:id_project>/insert_record', viewsProject.InsertRecord.as_view(), name='insertar_historico'),
+    path('<int:id_project>/last_modification', viewsProject.GetLastModificationFromAProject.as_view(), name='last_modification_record')
 
 ]
