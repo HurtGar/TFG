@@ -1,0 +1,9 @@
+<div class="container-fluid">
+    <h2>Bloques</h2>
+    <div class="list-group" *ngFor="let blo of blocks;">
+        <app-block-row [block]="blo"></app-block-row>
+        <!--<div *ngFor="let mod of lastModification;">
+            <app-block-row [project]="pro" [lastModification]="mod"></app-block-row>
+        </div>-->
+    </div>
+</div>

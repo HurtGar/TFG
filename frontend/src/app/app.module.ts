@@ -19,6 +19,13 @@ import { HomeComponent } from './components/home/home.component';
 import { ProjectRowComponent } from './components/projects/components/project-row/project-row.component';
 import { ProjectsListComponent } from './components/projects/containers/projects-list/projects-list.component';
 import { ProjectDetailComponent } from './components/projects/containers/project-detail/project-detail.component';
+import { ProjectViewComponent } from './components/projects/components/project-view/project-view.component';
+import { BlockAvailableComponent } from './components/projects/components/block-available/block-available.component';
+import { TasksAvailableComponent } from './components/projects/components/tasks-available/tasks-available.component';
+import { BlockDetailComponent } from './components/blocks/containers/block-detail/block-detail.component';
+import { BlockViewComponent } from './components/blocks/components/block-view/block-view.component';
+import { BlockListComponent } from './components/blocks/containers/block-list/block-list.component';
+import { BlockRowComponent } from './components/blocks/components/block-row/block-row.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +39,14 @@ import { ProjectDetailComponent } from './components/projects/containers/project
     HomeComponent,
     ProjectRowComponent,
     ProjectsListComponent,
-    ProjectDetailComponent
+    ProjectDetailComponent,
+    ProjectViewComponent,
+    BlockAvailableComponent,
+    TasksAvailableComponent,
+    BlockDetailComponent,
+    BlockViewComponent,
+    BlockListComponent,
+    BlockRowComponent
   ],
   imports: [
     BrowserModule,
