@@ -1,9 +1,7 @@
-<a class="list-group-item list-group-item-action flex-column align-items-start" [routerLink]="[block.idbloque]">
+<a class="list-group-item list-group-item-action flex-column align-items-start" [routerLink]="['/blocks/',block.idbloque,'user',1]">
     <div class="d-flex w-100 justify-content-between">
-      <h3 class="mb-1" >{{block.nombrebloque}}</h3>
-      <!--<small>Última modificación: {{lastModification.fechahistorico | date:'dd-MM-yyyy HH:mm:ss'}}</small>-->
-      <small>Proyecto: {{block.proyecto_idproyecto.idproyecto}} - {{block.proyecto_idproyecto.nombreproyecto}}</small>
+      <h3 class="mb-1" ><small class="badge badge-primary badge-pill">{{block.idbloque}}</small>{{block.nombrebloque}}</h3>
+      <small>{{block.proyecto_idproyecto.nombreproyecto}}<br>Última modificación: {{lastModification.fechahistorico | date:'dd-MM-yyyy HH:mm:ss'}}</small>
     </div>
     <p class="mb-1">{{block.descbloque}}</p>
-    <small>{{block.idbloque}}</small>
 </a>

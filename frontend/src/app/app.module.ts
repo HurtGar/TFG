@@ -26,6 +26,12 @@ import { BlockDetailComponent } from './components/blocks/containers/block-detai
 import { BlockViewComponent } from './components/blocks/components/block-view/block-view.component';
 import { BlockListComponent } from './components/blocks/containers/block-list/block-list.component';
 import { BlockRowComponent } from './components/blocks/components/block-row/block-row.component';
+import { TaskListComponent } from './components/tasks/containers/task-list/task-list.component';
+import { TaskDetailComponent } from './components/tasks/containers/task-detail/task-detail.component';
+import { TaskRowComponent } from './components/tasks/components/task-row/task-row.component';
+import { TaskViewComponent } from './components/tasks/components/task-view/task-view.component';
+import { BlockService } from './services/block.service';
+import { TaskService } from './services/task.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +52,11 @@ import { BlockRowComponent } from './components/blocks/components/block-row/bloc
     BlockDetailComponent,
     BlockViewComponent,
     BlockListComponent,
-    BlockRowComponent
+    BlockRowComponent,
+    TaskListComponent,
+    TaskDetailComponent,
+    TaskRowComponent,
+    TaskViewComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +64,7 @@ import { BlockRowComponent } from './components/blocks/components/block-row/bloc
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [ProjectsService],
+  providers: [ProjectsService, BlockService, TaskService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -6,6 +6,8 @@ import { BlockListComponent } from './components/blocks/containers/block-list/bl
 import { HomeComponent } from './components/home/home.component';
 import { ProjectDetailComponent } from './components/projects/containers/project-detail/project-detail.component';
 import { ProjectsListComponent } from './components/projects/containers/projects-list/projects-list.component';
+import { TaskDetailComponent } from './components/tasks/containers/task-detail/task-detail.component';
+import { TaskListComponent } from './components/tasks/containers/task-list/task-list.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 
 export const APP_ROUTES: Routes = [
@@ -18,7 +20,9 @@ export const APP_ROUTES: Routes = [
   { path: 'blocks', component: BlocksComponent },
   { path: 'blocks/:idBlock/user/:idUser', component: BlockDetailComponent },
   { path: 'blocks/user/:idUsuario', component: BlockListComponent},
-  { path: 'tasks', component: TasksComponent },
+  { path: 'task', component: TasksComponent },
+  { path: 'task/user/:idUser', component: TaskListComponent },
+  { path: 'task/:idTask/user/:idUser', component: TaskDetailComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];
 
