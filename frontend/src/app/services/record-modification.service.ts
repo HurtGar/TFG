@@ -21,4 +21,10 @@ export class RecordModificationService {
   getRecordsChangesFromProject(idProject: number): Observable<Record[]>{
     return this.getQuery(`${idProject}/last_modification`);
   }
+  getRecordsChangesFromBlock(idBlock: number): Observable<Record[]>{
+    return this.getQuery(`${idBlock}/last_modification`);
+  }
+  getRecordsChangesFromTask(idTask: number): Observable<Record[]>{
+    return this.getQuery(`${idTask}/last_modification`);
+  }
 }

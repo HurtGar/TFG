@@ -19,6 +19,19 @@ import { HomeComponent } from './components/home/home.component';
 import { ProjectRowComponent } from './components/projects/components/project-row/project-row.component';
 import { ProjectsListComponent } from './components/projects/containers/projects-list/projects-list.component';
 import { ProjectDetailComponent } from './components/projects/containers/project-detail/project-detail.component';
+import { ProjectViewComponent } from './components/projects/components/project-view/project-view.component';
+import { BlockAvailableComponent } from './components/projects/components/block-available/block-available.component';
+import { TasksAvailableComponent } from './components/projects/components/tasks-available/tasks-available.component';
+import { BlockDetailComponent } from './components/blocks/containers/block-detail/block-detail.component';
+import { BlockViewComponent } from './components/blocks/components/block-view/block-view.component';
+import { BlockListComponent } from './components/blocks/containers/block-list/block-list.component';
+import { BlockRowComponent } from './components/blocks/components/block-row/block-row.component';
+import { TaskListComponent } from './components/tasks/containers/task-list/task-list.component';
+import { TaskDetailComponent } from './components/tasks/containers/task-detail/task-detail.component';
+import { TaskRowComponent } from './components/tasks/components/task-row/task-row.component';
+import { TaskViewComponent } from './components/tasks/components/task-view/task-view.component';
+import { BlockService } from './services/block.service';
+import { TaskService } from './services/task.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +45,18 @@ import { ProjectDetailComponent } from './components/projects/containers/project
     HomeComponent,
     ProjectRowComponent,
     ProjectsListComponent,
-    ProjectDetailComponent
+    ProjectDetailComponent,
+    ProjectViewComponent,
+    BlockAvailableComponent,
+    TasksAvailableComponent,
+    BlockDetailComponent,
+    BlockViewComponent,
+    BlockListComponent,
+    BlockRowComponent,
+    TaskListComponent,
+    TaskDetailComponent,
+    TaskRowComponent,
+    TaskViewComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +64,7 @@ import { ProjectDetailComponent } from './components/projects/containers/project
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [ProjectsService],
+  providers: [ProjectsService, BlockService, TaskService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
