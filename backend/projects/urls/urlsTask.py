@@ -18,8 +18,10 @@ urlpatterns = [
     path('create/assignment', viewsTask.CreateATaskAssignment.as_view(), name='crear_asignacion'),
     path('delete/assignment', viewsTask.DeleteATaskAssignment.as_view(), name='eliminar_asignacion'),
     path('assignment/<int:id_task>', viewsTask.UpdateAssignmentTask.as_view(), name='actualizar_asignacion'),
-    path('create',viewsTask.CreateTask.as_view(), name='crear_tarea'),
+    path('create', viewsTask.CreateTask.as_view(), name='crear_tarea'),
     path('<int:id_task>/update', viewsTask.UpdateTask.as_view(), name='actualizar_tarea'),
     path('delete/<int:id_task>', viewsTask.DeleteTask.as_view(), name='borrar_tarea'),
     path('<int:id_task>/insert_record', viewsTask.InsertRecord.as_view(), name='insertar_historico'),
+    path('<int:id_task>/last_modification', viewsTask.GetLastModificationFromATask.as_view(),
+         name='last_modification_record')
 ]

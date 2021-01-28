@@ -34,15 +34,15 @@ class GetOneTaskFromAnUser(APIView):
 
     def get_object(self, id_user, id_task):
         try:
-            return Tarea.objects.get(tareasusuarios__usuarios_idusuario=id_user,
-                                     tareasusuarios__tareas_idtarea=id_task)
+            return Tarea.objects.filter(tareasusuarios__usuarios_idusuario=id_user,
+                                        tareasusuarios__tareas_idtarea=id_task).distinct()
 
         except Tarea.DoesNotExist:
             raise Http404
 
     def get(self, request, id_user, id_task):
         task = self.get_object(id_user, id_task)
-        serializer = TareaSerializer(task)
+        serializer = TareaSerializer(task, many=True)
         return Response(serializer.data)
 
 
@@ -143,6 +143,26 @@ class GetRecordsFromATask(APIView):
     def get(self, request, id_task):
         records = self.get_object(id_task)
         serializer = HistorialModificacionTareaSerializer(records, many=True)
+        return Response(serializer.data)
+
+
+class GetLastModificationFromATask(APIView):
+    """"""
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def get_object(self, id_task):
+        try:
+            return HistorialModificaciones.objects.raw('''
+                SELECT hm.* FROM gestion.historial_modificacion_tarea hmp 
+                inner join gestion.historial_modificaciones hm on hmp."historialModificaciones_idhistorial_id" = hm.idhistorico
+                WHERE hmp.tareas_idtarea_id = %s order by hm.fechahistorico desc limit 1''', [id_task])
+        except HistorialModificaciones.DoesNotExist:
+            raise Http404
+
+    def get(self, request, id_task):
+        task = self.get_object(id_task)
+        serializer = HistorialModificacionesSerializer(task, many=True)
         return Response(serializer.data)
 
 

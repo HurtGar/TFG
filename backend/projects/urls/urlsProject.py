@@ -8,6 +8,7 @@ urlpatterns = [
     path('<int:id_project>/list_users', viewsProject.GetAllUsersFromAProject.as_view(), name='listar_usuarios'),
     path('<int:id_project>/blocs', viewsProject.GetAllBlocksFromAProject.as_view(),
          name='listar_bloques_proyecto'),
+    path('<int:id_project>/user/<int:id_user>/blocks', viewsProject.GetAllBlocksFromAProjectAndUser.as_view(), name='bloques_proyecto_usuario'),
     path('<int:id_project>/tasks', viewsProject.GetAllTaskFromAProject.as_view(),
          name='listar_tareas_proyecto'),
     path('<int:id_project>/hours', viewsProject.GetTotalHoursFromAProject.as_view(), name='obtener_horas'),
