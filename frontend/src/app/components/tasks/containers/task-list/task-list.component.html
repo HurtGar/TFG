@@ -1,0 +1,8 @@
+<div class="container-fluid">
+    <h2>Tareas</h2>
+    <div class="list-group" *ngFor="let tas of tasks;">
+        <div *ngFor="let mod of lastModification;">
+            <app-task-row [task]="tas" [lastModification]="mod"></app-task-row>
+        </div>
+    </div>
+</div>
