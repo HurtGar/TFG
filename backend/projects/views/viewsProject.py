@@ -130,6 +130,20 @@ class GetAllBlocksFromAProject(APIView):
         return Response(serializer.data)
 
 
+class GetAllBlocksFromAProjectAndUser(APIView):
+    """"""
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def get_object(self, id_project, id_user):
+        return Bloque.objects.filter(proyecto_idproyecto=id_project,bloque__tareas__idusuario=id_user).distinct()
+
+    def get(self, request, id_project, id_user, format=None):
+        bloque = self.get_object(id_project, id_user)
+        serializer = BloqueSerializer(bloque, many=True)
+        return Response(serializer.data)
+
+
 class GetAllTaskFromAProject(APIView):
     """"""
     permission_classes = [IsAuthenticated]
