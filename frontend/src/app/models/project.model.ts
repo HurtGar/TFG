@@ -1,5 +1,5 @@
 export interface Project {
-  idproyecto: number;
+  idproyecto?: number;
   nombreproyecto: string;
   descproyecto?: string;
   inicioproyecto?: string;

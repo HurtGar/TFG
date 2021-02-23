@@ -1,5 +1,8 @@
 <div class="container-fluid">
     <h2>Proyectos</h2>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a [routerLink]="['/projects/new-project']" style="text-decoration: none;" class="text-white"><button class="btn btn-primary">Nuevo proyecto</button></a>
+    </div>
     <div class="list-group" *ngFor="let pro of projects;">
         <div *ngFor="let mod of lastModification;">
             <app-project-row [project]="pro" [lastModification]="mod"></app-project-row>

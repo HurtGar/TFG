@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Services
 import { ProjectsService } from './services/projects.service';
@@ -32,6 +33,7 @@ import { TaskRowComponent } from './components/tasks/components/task-row/task-ro
 import { TaskViewComponent } from './components/tasks/components/task-view/task-view.component';
 import { BlockService } from './services/block.service';
 import { TaskService } from './services/task.service';
+import { ProjectFormComponent } from './components/projects/components/project-form/project-form.component';
 
 @NgModule({
   declarations: [
@@ -56,13 +58,16 @@ import { TaskService } from './services/task.service';
     TaskListComponent,
     TaskDetailComponent,
     TaskRowComponent,
-    TaskViewComponent
+    TaskViewComponent,
+    ProjectFormComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [ProjectsService, BlockService, TaskService],
   bootstrap: [AppComponent],
