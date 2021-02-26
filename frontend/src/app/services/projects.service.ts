@@ -41,13 +41,6 @@ export class ProjectsService {
     return this.getQuery(`${idProject}/tasks`);
   }
 
-  deleteProject(idProject: string): void {
-    const projectUrl = environment.baseurl.concat(
-      `/project/delete/${idProject}`
-    );
-    this.http.delete(projectUrl, { headers });
-  }
-
   createProject(project: any): Observable<any> {
     console.log(project);
 
@@ -56,5 +49,20 @@ export class ProjectsService {
       project,
       { headers }
     );
+  }
+
+  updateProject(project: any, idproject: number): Observable<any> {
+    return this.http.put(
+      environment.baseurl.concat(`/project/update/${idproject}`),
+      project,
+      { headers }
+    );
+  }
+
+  deleteProject(idProject: number): Observable<any> {
+    const projectUrl = environment.baseurl.concat(
+      `/project/delete/${idProject}`
+    );
+    return this.http.delete(projectUrl, { headers });
   }
 }

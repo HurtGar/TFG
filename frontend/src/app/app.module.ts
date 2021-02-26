@@ -33,7 +33,10 @@ import { TaskRowComponent } from './components/tasks/components/task-row/task-ro
 import { TaskViewComponent } from './components/tasks/components/task-view/task-view.component';
 import { BlockService } from './services/block.service';
 import { TaskService } from './services/task.service';
-import { ProjectFormComponent } from './components/projects/components/project-form/project-form.component';
+import { NewFormComponent } from './components/projects/components/new-form/new-form.component';
+import { UpdateFormComponent } from './components/projects/components/update-form/update-form.component';
+import { ProjectFormComponent } from './components/projects/containers/project-form/project-form.component';
+
 
 @NgModule({
   declarations: [
@@ -60,6 +63,8 @@ import { ProjectFormComponent } from './components/projects/components/project-f
     TaskRowComponent,
     TaskViewComponent,
     ProjectFormComponent,
+    UpdateFormComponent,
+    NewFormComponent,
   ],
   imports: [
     FormsModule,

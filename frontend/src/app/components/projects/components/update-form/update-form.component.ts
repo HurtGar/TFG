@@ -1,39 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/models/project.model';
 import { ProjectsService } from 'src/app/services/projects.service';
-import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-project-form',
-  templateUrl: './project-form.component.html',
-  styleUrls: ['./project-form.component.scss'],
+  selector: 'app-update-form',
+  templateUrl: './update-form.component.html',
+  styleUrls: ['./update-form.component.scss'],
 })
-export class ProjectFormComponent implements OnInit {
-  project: Project;
+export class UpdateFormComponent implements OnInit {
   data: FormGroup;
+  @Input() project: Project;
   error: any = { isError: false };
+  updateForm = true;
+
   constructor(
     private projectService: ProjectsService,
-    private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
     this.createForm();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadDataToForm(this.project);
+    console.log(this.project);
+  }
 
   get nombreProyectoNoValido(): any {
     return (
       this.data.get('nombreproyecto').invalid &&
       this.data.get('nombreproyecto').touched
-    );
-  }
-
-  get inicioProyectoNoValido(): any {
-    return (
-      this.data.get('inicioproyecto').invalid &&
-      this.data.get('inicioproyecto').touched
     );
   }
 
@@ -47,36 +45,41 @@ export class ProjectFormComponent implements OnInit {
       };
     }
   }
+
   createForm(): any {
     this.data = this.formBuilder.group({
       nombreproyecto: ['', [Validators.required]],
-      descproyecto: '',
-      fechacreacion: [this.setCreationTime(), [Validators.required]],
+      descproyecto: [''],
+      fechacreacion: [''],
       inicioproyecto: [''],
       finproyecto: [''],
     });
   }
 
-  setCreationTime(): string {
-    const date = new Date();
-    const dateStr =
-      date.getFullYear() +
-      '-' +
-      ('00' + (date.getMonth() + 1)).slice(-2) +
-      '-' +
-      ('00' + date.getDate()).slice(-2) +
-      ' ' +
-      ('00' + date.getHours()).slice(-2) +
-      ':' +
-      ('00' + date.getMinutes()).slice(-2) +
-      ':' +
-      ('00' + date.getSeconds()).slice(-2);
-    return dateStr;
+  loadDataToForm(pro: Project): any {
+    this.data.setValue({
+      nombreproyecto: pro.nombreproyecto,
+      descproyecto: pro.descproyecto,
+      fechacreacion: pro.fechacreacion,
+      inicioproyecto: pro.inicioproyecto,
+      finproyecto: pro.finproyecto,
+    });
   }
 
-  addProject(): void {
-    console.log(this.data);
+  private checkDates(dateA: string, dateB: string): boolean {
+    let correct = true;
 
+    const finalDateA = Date.parse(dateA);
+    const finalDateB = Date.parse(dateB);
+
+    if (finalDateB < finalDateA) {
+      correct = false;
+    }
+    console.log(correct);
+    return correct;
+  }
+
+  updateProject(): void {
     if (this.data.invalid) {
       return Object.values(this.data.controls).forEach((control) => {
         control.markAsTouched();
@@ -114,27 +117,15 @@ export class ProjectFormComponent implements OnInit {
       delete formObject.finproyecto;
     }
 
-    console.log(formObject);
-
-    this.projectService.createProject(formObject).subscribe(
-      (p: Project) => {
-        console.log(p);
-        this.router.navigate(['projects/user/1']);
-      },
-      (error: any) => console.log(error)
-    );
-  }
-
-  private checkDates(dateA: string, dateB: string): boolean {
-    let correct = true;
-
-    const finalDateA = Date.parse(dateA);
-    const finalDateB = Date.parse(dateB);
-
-    if (finalDateB < finalDateA) {
-      correct = false;
-    }
-    console.log(correct);
-    return correct;
+    this.projectService
+      .updateProject(formObject, this.project.idproyecto)
+      .subscribe(
+        (p: Project) => {
+          console.log(p);
+          // Recargamos la página para mostrar los nuevos cambios.
+          window.location.reload();
+        },
+        (error: any) => console.log(error)
+      );
   }
 }

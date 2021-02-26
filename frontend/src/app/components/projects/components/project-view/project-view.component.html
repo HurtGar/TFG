@@ -1,7 +1,8 @@
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item text-primary"><a [routerLink]="['../']">Proyectos</a> / <span class="text-secondary">{{project.nombreproyecto}}</span></li>
+            <li class="breadcrumb-item text-primary"><a [routerLink]="['../']">Proyectos</a> / <span
+                    class="text-secondary">{{project.nombreproyecto}}</span></li>
         </ol>
     </nav>
     <div class="row">
@@ -24,12 +25,17 @@
         </div>
         <div class="col dates" style="display: inline-block">
             <p>Creado: {{project.fechacreacion | date:'dd-MM-yyyy HH:mm:ss'}}</p>
-            <p>Inicio: {{project.inicioproyecto}}</p>
-            <p>Fin: {{project.finproyecto}}</p>
+            <p *ngIf="project.inicioproyecto!=null">Inicio: {{project.inicioproyecto}}</p>
+            <p *ngIf="project.finproyecto!=null">Fin: {{project.finproyecto}}</p>
         </div>
         <div class="col">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-primary">Modificar proyecto</button>
+                <!--<a [routerLink]="['/projects/update/',project.idproyecto]">
+                    <button type="button" class="btn btn-primary">Modificar proyecto</button>
+                </a>-->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Modificar proyecto
+                </button>
                 <button type="button" class="btn btn-danger" data-toggle="modal"
                     data-target="#exampleModalCenter">Eliminar Proyecto</button>
             </div>
@@ -43,17 +49,38 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <h2 class="modal-title" id="exampleModalLongTitle">Borrar proyecto</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                ¿Desea borrar el proyecto {{project.nombreproyecto}}?
+                ¿Desea borrar el proyecto <b>{{project.nombreproyecto}}</b>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary">Sí</button>
+                <button type="button" class="btn btn-primary" (click)="deleteProject(this.project.idproyecto);" data-dismiss="modal">Sí</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for update project -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">{{project.nombreproyecto}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-update-form [project]="project"></app-update-form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
     </div>
