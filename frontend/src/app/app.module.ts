@@ -33,9 +33,12 @@ import { TaskRowComponent } from './components/tasks/components/task-row/task-ro
 import { TaskViewComponent } from './components/tasks/components/task-view/task-view.component';
 import { BlockService } from './services/block.service';
 import { TaskService } from './services/task.service';
-import { NewFormComponent } from './components/projects/components/new-form/new-form.component';
-import { UpdateFormComponent } from './components/projects/components/update-form/update-form.component';
+import { NewProjectFormComponent } from './components/projects/components/new-project-form/new-form.component';
+import { UpdateProjectFormComponent } from './components/projects/components/update-project-form/update-form.component';
 import { ProjectFormComponent } from './components/projects/containers/project-form/project-form.component';
+import { BlockFormComponent } from './components/blocks/containers/block-form/block-form.component';
+import { NewBlockFormComponent } from './components/blocks/components/new-block-form/new-block-form.component';
+import { UpdateBlockFormComponent } from './components/blocks/components/update-block-form/update-block-form.component';
 
 
 @NgModule({
@@ -63,8 +66,11 @@ import { ProjectFormComponent } from './components/projects/containers/project-f
     TaskRowComponent,
     TaskViewComponent,
     ProjectFormComponent,
-    UpdateFormComponent,
-    NewFormComponent,
+    UpdateProjectFormComponent,
+    NewProjectFormComponent,
+    BlockFormComponent,
+    NewBlockFormComponent,
+    UpdateBlockFormComponent,
   ],
   imports: [
     FormsModule,

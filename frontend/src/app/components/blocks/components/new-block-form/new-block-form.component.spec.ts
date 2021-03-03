@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UpdateFormComponent } from './update-form.component';
+import { NewBlockFormComponent } from './new-block-form.component';
 
-describe('UpdateFormComponent', () => {
-  let component: UpdateFormComponent;
-  let fixture: ComponentFixture<UpdateFormComponent>;
+describe('NewBlockFormComponent', () => {
+  let component: NewBlockFormComponent;
+  let fixture: ComponentFixture<NewBlockFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UpdateFormComponent ]
+      declarations: [ NewBlockFormComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UpdateFormComponent);
+    fixture = TestBed.createComponent(NewBlockFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

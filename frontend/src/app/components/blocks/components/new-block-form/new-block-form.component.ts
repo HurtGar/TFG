@@ -1,59 +1,81 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from 'src/app/models/project.model';
-import { ProjectsService } from 'src/app/services/projects.service';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Block } from 'src/app/models/block.model';
+import { Project } from 'src/app/models/project.model';
+import { BlockService } from 'src/app/services/block.service';
+import { ProjectsService } from 'src/app/services/projects.service';
 
 @Component({
-  selector: 'app-new-form',
-  templateUrl: './new-form.component.html',
-  styleUrls: ['./new-form.component.scss'],
+  selector: 'app-new-block-form',
+  templateUrl: './new-block-form.component.html',
+  styleUrls: ['./new-block-form.component.scss'],
 })
-export class NewFormComponent implements OnInit {
-  project: Project;
+export class NewBlockFormComponent implements OnInit {
+  projects: Project[] = [];
+  block: Block;
   data: FormGroup;
   error: any = { isError: false };
+
   constructor(
+    private blockService: BlockService,
     private projectService: ProjectsService,
     private router: Router,
     private formBuilder: FormBuilder
   ) {
     this.createForm();
+    this.loadProjects();
   }
 
   ngOnInit(): void {}
 
-  get nombreProyectoNoValido(): any {
+  get nombreBloqueNoValido(): any {
     return (
-      this.data.get('nombreproyecto').invalid &&
-      this.data.get('nombreproyecto').touched
+      this.data.get('nombrebloque').invalid &&
+      this.data.get('nombrebloque').touched
     );
   }
 
-  get inicioProyectoNoValido(): any {
-    return (
-      this.data.get('inicioproyecto').invalid &&
-      this.data.get('inicioproyecto').touched
-    );
+  get idProject(): any {
+    return this.data.get('proyecto_idproyecto');
+  }
+
+  selectProject(e): any {
+    console.log(e.target.value);
+
+    this.idProject.setValue(e.target.value, {
+      onlySelf: true,
+    });
   }
 
   compareTwoDates(): void {
     if (
-      new Date(this.data.controls.finproyecto.value) <
-      new Date(this.data.controls.inicioproyecto.value)
+      new Date(this.data.controls.finbloque.value) <
+      new Date(this.data.controls.iniciobloque.value)
     ) {
       this.error = {
         isError: true,
       };
     }
   }
+
+  loadProjects(): void {
+    this.projectService.getAllProjectFromAnUser('1').subscribe((p) => {
+      console.log(p);
+
+      this.projects = p;
+    });
+  }
+
   createForm(): any {
     this.data = this.formBuilder.group({
-      nombreproyecto: ['', [Validators.required]],
-      descproyecto: '',
+      nombrebloque: ['', [Validators.required]],
+      descbloque: [''],
       fechacreacion: [this.setCreationTime(), [Validators.required]],
-      inicioproyecto: [''],
-      finproyecto: [''],
+      iniciobloque: [''],
+      finbloque: [''],
+      proyecto_idproyecto: [''],
     });
   }
 
@@ -74,25 +96,25 @@ export class NewFormComponent implements OnInit {
     return dateStr;
   }
 
-  addProject(): void {
+  addBlock(): void {
     console.log(this.data);
-
     if (this.data.invalid) {
       return Object.values(this.data.controls).forEach((control) => {
         control.markAsTouched();
       });
     }
+
     const formObject = this.data.getRawValue();
     JSON.stringify(formObject);
 
     // Comprobar si la fecha de fin es anterior a la de inicio del proyecto.
     if (
-      this.data.get('inicioproyecto').value != null &&
-      this.data.get('finproyecto').value != null
+      this.data.get('iniciobloque').value != null &&
+      this.data.get('finbloque').value != null
     ) {
       const datesOk = this.checkDates(
-        this.data.get('inicioproyecto').value,
-        this.data.get('finproyecto').value
+        this.data.get('iniciobloque').value,
+        this.data.get('finbloque').value
       );
       if (!datesOk) {
         throw Error();
@@ -102,27 +124,24 @@ export class NewFormComponent implements OnInit {
     // Las fechas pueden venir vacías y si vienen, debemos borrar el campo del JSON para evitar problemas de inserción.
     // No se puede insertar en la BD un campo de tipo DateField como null o vacío.
     if (
-      this.data.get('inicioproyecto').value === null ||
-      this.data.get('inicioproyecto').value === ''
+      this.data.get('iniciobloque').value === null ||
+      this.data.get('iniciobloque').value === ''
     ) {
-      delete formObject.inicioproyecto;
+      delete formObject.iniciobloque;
     }
     if (
-      this.data.get('finproyecto').value === null ||
-      this.data.get('finproyecto').value === ''
+      this.data.get('finbloque').value === null ||
+      this.data.get('finbloque').value === ''
     ) {
-      delete formObject.finproyecto;
+      delete formObject.finbloque;
     }
 
     console.log(formObject);
 
-    this.projectService.createProject(formObject).subscribe(
-      (p: Project) => {
-        console.log(p);
-        this.router.navigate(['projects/user/1']);
-      },
-      (error: any) => console.log(error)
-    );
+    this.blockService.createBlock(formObject).subscribe((b: Block) => {
+      console.log(b);
+      this.router.navigate(['blocks/user/1']);
+    });
   }
 
   private checkDates(dateA: string, dateB: string): boolean {

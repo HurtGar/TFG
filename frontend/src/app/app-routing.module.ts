@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BlocksComponent } from './components/blocks/blocks.component';
 import { BlockDetailComponent } from './components/blocks/containers/block-detail/block-detail.component';
+import { BlockFormComponent } from './components/blocks/containers/block-form/block-form.component';
 import { BlockListComponent } from './components/blocks/containers/block-list/block-list.component';
 import { HomeComponent } from './components/home/home.component';
-import { NewFormComponent } from './components/projects/components/new-form/new-form.component';
-import { UpdateFormComponent } from './components/projects/components/update-form/update-form.component';
+import { UpdateProjectFormComponent } from './components/projects/components/update-project-form/update-form.component';
 import { ProjectDetailComponent } from './components/projects/containers/project-detail/project-detail.component';
 import { ProjectFormComponent } from './components/projects/containers/project-form/project-form.component';
 import { ProjectsListComponent } from './components/projects/containers/projects-list/projects-list.component';
@@ -26,9 +26,10 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: 'projects/update/:idProject',
-    component: UpdateFormComponent,
+    component: UpdateProjectFormComponent,
   },
   { path: 'blocks', component: BlocksComponent },
+  { path: 'blocks/new-block', component: BlockFormComponent },
   { path: 'blocks/:idBlock/user/:idUser', component: BlockDetailComponent },
   { path: 'blocks/user/:idUsuario', component: BlockListComponent},
   { path: 'task', component: TasksComponent },

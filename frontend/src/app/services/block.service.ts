@@ -32,4 +32,27 @@ export class BlockService {
   getAllBlocksFromAnUser(idUser: string): Observable<Block[]> {
     return this.getQuery(`user/${idUser}`);
   }
+
+  createBlock(block: any): Observable<any> {
+    console.log(block);
+
+    return this.http.post(environment.baseurl.concat(`/block/create`), block, {
+      headers,
+    });
+  }
+
+  updateBlock(block: any, idblock: number): Observable<any> {
+    return this.http.put(
+      environment.baseurl.concat(`/block/update/${idblock}`),
+      block,
+      { headers }
+    );
+  }
+
+  deleteBlock(idBlock: number): Observable<any> {
+    const blockUrl = environment.baseurl.concat(
+      `/block/delete/${idBlock}`
+    );
+    return this.http.delete(blockUrl, { headers });
+  }
 }

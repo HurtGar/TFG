@@ -9,7 +9,7 @@ import { ProjectsService } from 'src/app/services/projects.service';
   templateUrl: './update-form.component.html',
   styleUrls: ['./update-form.component.scss'],
 })
-export class UpdateFormComponent implements OnInit {
+export class UpdateProjectFormComponent implements OnInit {
   data: FormGroup;
   @Input() project: Project;
   error: any = { isError: false };
@@ -25,7 +25,6 @@ export class UpdateFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadDataToForm(this.project);
-    console.log(this.project);
   }
 
   get nombreProyectoNoValido(): any {
