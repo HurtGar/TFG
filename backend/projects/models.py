@@ -50,9 +50,9 @@ class HistorialModificaciones(models.Model):
 class Proyecto(models.Model):
     idproyecto = models.AutoField(primary_key=True)
     nombreproyecto = models.CharField(max_length=100)
-    descproyecto = models.CharField(max_length=500, null=True)
-    inicioproyecto = models.DateField(null=True)
-    finproyecto = models.DateField(null=True)
+    descproyecto = models.CharField(max_length=500, null=True, blank=True)
+    inicioproyecto = models.DateField(null=True, blank=True)
+    finproyecto = models.DateField(null=True, blank=True)
     fechacreacion = models.DateTimeField()
     modificaciones = models.ManyToManyField(HistorialModificaciones, through='HistorialModificacionProyecto',
                                             related_name='modificaciones_proyecto',
@@ -70,9 +70,9 @@ class Proyecto(models.Model):
 class Bloque(models.Model):
     idbloque = models.AutoField(primary_key=True)
     nombrebloque = models.CharField(max_length=100)
-    descbloque = models.CharField(max_length=1000, null=True)
-    iniciobloque = models.DateField(null=True)
-    finbloque = models.DateField(null=True)
+    descbloque = models.CharField(max_length=1000, null=True, blank=True)
+    iniciobloque = models.DateField(null=True, blank=True)
+    finbloque = models.DateField(null=True, blank=True)
     fechacreacion = models.DateTimeField()
     proyecto_idproyecto = models.ForeignKey(Proyecto, related_name='proyecto_bloque', on_delete=models.CASCADE,
                                             db_column='proyecto_idproyecto')

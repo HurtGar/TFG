@@ -199,7 +199,7 @@ class CreateBlock(APIView):
 
     def post(self, request, format=None):
         """Insertar datos de un proyecto"""
-        serializer = BloqueSerializer(data=request.data)
+        serializer = CreateBloqueSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -220,7 +220,7 @@ class UpdateBlock(APIView):
     def put(self, request, id_block, format=None):
         """Crear un nuevo elemento o reemplazar un proyecto."""
         block = self.get_object(id_block)
-        serializer = BloqueSerializer(block, data=request.data)
+        serializer = UpdateBloqueSerializer(block, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
