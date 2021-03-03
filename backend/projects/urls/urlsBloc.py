@@ -15,7 +15,7 @@ urlpatterns = [
     path('<int:id_block>/records', viewsBlock.GetRecordsChangesFromProject.as_view(), name='historial_bloques'),
     path('<int:id_block>/assigment', viewsBlock.SetBlockToAProject.as_view(), name='asignar_bloque_proyecto'),
     path('create', viewsBlock.CreateBlock.as_view(), name='crear_bloque'),
-    path('<int:id_block>/update', viewsBlock.UpdateBlock.as_view(), name='actualizar_bloque'),
+    path('update/<int:id_block>', viewsBlock.UpdateBlock.as_view(), name='actualizar_bloque'),
     path('delete/<int:id_block>', viewsBlock.DeleteBlock.as_view(), name='borrar_bloque'),
     path('<int:id_block>/insert_record', viewsBlock.InsertRecord.as_view(), name='insertar_historico'),
     path('<int:id_block>/last_modification', viewsBlock.GetLastModificationFromABlock.as_view(),

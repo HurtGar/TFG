@@ -17,7 +17,7 @@ urlpatterns = [
     path('<int:id_project>/records', viewsProject.GetRecordsChangesFromProject.as_view(),
          name='historico_proyecto'),
     path('create', viewsProject.CreateProject.as_view(), name='crear_proyecto'),
-    path('<int:id_project>/update', viewsProject.UpdateProject.as_view(), name='actualizar_proyecto'),
+    path('update/<int:id_project>', viewsProject.UpdateProject.as_view(), name='actualizar_proyecto'),
     path('delete/<int:id_project>', viewsProject.DeleteProject.as_view(), name='borrar_proyecto'),
     path('<int:id_project>/insert_record', viewsProject.InsertRecord.as_view(), name='insertar_historico'),
     path('<int:id_project>/last_modification', viewsProject.GetLastModificationFromAProject.as_view(), name='last_modification_record')
