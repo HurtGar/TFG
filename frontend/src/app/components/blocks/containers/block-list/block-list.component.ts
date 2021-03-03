@@ -31,12 +31,14 @@ export class BlockListComponent implements OnInit {
     let i = 0;
     this.blockService.getAllBlocksFromAnUser(idUsuario).subscribe((block) => {
       this.blocks = block;
+      console.log(block);
       this.recordService
         .getRecordsChangesFromBlock(block[i].idbloque)
         .subscribe((record) => {
           this.lastModification = record;
+          i += 1;
+          console.log(record);
         });
-      i += 1;
     });
   }
 }

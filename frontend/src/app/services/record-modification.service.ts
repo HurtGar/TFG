@@ -14,17 +14,26 @@ export class RecordModificationService {
   }
 
   getQuery(url: string): Observable<any> {
-    const projectUrl = environment.baseurl.concat(`/project/${url}`);
+    const projectUrl = environment.baseurl.concat(`/block/${url}`);
     return this.http.get(projectUrl, { headers });
   }
 
-  getRecordsChangesFromProject(idProject: number): Observable<Record[]>{
-    return this.getQuery(`${idProject}/last_modification`);
+  getRecordsChangesFromProject(idProject: number): Observable<any> {
+    return this.http.get(
+      environment.baseurl.concat(`/project/${idProject}/last_modification`),
+      { headers }
+    );
   }
-  getRecordsChangesFromBlock(idBlock: number): Observable<Record[]>{
-    return this.getQuery(`${idBlock}/last_modification`);
+  getRecordsChangesFromBlock(idBlock: number): Observable<any> {
+    return this.http.get(
+      environment.baseurl.concat(`/block/${idBlock}/last_modification`),
+      { headers }
+    );
   }
-  getRecordsChangesFromTask(idTask: number): Observable<Record[]>{
-    return this.getQuery(`${idTask}/last_modification`);
+  getRecordsChangesFromTask(idTask: number): Observable<any> {
+    return this.http.get(
+      environment.baseurl.concat(`/task/${idTask}/last_modification`),
+      { headers }
+    );
   }
 }

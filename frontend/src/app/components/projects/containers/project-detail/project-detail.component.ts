@@ -64,7 +64,4 @@ export class ProjectDetailComponent implements OnInit {
       });
   }
 
-  public deleteProject(idProject: string): void {
-    this.projectsService.deleteProject(idProject);
-  }
 }

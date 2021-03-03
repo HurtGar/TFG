@@ -1,8 +1,10 @@
-import { Block } from "./block.model";
-import { Project } from "./project.model";
+import { Block } from './block.model';
+import { Priority } from './priority.model';
+import { Project } from './project.model';
+import { Status } from './status.model';
 
 export interface Task{
-    idtarea: number;
+    idtarea?: number;
     nombretarea: string;
     desctarea?: string;
     fechacreacion: string;
@@ -13,7 +15,7 @@ export interface Task{
     horasactuales?: number;
     horasrestantes?: number;
     bloques_idbloque: Block;
-    estados_idestado?: number;
-    prioridad_idprioridad?: number;
+    estados_idestado?: Status;
+    prioridades_idprioridad?: Priority;
     proyectos_idproyecto: Project;
 }

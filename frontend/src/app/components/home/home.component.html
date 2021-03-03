@@ -1,1 +1,85 @@
-<p>home works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="fixedHeightContainer">
+                <h2>Tareas con proxima fecha de vencimiento</h2>
+                <div class="content">
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Prioridad</th>
+                                <th scope="col">Fecha actualización</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let task of tasks;">
+                            <tr>
+                                <th scope="row">{{task.idtarea}}</th>
+                                <td>{{task.nombretarea}}</td>
+                                <td>{{task.estados_idestado.descestado}}</td>
+                                <ng-container
+                                    *ngIf="task.prioridades_idprioridad.nivelprioridad>=0 && task.prioridades_idprioridad.nivelprioridad<=2">
+                                    <td class="badge bg-success text-wrap">
+                                        {{task.prioridades_idprioridad.descprioridad}}</td>
+                                </ng-container>
+                                <ng-container class="priority-level"
+                                    *ngIf="task.prioridades_idprioridad.nivelprioridad>=3 && task.prioridades_idprioridad.nivelprioridad<=5">
+                                    <td class="badge bg-warning text-wrap">
+                                        {{task.prioridades_idprioridad.descprioridad}}</td>
+                                </ng-container>
+                                <ng-container class="priority-level"
+                                    *ngIf="task.prioridades_idprioridad.nivelprioridad>=6">
+                                    <td class="badge bg-danger text-wrap">{{task.prioridades_idprioridad.descprioridad}}
+                                    </td>
+                                </ng-container>
+                                <td>{{task.fechaactualizacion | date:'dd-MM-yyyy HH:mm:ss' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="fixedHeightContainer">
+                <h2>Title</h2>
+                <div class="Content">
+                    blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah
+                    blah
+                    blah...
+                    ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah
+                    blah...
+                    ..blah blah
+                    blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah
+                    blah
+                    blah...
+                    ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah
+                    blah...
+                    ..blah blah
+                    blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah
+                    blah
+                    blah...
+                    ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah
+                    blah...
+                    ..blah blah
+                    blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah
+                    blah
+                    blah...
+                    ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah
+                    blah...
+                    ..blah blah
+                    blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah
+                    blah
+                    blah...
+                    ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah
+                    blah...
+                    ..blah blah
+                    blah...
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

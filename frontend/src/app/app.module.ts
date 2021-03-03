@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Services
 import { ProjectsService } from './services/projects.service';
@@ -32,6 +33,13 @@ import { TaskRowComponent } from './components/tasks/components/task-row/task-ro
 import { TaskViewComponent } from './components/tasks/components/task-view/task-view.component';
 import { BlockService } from './services/block.service';
 import { TaskService } from './services/task.service';
+import { NewProjectFormComponent } from './components/projects/components/new-project-form/new-form.component';
+import { UpdateProjectFormComponent } from './components/projects/components/update-project-form/update-form.component';
+import { ProjectFormComponent } from './components/projects/containers/project-form/project-form.component';
+import { BlockFormComponent } from './components/blocks/containers/block-form/block-form.component';
+import { NewBlockFormComponent } from './components/blocks/components/new-block-form/new-block-form.component';
+import { UpdateBlockFormComponent } from './components/blocks/components/update-block-form/update-block-form.component';
+
 
 @NgModule({
   declarations: [
@@ -56,13 +64,21 @@ import { TaskService } from './services/task.service';
     TaskListComponent,
     TaskDetailComponent,
     TaskRowComponent,
-    TaskViewComponent
+    TaskViewComponent,
+    ProjectFormComponent,
+    UpdateProjectFormComponent,
+    NewProjectFormComponent,
+    BlockFormComponent,
+    NewBlockFormComponent,
+    UpdateBlockFormComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [ProjectsService, BlockService, TaskService],
   bootstrap: [AppComponent],

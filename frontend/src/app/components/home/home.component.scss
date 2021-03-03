@@ -1,0 +1,8 @@
+.fixedHeightContainer {
+  float: inline-start;
+  padding: 3px;
+}
+.content {
+  overflow: auto;
+  max-height: 300px;
+}

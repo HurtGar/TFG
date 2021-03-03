@@ -1,7 +1,7 @@
 import { Project } from './project.model';
 
 export interface Block{
-    idbloque: number;
+    idbloque?: number;
     nombrebloque: string;
     descbloque?: string;
     iniciobloque?: string;

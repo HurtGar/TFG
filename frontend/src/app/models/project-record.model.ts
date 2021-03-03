@@ -3,6 +3,6 @@ import { Record } from './record.model';
 
 export interface ProjectRecord {
   historialModificaciones_idhistorial: Record;
-  id: number;
+  id?: number;
   proyectos_idproyecto: Project;
 }
