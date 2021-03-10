@@ -1,5 +1,9 @@
 <div class="container-fluid">
     <h2>Tareas</h2>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a [routerLink]="['/task/new-task']" style="text-decoration: none;" class="text-white"><button
+                class="btn btn-primary">Nueva tarea</button></a>
+    </div>
     <div class="list-group" *ngFor="let tas of tasks;">
         <div *ngFor="let mod of lastModification;">
             <app-task-row [task]="tas" [lastModification]="mod"></app-task-row>

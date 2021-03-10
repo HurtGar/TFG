@@ -3,6 +3,7 @@ import { Project } from 'src/app/models/project.model';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { RecordModificationService } from 'src/app/services/record-modification.service';
 
 @Component({
   selector: 'app-new-form',
@@ -12,13 +13,20 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class NewProjectFormComponent implements OnInit {
   project: Project;
   data: FormGroup;
+  dataRecord: FormGroup;
+  lastProject: Project;
   error: any = { isError: false };
   constructor(
     private projectService: ProjectsService,
     private router: Router,
+    private recordModificationService: RecordModificationService,
     private formBuilder: FormBuilder
   ) {
     this.createForm();
+    this.projectService.lastInsertedProject().subscribe((lp)=>{
+      this.lastProject = lp;
+    });
+    this.createRecordProject();
   }
 
   ngOnInit(): void {}
@@ -57,6 +65,15 @@ export class NewProjectFormComponent implements OnInit {
     });
   }
 
+  createRecordProject(): any {
+    this.dataRecord = this.formBuilder.group({
+      fechahistorico: [this.setCreationTime(), [Validators.required]],
+      motivo: ['Creación del proyecto'],
+      deschistorico: [`Se ha creado un nuevo proyecto.`],
+      usuarios_idusuario: 1,
+    });
+  }
+
   setCreationTime(): string {
     const date = new Date();
     const dateStr =
@@ -75,7 +92,6 @@ export class NewProjectFormComponent implements OnInit {
   }
 
   addProject(): void {
-    console.log(this.data);
 
     if (this.data.invalid) {
       return Object.values(this.data.controls).forEach((control) => {
@@ -84,6 +100,8 @@ export class NewProjectFormComponent implements OnInit {
     }
     const formObject = this.data.getRawValue();
     JSON.stringify(formObject);
+    const recordProject = this.dataRecord.getRawValue();
+    JSON.stringify(recordProject);
 
     // Comprobar si la fecha de fin es anterior a la de inicio del proyecto.
     if (
@@ -118,11 +136,15 @@ export class NewProjectFormComponent implements OnInit {
 
     this.projectService.createProject(formObject).subscribe(
       (p: Project) => {
-        console.log(p);
-        this.router.navigate(['projects/user/1']);
       },
       (error: any) => console.log(error)
-    );
+      );
+      
+      this.recordModificationService
+      .insertNewRecordModificationProject(recordProject, this.lastProject.idproyecto + 1)
+      .subscribe((rt) => {
+        this.router.navigate(['projects/user/1']);
+      });
   }
 
   private checkDates(dateA: string, dateB: string): boolean {

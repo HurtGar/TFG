@@ -6,6 +6,7 @@ import { Block } from 'src/app/models/block.model';
 import { Project } from 'src/app/models/project.model';
 import { BlockService } from 'src/app/services/block.service';
 import { ProjectsService } from 'src/app/services/projects.service';
+import { RecordModificationService } from 'src/app/services/record-modification.service';
 
 @Component({
   selector: 'app-new-block-form',
@@ -16,16 +17,23 @@ export class NewBlockFormComponent implements OnInit {
   projects: Project[] = [];
   block: Block;
   data: FormGroup;
+  dataRecordBlock: FormGroup;
+  lastBlock: Block;
   error: any = { isError: false };
 
   constructor(
     private blockService: BlockService,
     private projectService: ProjectsService,
+    private recordModificationService: RecordModificationService,
     private router: Router,
     private formBuilder: FormBuilder
   ) {
     this.createForm();
     this.loadProjects();
+    this.blockService.lastInsertedBlock().subscribe((lb) => {
+      this.lastBlock = lb;
+    });
+    this.createRecordBlock();
   }
 
   ngOnInit(): void {}
@@ -49,6 +57,14 @@ export class NewBlockFormComponent implements OnInit {
     });
   }
 
+  loadProjects(): void {
+    this.projectService.getAllProjectFromAnUser('1').subscribe((p) => {
+      console.log(p);
+
+      this.projects = p;
+    });
+  }
+
   compareTwoDates(): void {
     if (
       new Date(this.data.controls.finbloque.value) <
@@ -60,14 +76,6 @@ export class NewBlockFormComponent implements OnInit {
     }
   }
 
-  loadProjects(): void {
-    this.projectService.getAllProjectFromAnUser('1').subscribe((p) => {
-      console.log(p);
-
-      this.projects = p;
-    });
-  }
-
   createForm(): any {
     this.data = this.formBuilder.group({
       nombrebloque: ['', [Validators.required]],
@@ -76,6 +84,15 @@ export class NewBlockFormComponent implements OnInit {
       iniciobloque: [''],
       finbloque: [''],
       proyecto_idproyecto: [''],
+    });
+  }
+
+  createRecordBlock(): any {
+    this.dataRecordBlock = this.formBuilder.group({
+      fechahistorico: [this.setCreationTime(), [Validators.required]],
+      motivo: ['Creación del bloque'],
+      deschistorico: [`Se ha creado un nuevo bloque.`],
+      usuarios_idusuario: 1,
     });
   }
 
@@ -97,7 +114,6 @@ export class NewBlockFormComponent implements OnInit {
   }
 
   addBlock(): void {
-    console.log(this.data);
     if (this.data.invalid) {
       return Object.values(this.data.controls).forEach((control) => {
         control.markAsTouched();
@@ -106,6 +122,9 @@ export class NewBlockFormComponent implements OnInit {
 
     const formObject = this.data.getRawValue();
     JSON.stringify(formObject);
+    const recordBlock = this.dataRecordBlock.getRawValue();
+    JSON.stringify(recordBlock);
+    console.log(recordBlock);
 
     // Comprobar si la fecha de fin es anterior a la de inicio del proyecto.
     if (
@@ -136,12 +155,16 @@ export class NewBlockFormComponent implements OnInit {
       delete formObject.finbloque;
     }
 
-    console.log(formObject);
+    this.blockService.createBlock(formObject).subscribe((b: Block) => {});
 
-    this.blockService.createBlock(formObject).subscribe((b: Block) => {
-      console.log(b);
-      this.router.navigate(['blocks/user/1']);
-    });
+    this.recordModificationService
+      .insertNewRecordModificationBlock(
+        recordBlock,
+        this.lastBlock.idbloque + 1
+      )
+      .subscribe((rb) => {
+        this.router.navigate(['blocks/user/1']);
+      });
   }
 
   private checkDates(dateA: string, dateB: string): boolean {

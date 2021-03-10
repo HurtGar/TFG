@@ -11,7 +11,10 @@ export class TaskRowComponent implements OnInit {
 
   @Input() task: Task;
   @Input() lastModification: Record;
-  constructor() { }
+  constructor() {
+    console.log("Task-row");
+    
+  }
 
   ngOnInit(): void {
   }

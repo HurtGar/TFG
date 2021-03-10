@@ -9,7 +9,9 @@ import { UpdateProjectFormComponent } from './components/projects/components/upd
 import { ProjectDetailComponent } from './components/projects/containers/project-detail/project-detail.component';
 import { ProjectFormComponent } from './components/projects/containers/project-form/project-form.component';
 import { ProjectsListComponent } from './components/projects/containers/projects-list/projects-list.component';
+import { NewTaskFormComponent } from './components/tasks/components/new-task-form/new-task-form.component';
 import { TaskDetailComponent } from './components/tasks/containers/task-detail/task-detail.component';
+import { TaskFormComponent } from './components/tasks/containers/task-form/task-form.component';
 import { TaskListComponent } from './components/tasks/containers/task-list/task-list.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 
@@ -33,6 +35,7 @@ export const APP_ROUTES: Routes = [
   { path: 'blocks/:idBlock/user/:idUser', component: BlockDetailComponent },
   { path: 'blocks/user/:idUsuario', component: BlockListComponent},
   { path: 'task', component: TasksComponent },
+  { path: 'task/new-task', component: TaskFormComponent },
   { path: 'task/user/:idUser', component: TaskListComponent },
   { path: 'task/:idTask/user/:idUser', component: TaskDetailComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' },

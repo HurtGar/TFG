@@ -8,6 +8,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Services
 import { ProjectsService } from './services/projects.service';
+import { BlockService } from './services/block.service';
+import { TaskService } from './services/task.service';
+import { StatusService } from './services/status.service';
+import { PriorityService } from './services/priority.service';
+import { UserService } from './services/user.service';
 
 // Components
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -31,14 +36,15 @@ import { TaskListComponent } from './components/tasks/containers/task-list/task-
 import { TaskDetailComponent } from './components/tasks/containers/task-detail/task-detail.component';
 import { TaskRowComponent } from './components/tasks/components/task-row/task-row.component';
 import { TaskViewComponent } from './components/tasks/components/task-view/task-view.component';
-import { BlockService } from './services/block.service';
-import { TaskService } from './services/task.service';
 import { NewProjectFormComponent } from './components/projects/components/new-project-form/new-form.component';
 import { UpdateProjectFormComponent } from './components/projects/components/update-project-form/update-form.component';
 import { ProjectFormComponent } from './components/projects/containers/project-form/project-form.component';
 import { BlockFormComponent } from './components/blocks/containers/block-form/block-form.component';
 import { NewBlockFormComponent } from './components/blocks/components/new-block-form/new-block-form.component';
 import { UpdateBlockFormComponent } from './components/blocks/components/update-block-form/update-block-form.component';
+import { TaskFormComponent } from './components/tasks/containers/task-form/task-form.component';
+import { NewTaskFormComponent } from './components/tasks/components/new-task-form/new-task-form.component';
+import { UpdateTaskFormComponent } from './components/tasks/components/update-task-form/update-task-form.component';
 
 
 @NgModule({
@@ -71,6 +77,9 @@ import { UpdateBlockFormComponent } from './components/blocks/components/update-
     BlockFormComponent,
     NewBlockFormComponent,
     UpdateBlockFormComponent,
+    TaskFormComponent,
+    NewTaskFormComponent,
+    UpdateTaskFormComponent,
   ],
   imports: [
     FormsModule,
@@ -80,7 +89,7 @@ import { UpdateBlockFormComponent } from './components/blocks/components/update-
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [ProjectsService, BlockService, TaskService],
+  providers: [ProjectsService, BlockService, TaskService, StatusService, PriorityService,UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

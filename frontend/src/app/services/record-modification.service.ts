@@ -36,4 +36,36 @@ export class RecordModificationService {
       { headers }
     );
   }
+
+  insertNewRecordModificationProject(
+    changes: any,
+    idProject: number
+  ): Observable<any> {
+    return this.http.post(
+      environment.baseurl.concat(`/project/insert_record/${idProject}`),
+      changes,
+      { headers }
+    );
+  }
+  insertNewRecordModificationBlock(
+    changes: any,
+    idBlock: number
+  ): Observable<any> {
+    return this.http.post(
+      environment.baseurl.concat(`/block/insert_record/${idBlock}`),
+      changes,
+      { headers }
+    );
+  }
+  insertNewRecordModificationTask(
+    changes: any,
+    idTask: number
+  ): Observable<any> {
+    return this.http.post(
+      environment.baseurl.concat(`/task/insert_record/${idTask}`),
+      changes,
+      { headers }
+    );
+  }
+
 }

@@ -17,15 +17,14 @@ export class BlockViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  deleteBlock(idProject): void {
+  deleteBlock(idbloque): void {
     this.blockService.deleteBlock(this.block.idbloque).subscribe(
       (b: Block) => {
-        console.log('Borrando proyecto');
         this.router.navigate(['blocks/user/1']);
       },
       (error: any) => {
         console.log(error);
-        alert('Este proyecto tiene tareas asociadas. No se puede borrar. Borre las tareas asociadas previamente.');
+        alert('Este bloque tiene tareas asociadas. No se puede borrar. Borre las tareas asociadas previamente.');
       }
     );
   }

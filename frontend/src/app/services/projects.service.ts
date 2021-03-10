@@ -10,9 +10,7 @@ import { Task } from '../models/task.model';
   providedIn: 'root',
 })
 export class ProjectsService {
-  constructor(private http: HttpClient) {
-    console.log('Servicio listo para usarse.');
-  }
+  constructor(private http: HttpClient) {}
 
   getQuery(url: string): Observable<any> {
     const projectUrl = environment.baseurl.concat(`/project/${url}`);
@@ -37,8 +35,19 @@ export class ProjectsService {
     return this.getQuery(`${idProject}/user/${idUser}/blocks`);
   }
 
+  getAllBlocksFromAProjectForTasks(
+    idUser: string,
+    idProject: string
+  ): Observable<Block[]> {
+    return this.getQuery(`${idProject}/user/${idUser}/blocks`);
+  }
+
   getAllTasksFromAProject(idProject: string): Observable<Task> {
     return this.getQuery(`${idProject}/tasks`);
+  }
+
+  lastInsertedProject(): Observable<any> {
+    return this.getQuery(`last_inserted`);
   }
 
   createProject(project: any): Observable<any> {
