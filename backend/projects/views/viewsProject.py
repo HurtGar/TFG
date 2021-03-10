@@ -161,6 +161,23 @@ class GetAllTaskFromAProject(APIView):
         return Response(serializer.data)
 
 
+class GetLastInsertedProject(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def get_object(self):
+        try:
+            return Proyecto.objects.latest('idproyecto')
+        except Proyecto.DoesNotExist:
+            raise Http404
+
+    def get(self, request):
+        project = self.get_object()
+        serializer = ProyectoSerializer(project)
+        return Response(serializer.data)
+
+
+
 class GetTotalHoursFromAProject(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]

@@ -272,3 +272,19 @@ class InsertRecord(APIView):
 
         except Bloque.DoesNotExist:
             raise Http404
+
+
+class GetLastInsertedBlock(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def get_object(self):
+        try:
+            return Bloque.objects.latest('idbloque')
+        except Bloque.DoesNotExist:
+            raise Http404
+
+    def get(self, request):
+        block = self.get_object()
+        serializer = BloqueSerializer(block)
+        return Response(serializer.data)

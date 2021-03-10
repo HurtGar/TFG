@@ -39,7 +39,7 @@ class ListAllUsers(APIView):
 
     def get(self, request):
         users = self.get_object()
-        serializer = UsuarioSerializer(users, many=True)
+        serializer = TodosUsuariosSerializer(users, many=True)
         return Response(serializer.data)
 
 

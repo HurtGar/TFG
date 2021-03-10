@@ -131,6 +131,22 @@ class GetLastUpdatedTask(APIView):
         return Response(serializer.data)
 
 
+class GetLastInsertedTask(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def get_object(self):
+        try:
+            return Tarea.objects.latest('idtarea')
+        except Tarea.DoesNotExist:
+            raise Http404
+
+    def get(self, request):
+        task = self.get_object()
+        serializer = TareaSerializer(task)
+        return Response(serializer.data)
+
+
 class GetRecordsFromATask(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
@@ -224,7 +240,6 @@ class CreateATaskAssignment(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
 
-    @staticmethod
     def post(self, request):
         try:
             if not TareasUsuarios.objects.filter(tareas_idtarea_id=request.data['tareas_idtarea'],
@@ -288,7 +303,7 @@ class CreateTask(APIView):
     authentication_classes = [TokenAuthentication]
 
     def post(self, request):
-        serializer = TareaSerializer(data=request.data)
+        serializer = CreateTareaSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(status=status.HTTP_200_OK)
@@ -309,7 +324,7 @@ class UpdateTask(APIView):
     def put(self, request, id_task, format=None):
         """Crear un nuevo elemento o reemplazar un proyecto."""
         task = self.get_object(id_task)
-        serializer = TareaSerializer(task, data=request.data)
+        serializer = UpdateTareaSerializer(task, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -339,6 +354,21 @@ class DeleteTask(APIView):
         task.delete()
         return Response(status=status.HTTP_200_OK)
 
+
+class DeleteAssignmentTask(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def get_object(self, id_task):
+        try:
+            return TareasUsuarios.objects.filter(tareas_idtarea_id=id_task)
+        except TareasUsuarios.DoesNotExist:
+            raise Http404
+
+    def delete(self, request, id_task):
+        task = self.get_object(id_task)
+        task.delete();
+        return Response(status=status.HTTP_200_OK)
 
 class InsertRecord(APIView):
     permission_classes = [IsAuthenticated]

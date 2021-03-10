@@ -24,6 +24,12 @@ class RolesSerializer(serializers.ModelSerializer):
         fields = ['idrol', 'descrol', 'nivelrol', 'permisos']
 
 
+class TodosUsuariosSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
+        fields = '__all__'
+
+
 class UsuarioSerializer(serializers.ModelSerializer):
     roles = RolesSerializer(many=True, read_only=True)
     proyectos = ProyectoSerializer(many=True, read_only=True)

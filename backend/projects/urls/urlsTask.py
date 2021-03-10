@@ -16,12 +16,14 @@ urlpatterns = [
     path('priority/<int:id_priority>', viewsTask.GetTasksWithAPriority.as_view(), name='tareas_prioridad'),
     path('search/priority/state', viewsTask.GetTaskByPriorityIdAndStateId.as_view(), name='tareas_estado_prioridad'),
     path('create/assignment', viewsTask.CreateATaskAssignment.as_view(), name='crear_asignacion'),
+    path('last_inserted', viewsTask.GetLastInsertedTask.as_view(), name='ultima_insercion'),
     path('delete/assignment', viewsTask.DeleteATaskAssignment.as_view(), name='eliminar_asignacion'),
     path('assignment/<int:id_task>', viewsTask.UpdateAssignmentTask.as_view(), name='actualizar_asignacion'),
     path('create', viewsTask.CreateTask.as_view(), name='crear_tarea'),
-    path('<int:id_task>/update', viewsTask.UpdateTask.as_view(), name='actualizar_tarea'),
+    path('update/<int:id_task>', viewsTask.UpdateTask.as_view(), name='actualizar_tarea'),
     path('delete/<int:id_task>', viewsTask.DeleteTask.as_view(), name='borrar_tarea'),
-    path('<int:id_task>/insert_record', viewsTask.InsertRecord.as_view(), name='insertar_historico'),
+    path('delete/assignment/<int:id_task>', viewsTask.DeleteAssignmentTask.as_view(), name='borrar_asignacion_tarea'),
+    path('insert_record/<int:id_task>', viewsTask.InsertRecord.as_view(), name='insertar_historico'),
     path('<int:id_task>/last_modification', viewsTask.GetLastModificationFromATask.as_view(),
          name='last_modification_record')
 ]
