@@ -89,7 +89,6 @@ export class UpdateBlockFormComponent implements OnInit {
       finbloque: block.finbloque,
       proyecto_idproyecto: block.proyecto_idproyecto.idproyecto,
     });
-    console.log(this.data);
   }
 
   setCreationTime(): string {

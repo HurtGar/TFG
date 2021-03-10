@@ -30,6 +30,8 @@ export class TaskListComponent implements OnInit {
     let i = 0;
     this.taskService.getAllTasksFromAnUser(idUser).subscribe((task) => {
       this.tasks = task;
+      console.log('Tareas');
+
       console.log(task);
       this.recordService
         .getRecordsChangesFromTask(task[i].idtarea)

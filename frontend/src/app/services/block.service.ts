@@ -33,6 +33,10 @@ export class BlockService {
     return this.getQuery(`user/${idUser}`);
   }
 
+  lastInsertedBlock(): Observable<any>{
+    return this.getQuery(`last_inserted`);
+  }
+
   createBlock(block: any): Observable<any> {
     console.log(block);
 

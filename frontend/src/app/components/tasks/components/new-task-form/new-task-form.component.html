@@ -1,0 +1,95 @@
+<form [formGroup]="data" (ngSubmit)="addTask()" class="mb-5">
+    <div class="form-group row">
+        <div class="col">
+            <label for="exampleFormControlTextarea1" class="form-label">Proyecto</label>
+            <select class="form-control form-control-sm" (change)="selectProject($event)">
+                <option value="">Selecciona el proyecto</option>
+                <option *ngFor="let p of projects" [value]="p.idproyecto">
+                    {{p.nombreproyecto}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label for="exampleFormControlTextarea1" class="form-label">Bloque</label>
+            <select class="form-control form-control-sm" (change)="selectBlock($event)">
+                <option value="">Selecciona el bloque</option>
+                <option *ngFor="let b of blocks" [value]="b.idbloque">
+                    {{b.nombrebloque}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label for="exampleFormControlTextarea1" class="form-label">Asignar a</label>
+            <select class="form-control form-control-sm" (change)="selectUser($event)">
+                <option value="">Selecciona el bloque</option>
+                <option *ngFor="let u of users" [value]="u.idusuario">
+                    {{u.nombre}} {{u.primerapellido}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label for="exampleFormControlInput1" class="form-label">Nombre bloque</label>
+            <input class="form-control" type="text" placeholder="Nombre proyecto" formControlName="nombretarea"
+                [class.is-invalid]="nombreTareaNoValido">
+            <small *ngIf="nombreTareaNoValido" class="form-text text-danger">Introduzca un nombre para el
+                bloque.</small>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col">
+            <label for="exampleFormControlTextarea1" class="form-label">Descripción del bloque</label>
+            <textarea class="form-control" formControlName="desctarea" placeholder="Descripción"></textarea>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col">
+            <label for="exampleSelect1">Fecha inicio</label>
+            <input type="date" class="form-control" formControlName="fechainicio">
+        </div>
+        <div class="col">
+            <label for="exampleSelect2">Fecha fin</label>
+            <input type="date" class="form-control" formControlName="fechafin" (change)="compareTwoDates()">
+        </div>
+    </div>
+    <small *ngIf="error.isError" class="form-text text-danger">La fecha de fin de bloque no puede ser menor que la de
+        inicio.</small>
+
+    <div class="form-group row">
+        <div class="col">
+            <label for="exampleSelect1" class="form-label">Horas de estimación</label>
+            <input class="form-control" value="0" type="number" min="0" placeholder="Horas de estimación" formControlName="horasestimacion" [class.is-invalid]="estimacionHorasNoValido">
+            <small *ngIf="estimacionHorasNoValido" class="form-text text-danger">Introduzca el número de horas estimadas.</small>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col">
+            <label for="exampleSelect1">Estado</label>
+            <select class="form-control form-control-sm" (change)="selectStatus($event)" [class.is-invalid]="estadoNoValido">
+                <option value="">Estado tarea</option>
+                <option *ngFor="let s of status" [value]="s.idestado">
+                    {{s.descestado}}</option>
+            </select>
+            <small *ngIf="estimacionHorasNoValido" class="form-text text-danger">Seleccione un estado.</small>
+
+        </div>
+        <div class="col">
+            <label for="exampleSelect2">Prioridad</label>
+            <select class="form-control form-control-sm" (change)="selectPriority($event)" [class.is-invalid]="prioridadNoValida">
+                <option value="">Prioridad proyecto</option>
+                <option *ngFor="let pri of priorities" [value]="pri.idprioridad">
+                    {{pri.descprioridad}}</option>
+            </select>
+            <small *ngIf="estimacionHorasNoValido" class="form-text text-danger">Seleccione una prioridad.</small>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Crear</button>
+</form>
