@@ -17,8 +17,9 @@ urlpatterns = [
     path('create', viewsBlock.CreateBlock.as_view(), name='crear_bloque'),
     path('update/<int:id_block>', viewsBlock.UpdateBlock.as_view(), name='actualizar_bloque'),
     path('delete/<int:id_block>', viewsBlock.DeleteBlock.as_view(), name='borrar_bloque'),
-    path('<int:id_block>/insert_record', viewsBlock.InsertRecord.as_view(), name='insertar_historico'),
+    path('insert_record/<int:id_block>', viewsBlock.InsertRecord.as_view(), name='insertar_historico'),
     path('<int:id_block>/last_modification', viewsBlock.GetLastModificationFromABlock.as_view(),
-         name='last_modification_record')
+         name='last_modification_record'),
+    path('last_inserted', viewsBlock.GetLastInsertedBlock.as_view(), name='ultima_insercion'),
 
 ]

@@ -59,6 +59,20 @@ class TareaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class CreateTareaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Tarea
+        fields = '__all__'
+
+
+class UpdateTareaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Tarea
+        fields = '__all__'
+
+
 class HistorialModificacionesSerializer(serializers.ModelSerializer):
     class Meta:
         model = HistorialModificaciones

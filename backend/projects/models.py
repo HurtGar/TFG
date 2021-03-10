@@ -95,7 +95,7 @@ class Bloque(models.Model):
 class Tarea(models.Model):
     idtarea = models.AutoField(primary_key=True)
     nombretarea = models.CharField(max_length=100)
-    desctarea = models.CharField(max_length=5000, null=True)
+    desctarea = models.CharField(max_length=5000, null=True, blank=True)
     fechacreacion = models.DateTimeField()
     fechainicio = models.DateField(null=True)
     fechafin = models.DateField(null=True)
