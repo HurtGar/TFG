@@ -11,10 +11,13 @@ import { BlockService } from 'src/app/services/block.service';
 export class BlockViewComponent implements OnInit {
 
   @Input() block: Block;
+  horasactuales: number;
+  horasestimacion: number;
 
   constructor(private blockService: BlockService, private router: Router) { }
 
   ngOnInit(): void {
+    this.getAllBlockHours(this.block.idbloque.toString());
   }
 
   deleteBlock(idbloque): void {
@@ -27,5 +30,19 @@ export class BlockViewComponent implements OnInit {
         alert('Este bloque tiene tareas asociadas. No se puede borrar. Borre las tareas asociadas previamente.');
       }
     );
+  }
+
+  getAllBlockHours(idBlock: string): void {
+    this.blockService.getTotalBlockHours(idBlock).subscribe((t: any) => {
+      console.log(t);
+      this.horasestimacion = t.horasestimacion;
+      this.horasactuales = t.horasactuales;
+    });
+  }
+
+  currentHours(horasActu: number, horasEsti: number): string {
+    const hours = (horasActu * 100) / horasEsti;
+
+    return hours.toString().concat('%');
   }
 }

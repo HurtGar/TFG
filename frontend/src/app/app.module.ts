@@ -45,6 +45,7 @@ import { UpdateBlockFormComponent } from './components/blocks/components/update-
 import { TaskFormComponent } from './components/tasks/containers/task-form/task-form.component';
 import { NewTaskFormComponent } from './components/tasks/components/new-task-form/new-task-form.component';
 import { UpdateTaskFormComponent } from './components/tasks/components/update-task-form/update-task-form.component';
+import { RegisterHoursComponent } from './components/tasks/components/register-hours/register-hours.component';
 
 
 @NgModule({
@@ -80,6 +81,7 @@ import { UpdateTaskFormComponent } from './components/tasks/components/update-ta
     TaskFormComponent,
     NewTaskFormComponent,
     UpdateTaskFormComponent,
+    RegisterHoursComponent,
   ],
   imports: [
     FormsModule,

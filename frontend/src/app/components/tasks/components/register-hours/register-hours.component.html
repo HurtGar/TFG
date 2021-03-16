@@ -1,0 +1,23 @@
+<form [formGroup]="data" (ngSubmit)="registerHours()" class="mb-5">
+    <div class="form-group row">
+        <div class="col">
+            <label for="exampleSelect1" class="form-label">Horas de estimación</label>
+            <input class="form-control" [ngModel]="task.horasestimacion" type="number" min="0"
+                formControlName="horasestimacion">
+                <p>horas</p>
+        </div>
+    </div>
+    <small *ngIf="horasEstimacion" class="form-text text-danger">No se permiten caracteres. Introduzca un número</small>
+    <div class="form-group row">
+        <div class="col">
+            <label for="exampleSelect1" class="form-label">Horas registradas</label>
+            <input class="form-control" [ngModel]="task.horasactuales" type="number" min="0"
+                formControlName="horasregistradas" disabled style="width: 100px;"> <p>horas</p>
+        </div>
+        <div class="form-group col">
+            <label for="exampleSelect1" class="form-label">Horas a introducir</label>
+            <input class="form-control" [ngModel]="0" type="number" min="0" formControlName="horasactuales" style="width: 100px;"> <p>horas</p>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Registrar horas</button>
+</form>

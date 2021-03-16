@@ -61,4 +61,8 @@ export class TaskService {
     );
     return this.http.delete(taskUrl, { headers });
   }
+
+  registerTaskHours(idTask: number, json: any): Observable<any>{
+    return this.http.post(environment.baseurl.concat(`/task/register_hours/${idTask}`), json, {headers});
+  }
 }

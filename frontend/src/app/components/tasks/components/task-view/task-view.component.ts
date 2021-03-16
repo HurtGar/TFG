@@ -34,4 +34,15 @@ export class TaskViewComponent implements OnInit {
       }
     );
   }
+
+  currentHours(taskHour: Task): string {
+    const hours = (taskHour.horasactuales * 100) / taskHour.horasestimacion;
+
+    return hours.toString().concat('%');
+  }
+  remainingHours(taskHour: Task): string {
+    const hours = (taskHour.horasrestantes * 100) / taskHour.horasestimacion;
+
+    return hours.toString().concat('%');
+  }
 }
