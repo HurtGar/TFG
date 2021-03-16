@@ -25,5 +25,7 @@ urlpatterns = [
     path('delete/assignment/<int:id_task>', viewsTask.DeleteAssignmentTask.as_view(), name='borrar_asignacion_tarea'),
     path('insert_record/<int:id_task>', viewsTask.InsertRecord.as_view(), name='insertar_historico'),
     path('<int:id_task>/last_modification', viewsTask.GetLastModificationFromATask.as_view(),
-         name='last_modification_record')
+         name='last_modification_record'),
+    path('register_hours/<int:id_task>', viewsTask.RegisterHoursTask.as_view(),
+         name='registrar_horas')
 ]
