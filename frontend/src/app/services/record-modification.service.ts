@@ -9,9 +9,7 @@ import { ProjectRecord } from '../models/project-record.model';
   providedIn: 'root',
 })
 export class RecordModificationService {
-  constructor(private http: HttpClient) {
-    console.log('Servicio RecordModification listo para usarse');
-  }
+  constructor(private http: HttpClient) {}
 
   getQuery(url: string): Observable<any> {
     const projectUrl = environment.baseurl.concat(`/block/${url}`);
@@ -68,4 +66,23 @@ export class RecordModificationService {
     );
   }
 
+  getAllRecordsProject(idProject: number): Observable<any> {
+    return this.http.get(
+      environment.baseurl.concat(`/project/${idProject}/records`),
+      { headers }
+    );
+  }
+  getAllRecordsBlock(idBlock: number): Observable<any> {
+    console.log(idBlock);
+    return this.http.get(
+      environment.baseurl.concat(`/block/${idBlock}/records`),
+      { headers }
+    );
+  }
+  getAllRecordsTask(idTask: number): Observable<any> {
+    return this.http.get(
+      environment.baseurl.concat(`/task/${idTask}/records`),
+      { headers }
+    );
+  }
 }

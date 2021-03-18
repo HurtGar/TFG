@@ -46,6 +46,9 @@ import { TaskFormComponent } from './components/tasks/containers/task-form/task-
 import { NewTaskFormComponent } from './components/tasks/components/new-task-form/new-task-form.component';
 import { UpdateTaskFormComponent } from './components/tasks/components/update-task-form/update-task-form.component';
 import { RegisterHoursComponent } from './components/tasks/components/register-hours/register-hours.component';
+import { ProjectHistoryComponent } from './components/projects/components/project-history/project-history.component';
+import { BlockHistoryComponent } from './components/blocks/components/block-history/block-history.component';
+import { TaskHistoryComponent } from './components/tasks/components/task-history/task-history.component';
 
 
 @NgModule({
@@ -82,6 +85,9 @@ import { RegisterHoursComponent } from './components/tasks/components/register-h
     NewTaskFormComponent,
     UpdateTaskFormComponent,
     RegisterHoursComponent,
+    ProjectHistoryComponent,
+    BlockHistoryComponent,
+    TaskHistoryComponent,
   ],
   imports: [
     FormsModule,

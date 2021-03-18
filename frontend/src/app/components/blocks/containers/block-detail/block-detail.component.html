@@ -1,23 +1,22 @@
 <div class="container-fluid">
     <ng-container *ngFor="let block of blocks">
         <app-block-view [block]="block"></app-block-view>
+        <app-block-history [block]="block"></app-block-history>
     </ng-container>
 
 
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <nav>
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
-                            role="tab" aria-controls="nav-home" aria-selected="true">Tareas</a>
-                    </div>
-                </nav>
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <app-tasks-available [tasks]="tasks"></app-tasks-available>
-                    </div>
+    <h3>Tareas</h3>
+    <div class="row">
+        <div class="col">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                        aria-controls="nav-home" aria-selected="true">Tareas</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <app-tasks-available [tasks]="tasks"></app-tasks-available>
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 <div class="container-fluid">
     <ng-container *ngFor="let task of tasks">
         <app-task-view [task]="task"></app-task-view>
+        <app-task-history [task]="task"></app-task-history>
     </ng-container>
 </div>
