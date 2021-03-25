@@ -13,7 +13,7 @@ import { TaskService } from './services/task.service';
 import { StatusService } from './services/status.service';
 import { PriorityService } from './services/priority.service';
 import { UserService } from './services/user.service';
-
+import { AuthenticationService } from './services/authentication.service';
 // Components
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { SidenavComponent } from './components/shared/sidenav/sidenav.component';
@@ -49,7 +49,8 @@ import { RegisterHoursComponent } from './components/tasks/components/register-h
 import { ProjectHistoryComponent } from './components/projects/components/project-history/project-history.component';
 import { BlockHistoryComponent } from './components/blocks/components/block-history/block-history.component';
 import { TaskHistoryComponent } from './components/tasks/components/task-history/task-history.component';
-
+import { RegistrationComponent } from './components/registration/registration.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,8 @@ import { TaskHistoryComponent } from './components/tasks/components/task-history
     ProjectHistoryComponent,
     BlockHistoryComponent,
     TaskHistoryComponent,
+    RegistrationComponent,
+    LoginComponent,
   ],
   imports: [
     FormsModule,
@@ -97,7 +100,15 @@ import { TaskHistoryComponent } from './components/tasks/components/task-history
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [ProjectsService, BlockService, TaskService, StatusService, PriorityService,UserService],
+  providers: [
+    ProjectsService,
+    BlockService,
+    TaskService,
+    StatusService,
+    PriorityService,
+    UserService,
+    AuthenticationService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
