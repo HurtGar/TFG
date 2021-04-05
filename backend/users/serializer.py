@@ -6,6 +6,7 @@
 from rest_framework import serializers
 from users.models import *
 from projects.serializer import ProyectoSerializer, BloqueSerializer, TareaSerializer
+from django.contrib.auth.models import User
 
 
 # Usuarios
@@ -34,6 +35,12 @@ class UsuarioSerializer(serializers.ModelSerializer):
     roles = RolesSerializer(many=True, read_only=True)
     proyectos = ProyectoSerializer(many=True, read_only=True)
 
+    class Meta:
+        model = Usuario
+        fields = '__all__'
+
+
+class UsuarioRegistroSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
         fields = '__all__'
@@ -68,4 +75,10 @@ class TareasUsuariosSerializer(serializers.ModelSerializer):
 class RegistroEntradaUsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = RegistroEntradaUsuario
+        fields = '__all__'
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
         fields = '__all__'

@@ -23,7 +23,8 @@ urlpatterns = [
     path(r'', viewsUser.index),
     # TOKEN
     path('api_generate_token/', vw.obtain_auth_token),
-    path('get_token', viewsToken.GetToken.as_view(), name='get_token'),
+    path('get_token', viewsToken.GetAuthToken.as_view(), name='get_token'),
+    path('register-user', viewsUser.RegisterNewUser.as_view(), name='register_user'),
     # ADMIN
     path('admin/', admin.site.urls),
     path('admin/doc/', include('django.contrib.admindocs.urls')),
