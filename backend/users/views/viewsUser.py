@@ -1,4 +1,5 @@
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import Http404
 from django.http import HttpResponseRedirect
@@ -186,7 +187,6 @@ class GetAccessByUserId(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-
 class ListarPermisosRoles(APIView):
     def get_object(self):
         try:
@@ -260,6 +260,56 @@ class Login(FormView):
         if token:
             login(self.request, form.get_user())
             return super(Login, self).form_valid(form)
+
+
+class RegisterNewUser(APIView):
+
+    def post(self, request):
+
+        if self.validateIfUserExists(request.data['email']):
+            self.createUser(request)
+
+            serializer = UsuarioRegistroSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+
+                userId = User.objects.get(username__exact=request.data['email'])
+                token = Token.objects.create(user=userId)
+                return Response({'token': token.key}, status=status.HTTP_201_CREATED)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'error':'El usuario ya existe.'}, status = status.HTTP_400_BAD_REQUEST)
+
+    def createUser(self, request):
+        user = User()
+        setattr(user, 'username', request.data['email'])
+        setattr(user, 'first_name', request.data['nombre'])
+        setattr(user, 'last_name', request.data['primerapellido'])
+        setattr(user, 'email', request.data['email'])
+        user.set_password(request.data['password'])
+        user.is_active = True
+        user.is_staff = False
+        if user.save() is not None:
+            return Response({'error':'Usuario no guardado.'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+    def validateIfUserExists(self, email):
+
+        try:
+            user = User.objects.get(username = email)
+        except User.DoesNotExist:
+            user = None
+
+        try:
+            usuario = Usuario.objects.get(email=email)
+        except Usuario.DoesNotExist:
+            usuario = None
+
+        if user is None and usuario is None:
+            return True
+        else:
+            return False
 
 
 class Logout(APIView):

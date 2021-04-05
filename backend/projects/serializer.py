@@ -110,3 +110,5 @@ class HistorialTareaSerializer(serializers.ModelSerializer):
     class Meta:
         model = HistorialModificacionTarea
         fields = '__all__'
+
+

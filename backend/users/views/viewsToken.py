@@ -3,6 +3,8 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from ..models import Usuario
+from django.contrib.auth.models import User
 
 
 class GetToken(APIView):
@@ -18,3 +20,13 @@ class GetToken(APIView):
 
         token = Token.objects.get(user=user)
         return Response({'token': token.key}, status=status.HTTP_200_OK)
+
+
+class GetAuthToken(APIView):
+    def post(self, request):
+        getUser = User.objects.get(username=request.data['email'])
+        user = authenticate(username=getUser.username, password = request.data['password'])
+        if user is None:
+            return Response({'error': 'Email or password incorrect.'}, status = status.HTTP_401_UNAUTHORIZED)
+        token = Token.objects.get(user= user)
+        return Response({'token': token.key, 'userId': getUser.id}, status=status.HTTP_200_OK)
