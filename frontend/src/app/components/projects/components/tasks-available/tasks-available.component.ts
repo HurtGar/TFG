@@ -9,10 +9,12 @@ import { Task } from 'src/app/models/task.model';
 export class TasksAvailableComponent implements OnInit {
 
   @Input() tasks: Task[] = [];
+  userId: string;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.userId = localStorage.getItem('userId');
   }
 
 }

@@ -1,5 +1,5 @@
 <a class="list-group-item list-group-item-action flex-column align-items-start"
-  [routerLink]="['/task/',task.idtarea,'user',1]">
+  [routerLink]="['/task/',task.idtarea,'user',userId]">
   <div class="d-flex w-100 justify-content-between">
     <h3 class="mb-1"><small class="badge badge-primary badge-pill">{{task.idtarea}}</small>{{task.nombretarea}}</h3>
     <small>{{task.proyectos_idproyecto.nombreproyecto}} - {{task.bloques_idbloque.nombrebloque}}<br>Última modificación: {{lastModification.fechahistorico | date:'dd-MM-yyyy HH:mm:ss'}}</small>

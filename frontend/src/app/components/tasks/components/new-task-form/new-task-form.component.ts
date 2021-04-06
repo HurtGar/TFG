@@ -33,6 +33,7 @@ export class NewTaskFormComponent implements OnInit {
   userTask: UserTask;
   lastTask: Task;
   error: any = { isError: false };
+  userId: string;
 
   constructor(
     private taskService: TaskService,
@@ -57,7 +58,9 @@ export class NewTaskFormComponent implements OnInit {
     this.createRecordTask();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userId = localStorage.getItem('userId');
+  }
 
   get nombreTareaNoValido(): any {
     return (
@@ -298,18 +301,18 @@ export class NewTaskFormComponent implements OnInit {
     this.taskService.createTask(formObject).subscribe((t: Task) => {
       console.log(t);
     });
+    
+    this.recordModificationService
+    .insertNewRecordModificationTask(recordTask, this.lastTask.idtarea + 1)
+    .subscribe((rt) => {
+      console.log(rt);
+      
+      this.router.navigate(['task/user/', this.userId]);
+    });
     this.taskService
       .createAssignment(userTaskObject)
       .subscribe((ut: UserTask) => {
         console.log(ut);
-      });
-
-    this.recordModificationService
-      .insertNewRecordModificationTask(recordTask, this.lastTask.idtarea + 1)
-      .subscribe((rt) => {
-        console.log(rt);
-
-        this.router.navigate(['task/user/1']);
       });
   }
 

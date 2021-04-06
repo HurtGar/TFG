@@ -1,11 +1,11 @@
 <div class="wrapper">
-
-  <app-navbar></app-navbar>
-
-
+  <div *ngIf="token">
+    <app-navbar></app-navbar>
+  </div>
   <div class="row container-fluid">
-
-    <app-sidenav></app-sidenav>
+    <div *ngIf="token">
+      <app-sidenav></app-sidenav>
+    </div>
     <main class="col-md ml-sm-auto col-lg px-md-4">
       <router-outlet></router-outlet>
     </main>

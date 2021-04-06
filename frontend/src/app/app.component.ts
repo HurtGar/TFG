@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Proment';
+  token: string;
+
+  ngOnInit(): void {
+    this.token = localStorage.getItem('token');
+  }
 }

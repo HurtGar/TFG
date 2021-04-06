@@ -9,7 +9,7 @@
     </button>
 
     <div class="container promentWord">
-        <a class="navbar-brand mx-4" href="#">Proment</a>
+        <a class="navbar-brand mx-4" [routerLink]="['home/', user.idusuario]">Proment</a>
     </div>
     <!-- Button for navbar -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
@@ -23,8 +23,13 @@
             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
         </form>
         <div class="container-flex">
-            <span class="text-white mx-2">Usuario</span>
-           
+            <span class="text-white mx-2">{{user.username}}</span>
+        </div>
+
+        <div *ngIf="user.username">
+            <button class="btn btn-danger" (click)="logout()">
+                Logout
+            </button>
         </div>
     </div>
 </nav>

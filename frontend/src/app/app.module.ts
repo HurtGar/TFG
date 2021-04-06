@@ -13,7 +13,7 @@ import { TaskService } from './services/task.service';
 import { StatusService } from './services/status.service';
 import { PriorityService } from './services/priority.service';
 import { UserService } from './services/user.service';
-
+import { AuthenticationService } from './services/authentication.service';
 // Components
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { SidenavComponent } from './components/shared/sidenav/sidenav.component';
@@ -45,7 +45,13 @@ import { UpdateBlockFormComponent } from './components/blocks/components/update-
 import { TaskFormComponent } from './components/tasks/containers/task-form/task-form.component';
 import { NewTaskFormComponent } from './components/tasks/components/new-task-form/new-task-form.component';
 import { UpdateTaskFormComponent } from './components/tasks/components/update-task-form/update-task-form.component';
-
+import { RegisterHoursComponent } from './components/tasks/components/register-hours/register-hours.component';
+import { ProjectHistoryComponent } from './components/projects/components/project-history/project-history.component';
+import { BlockHistoryComponent } from './components/blocks/components/block-history/block-history.component';
+import { TaskHistoryComponent } from './components/tasks/components/task-history/task-history.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterService } from './services/register-service.service';
 
 @NgModule({
   declarations: [
@@ -80,6 +86,12 @@ import { UpdateTaskFormComponent } from './components/tasks/components/update-ta
     TaskFormComponent,
     NewTaskFormComponent,
     UpdateTaskFormComponent,
+    RegisterHoursComponent,
+    ProjectHistoryComponent,
+    BlockHistoryComponent,
+    TaskHistoryComponent,
+    RegistrationComponent,
+    LoginComponent,
   ],
   imports: [
     FormsModule,
@@ -89,7 +101,16 @@ import { UpdateTaskFormComponent } from './components/tasks/components/update-ta
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [ProjectsService, BlockService, TaskService, StatusService, PriorityService,UserService],
+  providers: [
+    ProjectsService,
+    BlockService,
+    TaskService,
+    StatusService,
+    PriorityService,
+    UserService,
+    AuthenticationService,
+    RegisterService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -59,4 +59,8 @@ export class BlockService {
     );
     return this.http.delete(blockUrl, { headers });
   }
+
+  getTotalBlockHours(idBlock: string): Observable<any>{
+    return this.getQuery(`${idBlock}/hours`);
+  }
 }

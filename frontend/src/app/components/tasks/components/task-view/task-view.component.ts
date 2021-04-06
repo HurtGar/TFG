@@ -10,10 +10,13 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class TaskViewComponent implements OnInit {
   @Input() task: Task;
+  userId: string;
 
   constructor(private taskService: TaskService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userId = localStorage.getItem('userId');
+  }
 
   deleteTask(idTask): void {
     this.taskService.deleteTaskAssignment(this.task.idtarea).subscribe(
@@ -26,12 +29,23 @@ export class TaskViewComponent implements OnInit {
 
     this.taskService.deleteTask(this.task.idtarea).subscribe(
       (t: Task) => {
-        this.router.navigate(['task/user/1']);
+        this.router.navigate(['task/user/', this.userId]);
       },
       (error: any) => {
         console.log(error);
         alert('Esta tarea no puede ser eliminada.');
       }
     );
+  }
+
+  currentHours(taskHour: Task): string {
+    const hours = (taskHour.horasactuales * 100) / taskHour.horasestimacion;
+
+    return hours.toString().concat('%');
+  }
+  remainingHours(taskHour: Task): string {
+    const hours = (taskHour.horasrestantes * 100) / taskHour.horasestimacion;
+
+    return hours.toString().concat('%');
   }
 }

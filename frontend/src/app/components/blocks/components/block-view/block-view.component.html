@@ -1,46 +1,67 @@
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item text-primary"><a [routerLink]="['/projects/user/1']">Proyectos</a> / <a
-                    [routerLink]="['/projects/user/1/1']">{{block.proyecto_idproyecto.nombreproyecto}}</a> / <span
+            <li class="breadcrumb-item text-primary"><a [routerLink]="['/projects/user/',userId]">Proyectos</a> / <a
+                    [routerLink]="['/projects/user/',userId,block.proyecto_idproyecto.idproyecto]">{{block.proyecto_idproyecto.nombreproyecto}}</a> / <span
                     class="text-secondary">{{block.nombrebloque}}</span> </li>
         </ol>
     </nav>
     <div class="row">
         <div class="col">
-            <h3 class="mt-0">{{block.nombrebloque}}
-                <div *ngIf="block.iniciobloque<block.finbloque">
-                    <span class="badge badge-primary">Abierto</span>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <h3 class="mt-0">{{block.nombrebloque}}
+                            <div *ngIf="block.iniciobloque<block.finbloque">
+                                <span class="badge badge-primary">Abierto</span>
+                            </div>
+                        </h3>
+                    </div>
+                    <div class="row">
+                        <p>{{block.descbloque}}</p>
+                    </div>
                 </div>
-            </h3>
-            <p>{{block.descbloque}}</p>
-            <!-- <div class="media">
-                <img class="align-self-start mr-3" src="..." alt="Generic placeholder image">
-                <div class="media-body">
-                    <h3 class="mt-0">{{project.nombreproyecto}} <span class="badge badge-secondary">New</span></h3>
-                    <p>{{project.descproyecto}}Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus neque odio, congue quis efficitur a, eleifend accumsan eros. Aenean vel egestas lorem. Cras egestas porttitor lectus, id suscipit ante egestas vel. Nullam sed lacinia lorem. Etiam nisl ligula, semper ut tellus at, varius laoreet magna. Vestibulum a tincidunt nulla. Nam ac tincidunt enim. Suspendisse dapibus hendrerit nunc, a varius purus mollis sed. Fusce id sem at lorem fringilla condimentum eu eget metus. Sed sit amet lectus in est venenatis fermentum vel nec ante. Nulla velit ex, malesuada eu pulvinar ut, consequat quis magna. Praesent imperdiet nibh ultricies sapien ultricies pretium. Aenean non quam a mauris ullamcorper vulputate ut luctus mauris. Duis facilisis, mauris ut semper porttitor, justo ante aliquam magna, vitae euismod lacus libero at quam. Pellentesque eu pharetra ipsum. Aliquam suscipit ex id ligula tempor, vel placerat magna iaculis.
+            </div>
+        </div>
 
-                    </p>
+
+        <div class="col container-flex">
+            <div class="row">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Modificar bloque
+                    </button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                        data-target="#exampleModalCenter">Eliminar bloque</button>
                 </div>
-            </div> -->
-        </div>
-        <div class="col dates" style="display: inline-block">
-            <p>Proyecto: <a class="text-primary" [routerLink]="['/projects/user/1',block.proyecto_idproyecto.idproyecto]">{{block.proyecto_idproyecto.nombreproyecto}}</a></p>
-            <p>Creado: {{block.fechacreacion | date:'dd-MM-yyyy HH:mm:ss'}}</p>
-            <p>Inicio: {{block.iniciobloque}}</p>
-            <p>Fin: {{block.finbloque}}</p>
-        </div>
-        <div class="col">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Modificar bloque
-                </button>
-                <button type="button" class="btn btn-danger" data-toggle="modal"
-                    data-target="#exampleModalCenter">Eliminar bloque</button>
+            </div>
+            <div class="col dates" style="display: inline-block">
+                <p>Proyecto: <a class="text-primary"
+                        [routerLink]="['/projects/user/',userId,block.proyecto_idproyecto.idproyecto]">{{block.proyecto_idproyecto.nombreproyecto}}</a>
+                </p>
+                <p>Creado: {{block.fechacreacion | date:'dd-MM-yyyy HH:mm:ss'}}</p>
+                <p>Inicio: {{block.iniciobloque}}</p>
+                <p>Fin: {{block.finbloque}}</p>
+            </div>
+
+            <div class="container row" style="display: inline-block">
+                <h3>Horas proyecto</h3>
+                Horas estimadas:
+                <div class="progress mb-1">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="0"
+                        aria-valuemin="0" aria-valuemax="100">{{this.horasestimacion}} h</div>
+                </div>
+                Horas actuales:
+                <div class="progress mb-1 ">
+                    <div class="progress-bar bg-info" role="progressbar"
+                        [style.width]="currentHours(this.horasactuales, this.horasestimacion)" aria-valuenow="0"
+                        aria-valuemin="0" aria-valuemax="100">{{this.horasactuales}} h</div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -58,7 +79,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary" (click)="deleteBlock(this.block.idbloque);" data-dismiss="modal">Sí</button>
+                <button type="button" class="btn btn-primary" (click)="deleteBlock(this.block.idbloque);"
+                    data-dismiss="modal">Sí</button>
             </div>
         </div>
     </div>

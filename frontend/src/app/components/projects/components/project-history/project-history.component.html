@@ -1,0 +1,19 @@
+<div class="list-group mt-5 mb-5">
+    <h3>Historial de modificaciones</h3>
+    <div *ngIf="modifications">
+
+        <div *ngFor="let mod of modifications">
+            <div class="list-group-item list-group-item-action" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{mod.historialModificaciones_idhistorial.motivo}}</h5>
+                    <small>{{mod.historialModificaciones_idhistorial.fechahistorico | date:'dd-MM-yyyy HH:mm:ss'}}</small>
+                </div>
+                <p class="mb-1">{{mod.historialModificaciones_idhistorial.deschistorico}}</p>
+                <small>{{mod.historialModificaciones_idhistorial.usuarios_idusuario}}</small>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!modifications">
+        <p>No existen modificaciones en el proyecto.</p>
+    </div>
+</div>

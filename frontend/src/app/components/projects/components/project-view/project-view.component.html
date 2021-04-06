@@ -7,37 +7,50 @@
     </nav>
     <div class="row">
         <div class="col">
-            <h3 class="mt-0">{{project.nombreproyecto}}
-                <div *ngIf="project.inicioproyecto<project.finproyecto">
-                    <span class="badge badge-primary">Abierto</span>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <h3 class="mt-0">{{project.nombreproyecto}}
+                            <div *ngIf="project.inicioproyecto<project.finproyecto">
+                                <span class="badge badge-primary">Abierto</span>
+                            </div>
+                        </h3>
+                    </div>
+                    <div class="row">
+                        <p>{{project.descproyecto}}</p>
+                    </div>
                 </div>
-            </h3>
-            <p>{{project.descproyecto}}</p>
-            <!-- <div class="media">
-                <img class="align-self-start mr-3" src="..." alt="Generic placeholder image">
-                <div class="media-body">
-                    <h3 class="mt-0">{{project.nombreproyecto}} <span class="badge badge-secondary">New</span></h3>
-                    <p>{{project.descproyecto}}Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus neque odio, congue quis efficitur a, eleifend accumsan eros. Aenean vel egestas lorem. Cras egestas porttitor lectus, id suscipit ante egestas vel. Nullam sed lacinia lorem. Etiam nisl ligula, semper ut tellus at, varius laoreet magna. Vestibulum a tincidunt nulla. Nam ac tincidunt enim. Suspendisse dapibus hendrerit nunc, a varius purus mollis sed. Fusce id sem at lorem fringilla condimentum eu eget metus. Sed sit amet lectus in est venenatis fermentum vel nec ante. Nulla velit ex, malesuada eu pulvinar ut, consequat quis magna. Praesent imperdiet nibh ultricies sapien ultricies pretium. Aenean non quam a mauris ullamcorper vulputate ut luctus mauris. Duis facilisis, mauris ut semper porttitor, justo ante aliquam magna, vitae euismod lacus libero at quam. Pellentesque eu pharetra ipsum. Aliquam suscipit ex id ligula tempor, vel placerat magna iaculis.
+            </div>
+        </div>
+        <div class="col container-flex">
+            <div class="row">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Modificar proyecto
+                    </button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                        data-target="#exampleModalCenter">Eliminar Proyecto</button>
+                </div>
+            </div>
+            <div class="col dates" style="display: inline-block">
+                <p>Creado: {{project.fechacreacion | date:'dd-MM-yyyy HH:mm:ss'}}</p>
+                <p *ngIf="project.inicioproyecto!=null">Inicio: {{project.inicioproyecto}}</p>
+                <p *ngIf="project.finproyecto!=null">Fin: {{project.finproyecto}}</p>
+            </div>
 
-                    </p>
+            <div class="container row" style="display: inline-block">
+                <h3>Horas proyecto</h3>
+                Horas estimadas:
+                <div class="progress mb-1">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="0"
+                        aria-valuemin="0" aria-valuemax="100">{{this.horasestimacion}} h</div>
                 </div>
-            </div> -->
-        </div>
-        <div class="col dates" style="display: inline-block">
-            <p>Creado: {{project.fechacreacion | date:'dd-MM-yyyy HH:mm:ss'}}</p>
-            <p *ngIf="project.inicioproyecto!=null">Inicio: {{project.inicioproyecto}}</p>
-            <p *ngIf="project.finproyecto!=null">Fin: {{project.finproyecto}}</p>
-        </div>
-        <div class="col">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <!--<a [routerLink]="['/projects/update/',project.idproyecto]">
-                    <button type="button" class="btn btn-primary">Modificar proyecto</button>
-                </a>-->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Modificar proyecto
-                </button>
-                <button type="button" class="btn btn-danger" data-toggle="modal"
-                    data-target="#exampleModalCenter">Eliminar Proyecto</button>
+                Horas actuales:
+                <div class="progress mb-1 ">
+                    <div class="progress-bar bg-info" role="progressbar"
+                        [style.width]="currentHours(this.horasactuales, this.horasestimacion)" aria-valuenow="0"
+                        aria-valuemin="0" aria-valuemax="100">{{this.horasactuales}} h</div>
+                </div>
             </div>
         </div>
     </div>
@@ -59,7 +72,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary" (click)="deleteProject(this.project.idproyecto);" data-dismiss="modal">Sí</button>
+                <button type="button" class="btn btn-primary" (click)="deleteProject(this.project.idproyecto);"
+                    data-dismiss="modal">Sí</button>
             </div>
         </div>
     </div>

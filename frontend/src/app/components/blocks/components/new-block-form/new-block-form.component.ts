@@ -20,6 +20,7 @@ export class NewBlockFormComponent implements OnInit {
   dataRecordBlock: FormGroup;
   lastBlock: Block;
   error: any = { isError: false };
+  userId: string;
 
   constructor(
     private blockService: BlockService,
@@ -36,7 +37,9 @@ export class NewBlockFormComponent implements OnInit {
     this.createRecordBlock();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userId = localStorage.getItem('userId');
+  }
 
   get nombreBloqueNoValido(): any {
     return (
@@ -163,7 +166,7 @@ export class NewBlockFormComponent implements OnInit {
         this.lastBlock.idbloque + 1
       )
       .subscribe((rb) => {
-        this.router.navigate(['blocks/user/1']);
+        this.router.navigate(['blocks/user/', this.userId]);
       });
   }
 

@@ -11,12 +11,14 @@ export class TaskRowComponent implements OnInit {
 
   @Input() task: Task;
   @Input() lastModification: Record;
+  userId: string;
   constructor() {
     console.log("Task-row");
     
   }
 
   ngOnInit(): void {
+    this.userId = localStorage.getItem('userId');
   }
 
 }

@@ -11,7 +11,7 @@ export const environment = {
 
 export const headers: HttpHeaders = new HttpHeaders({
   'Content-Type': 'application/json',
-  Authorization: 'Token bace8200c208312345f90932cca8e3faab553112',
+  Authorization: `Token ${localStorage.getItem('token')}`,
 });
 
 /*

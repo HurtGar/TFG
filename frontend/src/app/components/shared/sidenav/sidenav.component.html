@@ -7,13 +7,13 @@
 
     <ul class="list-unstyled components">
       <li class="active">
-        <a [routerLink]="['home/1']" >Inicio</a>
+        <a [routerLink]="['home/', userId]" >Inicio</a>
       </li>
       <li>
-        <a href="#" [routerLink]="['projects/user/1']">Proyectos</a>
+        <a href="#" [routerLink]="['projects/user/', userId]">Proyectos</a>
       </li>
       <li>
-        <a href="#" [routerLink]="['blocks/user/1']">Bloques</a>
+        <a href="#" [routerLink]="['blocks/user/', userId]">Bloques</a>
         <!--<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Bloques</a>
         <ul class="collapse list-unstyled" id="pageSubmenu">
           <li>
@@ -28,7 +28,7 @@
         </ul>-->
       </li>
       <li>
-        <a href="#" [routerLink]="['task/user/1']">Tareas</a>
+        <a href="#" [routerLink]="['task/user/', userId]">Tareas</a>
       </li>
     </ul>
   </nav>

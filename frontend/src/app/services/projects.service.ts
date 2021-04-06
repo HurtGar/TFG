@@ -74,4 +74,8 @@ export class ProjectsService {
     );
     return this.http.delete(projectUrl, { headers });
   }
+
+  getTotalProjectHours(idProject: string): Observable<any>{
+    return this.getQuery(`${idProject}/hours`);
+  }
 }
