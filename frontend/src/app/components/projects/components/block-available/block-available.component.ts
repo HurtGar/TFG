@@ -10,9 +10,12 @@ import { BlockService } from 'src/app/services/block.service';
 })
 export class BlockAvailableComponent implements OnInit {
   @Input() blocks: Block[] = [];
+  userId: string;
 
   constructor(private blockService: BlockService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userId = localStorage.getItem('userId');
+  }
 
 }

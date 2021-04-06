@@ -8,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class SidenavComponent implements OnInit {
   events: string[] = [];
   opened: boolean;
+  userId: string;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userId = localStorage.getItem('userId');
+  }
 }

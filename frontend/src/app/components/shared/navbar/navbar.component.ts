@@ -17,10 +17,13 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.user = new UserLogin();
     this.user.username = localStorage.getItem('email');
+    this.user.idusuario = Number(localStorage.getItem('userId'));
   }
 
   logout() {
     this.authService.deleteToken();
-    this.router.navigateByUrl('/login');
+    this.router.navigate([`/login`]).then(() => {
+      window.location.reload();
+    });
   }
 }

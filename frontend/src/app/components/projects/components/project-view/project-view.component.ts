@@ -14,6 +14,7 @@ export class ProjectViewComponent implements OnInit {
   @Input() project: Project;
   horasactuales: number;
   horasestimacion: number;
+  userId: string;
 
   constructor(
     private projectService: ProjectsService,
@@ -23,13 +24,14 @@ export class ProjectViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProjectHours(this.project.idproyecto.toString());
+    this.userId = localStorage.getItem('userId');
   }
 
   deleteProject(idProject): void {
     this.projectService.deleteProject(this.project.idproyecto).subscribe(
       (p: Project) => {
         console.log('Borrando proyecto');
-        this.router.navigate(['projects/user/1']);
+        this.router.navigate(['projects/user/', this.userId]);
       },
       (error: any) => {
         console.log(error);

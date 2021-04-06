@@ -1,9 +1,9 @@
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item text-primary"><a [routerLink]="['/projects/user/1']">Proyectos</a> / <a
-                    [routerLink]="['/projects/user/', task.proyectos_idproyecto.idproyecto ,1]">{{task.proyectos_idproyecto.nombreproyecto}}</a>
-                / <a [routerLink]="['/blocks',task.bloques_idbloque.idbloque,'user', 1]">{{task.bloques_idbloque.nombrebloque}}
+            <li class="breadcrumb-item text-primary"><a [routerLink]="['/projects/user/', userId]">Proyectos</a> / <a
+                    [routerLink]="['/projects/user/',userId, task.proyectos_idproyecto.idproyecto]">{{task.proyectos_idproyecto.nombreproyecto}}</a>
+                / <a [routerLink]="['/blocks',task.bloques_idbloque.idbloque,'user', userId]">{{task.bloques_idbloque.nombrebloque}}
                 </a> / <span>{{task.nombretarea}}</span> </li>
         </ol>
     </nav>

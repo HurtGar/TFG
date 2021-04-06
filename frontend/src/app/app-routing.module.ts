@@ -19,8 +19,8 @@ import { TasksComponent } from './components/tasks/tasks.component';
 import { AuthGuard } from './guards/auth.guard';
 
 export const APP_ROUTES: Routes = [
-  { path: 'registration', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'registration', component: RegistrationComponent },
   { path: 'home/:idUser', component: HomeComponent, canActivate: [AuthGuard] },
   {
     path: 'projects/user/:idUsuario',

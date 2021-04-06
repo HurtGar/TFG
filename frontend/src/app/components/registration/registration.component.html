@@ -1,31 +1,51 @@
 <div class="limiter animated fadeInRight">
     <div class="container-login100">
         <div class="wrap-login100 p-t-50 p-b-90">
-            <form class="login100-form validate-form flex-sb flex-w" (ngSubmit)="onSubmit()">
+            <form class="login100-form validate-form flex-sb flex-w" [formGroup]="data" (ngSubmit)="onSubmit()">
 
-                <span class="login100-form-title p-b-51">
+                <span class="login100-form-title p-b-10">
                     Crear nueva cuenta
                 </span>
 
-                <!-- <span class="text-danger">El correo es obligatorio</span> -->
-                <div class="wrap-input100 m-b-16">
-                    <input class="input100" type="email" name="email" [(ngModel)]="user.email" placeholder="Email" required email>
-
-                    <span class="focus-input100"></span>
-                </div>
-
                 <!-- <span class="text-danger">El nombre es obligatorio</span> -->
                 <div class="wrap-input100 m-b-16">
-                    <input class="input100" type="text" name="nombre" [(ngModel)]="user.username"
-                        placeholder="Nombre y apellidos">
-
+                    <input class="input100 form-control" type="text" name="nombre" formControlName="nombre"
+                    placeholder="Nombre" [class.is-invalid]="userNameNoValid">
                     <span class="focus-input100"></span>
+                    <small *ngIf="userNameNoValid" class="form-text text-danger">Introduzca su nombre.</small>
+                </div>
+                
+                <div class="wrap-input100 m-b-16">
+                    <input class="input100 form-control" type="text" name="firstSurname" 
+                    placeholder="Primer apellido" formControlName="primerapellido" [class.is-invalid]="firstSurnameNoValid">
+                    <span class="focus-input100"></span>
+                    <small *ngIf="firstSurnameNoValid" class="form-text text-danger">Introduzca su primer apellido.</small>
+                </div>
+
+                <div class="wrap-input100 m-b-16">
+                    <input class="input100 form-control" type="text" name="secondSurname" 
+                    placeholder="Segundo apellido" formControlName="segundoapellido">
+                    
+                    <span class="focus-input100"></span>
+                </div>
+                <span class="login100-form-title p-b-10 p-t-10">
+                    Datos de acceso
+                </span>
+                <div class="wrap-input100 m-b-16">
+                    <input class="input100 form-control" type="email" name="email" formControlName="email"  placeholder="Email" [class.is-invalid]="emailNoValid" email>
+                    <span class="focus-input100"></span>
+                    <small *ngIf="emailNoValid" class="form-text text-danger">Introduzca un corre electrónico válido.</small>
                 </div>
 
                 <!-- <span class="text-danger">La contraseña debe de ser más de 6 letras</span> -->
                 <div class="wrap-input100 m-b-16" data-validate="Password is required">
-                    <input class="input100" type="password" name="pass" [(ngModel)]="user.password"
-                        placeholder="Password">
+                    <input class="input100 form-control" type="password" name="pass" formControlName="password"  required
+                        placeholder="Contraseña">
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 m-b-16" data-validate="Password is required">
+                    <input class="input100 form-control" type="password" name="confirmarpass" formControlName="confirmPassword" 
+                        placeholder="Confirmar contraseña" required>
                     <span class="focus-input100"></span>
                 </div>
 

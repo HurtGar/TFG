@@ -1,8 +1,8 @@
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item text-primary"><a [routerLink]="['/projects/user/1']">Proyectos</a> / <a
-                    [routerLink]="['/projects/user/1/1']">{{block.proyecto_idproyecto.nombreproyecto}}</a> / <span
+            <li class="breadcrumb-item text-primary"><a [routerLink]="['/projects/user/',userId]">Proyectos</a> / <a
+                    [routerLink]="['/projects/user/',userId,block.proyecto_idproyecto.idproyecto]">{{block.proyecto_idproyecto.nombreproyecto}}</a> / <span
                     class="text-secondary">{{block.nombrebloque}}</span> </li>
         </ol>
     </nav>
@@ -37,7 +37,7 @@
             </div>
             <div class="col dates" style="display: inline-block">
                 <p>Proyecto: <a class="text-primary"
-                        [routerLink]="['/projects/user/1',block.proyecto_idproyecto.idproyecto]">{{block.proyecto_idproyecto.nombreproyecto}}</a>
+                        [routerLink]="['/projects/user/',userId,block.proyecto_idproyecto.idproyecto]">{{block.proyecto_idproyecto.nombreproyecto}}</a>
                 </p>
                 <p>Creado: {{block.fechacreacion | date:'dd-MM-yyyy HH:mm:ss'}}</p>
                 <p>Inicio: {{block.iniciobloque}}</p>

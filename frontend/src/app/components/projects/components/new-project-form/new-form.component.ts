@@ -16,6 +16,7 @@ export class NewProjectFormComponent implements OnInit {
   dataRecord: FormGroup;
   lastProject: Project;
   error: any = { isError: false };
+  userId: string;
   constructor(
     private projectService: ProjectsService,
     private router: Router,
@@ -23,13 +24,15 @@ export class NewProjectFormComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.createForm();
-    this.projectService.lastInsertedProject().subscribe((lp)=>{
+    this.projectService.lastInsertedProject().subscribe((lp) => {
       this.lastProject = lp;
     });
     this.createRecordProject();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userId = localStorage.getItem('userId');
+  }
 
   get nombreProyectoNoValido(): any {
     return (
@@ -92,7 +95,6 @@ export class NewProjectFormComponent implements OnInit {
   }
 
   addProject(): void {
-
     if (this.data.invalid) {
       return Object.values(this.data.controls).forEach((control) => {
         control.markAsTouched();
@@ -135,15 +137,17 @@ export class NewProjectFormComponent implements OnInit {
     console.log(formObject);
 
     this.projectService.createProject(formObject).subscribe(
-      (p: Project) => {
-      },
+      (p: Project) => {},
       (error: any) => console.log(error)
-      );
-      
-      this.recordModificationService
-      .insertNewRecordModificationProject(recordProject, this.lastProject.idproyecto + 1)
+    );
+
+    this.recordModificationService
+      .insertNewRecordModificationProject(
+        recordProject,
+        this.lastProject.idproyecto + 1
+      )
       .subscribe((rt) => {
-        this.router.navigate(['projects/user/1']);
+        this.router.navigate(['projects/user/', this.userId]);
       });
   }
 

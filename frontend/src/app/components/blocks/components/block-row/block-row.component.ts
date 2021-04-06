@@ -11,10 +11,12 @@ export class BlockRowComponent implements OnInit {
 
   @Input() block: Block;
   @Input() lastModification: Record;
+  userId: string;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.userId = localStorage.getItem('userId');
   }
 
 }

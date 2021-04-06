@@ -51,6 +51,7 @@ import { BlockHistoryComponent } from './components/blocks/components/block-hist
 import { TaskHistoryComponent } from './components/tasks/components/task-history/task-history.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterService } from './services/register-service.service';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { LoginComponent } from './components/login/login.component';
     StatusService,
     PriorityService,
     UserService,
-    AuthenticationService
+    AuthenticationService,
+    RegisterService
   ],
   bootstrap: [AppComponent],
 })
