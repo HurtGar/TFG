@@ -22,7 +22,7 @@ class GetAllBlocsFromAnUser(APIView):
     def get_object(self, id_user):
 
         try:
-            return Bloque.objects.filter(bloque__tareasusuarios__usuarios_idusuario_id=id_user).distinct()
+            return Bloque.objects.filter(bloquesusuarios__usuarios_idusuario=id_user).distinct()
         except Bloque.DoesNotExist:
             raise Http404
 
@@ -39,7 +39,7 @@ class GetOneBlocFromAnUser(APIView):
     @staticmethod
     def get_object(self, id_user, id_block):
         try:
-            block = Bloque.objects.filter(bloque__tareasusuarios__usuarios_idusuario_id=id_user, idbloque=id_block).distinct()
+            block = Bloque.objects.filter(bloquesusuarios__usuarios_idusuario=id_user, idbloque=id_block).distinct()
             return block
         except Bloque.DoesNotExist:
             raise Http404("Bloque no existe.")

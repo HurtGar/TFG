@@ -28,7 +28,8 @@ class GetAllProjectFromAnUser(APIView):
         :return: Projects where the user is
         """
         try:
-            return Proyecto.objects.filter(proyecto_tarea__tareasusuarios__usuarios_idusuario=id_user).distinct()
+            return Proyecto.objects.filter(proyectosusuarios__usuarios_idusuario=id_user).distinct()
+            #return Proyecto.objects.filter(proyecto_tarea__tareasusuarios__usuarios_idusuario=id_user).distinct()
         except Proyecto.DoesNotExist:
             raise Http404
 
@@ -60,7 +61,7 @@ class GetOneProjectFromAnUser(APIView):
         :return: One project
         """
         try:
-            return Proyecto.objects.filter(proyecto_tarea__tareasusuarios__usuarios_idusuario=id_user,
+            return Proyecto.objects.filter(proyectosusuarios__usuarios_idusuario=id_user,
                                            idproyecto=id_project).distinct()
 
         except Proyecto.DoesNotExist:
