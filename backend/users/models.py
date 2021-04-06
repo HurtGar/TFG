@@ -1,6 +1,7 @@
 from django.db import models
 from projects.models import *
 
+
 # ---------Usuarios---------
 
 
@@ -51,6 +52,12 @@ class Usuario(models.Model):
                                     through_fields=(
                                         'usuarios_idusuario', 'tareas_idtarea', 'proyectos_idproyecto',
                                         'bloque_idbloque'))
+    proyectos = models.ManyToManyField(Proyecto, through='ProyectosUsuarios', related_name='proyectos',
+                                    through_fields=(
+                                        'usuarios_idusuario', 'proyectos_idproyecto'))
+    bloques = models.ManyToManyField(Bloque, through='BloquesUsuarios', related_name='bloques',
+                                    through_fields=(
+                                        'usuarios_idusuario', 'bloques_idbloque'))
     roles = models.ManyToManyField(Rol, related_name='rol', through='RolesUsuarios',
                                    through_fields=('usuarios_idusuario', 'roles_idrol'))
 
@@ -72,6 +79,32 @@ class TareasUsuarios(models.Model):
             models.UniqueConstraint(
                 fields=['tareas_idtarea', 'usuarios_idusuario'],
                 name='constraint_tareas_usuario')
+        ]
+
+
+class ProyectosUsuarios(models.Model):
+    proyectos_idproyecto = models.ForeignKey(Proyecto, on_delete=models.DO_NOTHING)
+    usuarios_idusuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
+
+    class Meta:
+        db_table = 'proyectos_usuario'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['proyectos_idproyecto', 'usuarios_idusuario'],
+                name='constraint_proyectos_usuario')
+        ]
+
+
+class BloquesUsuarios(models.Model):
+    bloques_idbloque = models.ForeignKey(Bloque, on_delete=models.DO_NOTHING)
+    usuarios_idusuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
+
+    class Meta:
+        db_table = 'bloques_usuario'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['bloques_idbloque', 'usuarios_idusuario'],
+                name='constraint_bloques_usuario')
         ]
 
 
