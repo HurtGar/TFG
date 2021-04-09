@@ -29,4 +29,4 @@ class GetAuthToken(APIView):
         if user is None:
             return Response({'error': 'Email or password incorrect.'}, status = status.HTTP_401_UNAUTHORIZED)
         token = Token.objects.get(user= user)
-        return Response({'token': token.key, 'userId': getUser.id}, status=status.HTTP_200_OK)
+        return Response({'token': token.key, 'userId': getUser.id, 'superuser': getUser.is_superuser}, status=status.HTTP_200_OK)

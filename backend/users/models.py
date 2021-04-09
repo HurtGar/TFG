@@ -45,19 +45,19 @@ class Usuario(models.Model):
     segundoapellido = models.CharField(max_length=45, null=True, blank=True)
     telefono = models.CharField(max_length=12, null=True, blank=True)
     email = models.EmailField()
-    password = models.CharField(max_length=200)
-    fecharegistro = models.DateTimeField()
+    password = models.CharField(max_length=200, null=True, blank=True)
+    fecharegistro = models.DateTimeField(null=True, blank=True)
     estado = models.IntegerField(choices=estado_enum, default=0)
     tareas = models.ManyToManyField(Tarea, through='TareasUsuarios', related_name='tareas',
                                     through_fields=(
                                         'usuarios_idusuario', 'tareas_idtarea', 'proyectos_idproyecto',
                                         'bloque_idbloque'))
     proyectos = models.ManyToManyField(Proyecto, through='ProyectosUsuarios', related_name='proyectos',
-                                    through_fields=(
-                                        'usuarios_idusuario', 'proyectos_idproyecto'))
+                                       through_fields=(
+                                           'usuarios_idusuario', 'proyectos_idproyecto'))
     bloques = models.ManyToManyField(Bloque, through='BloquesUsuarios', related_name='bloques',
-                                    through_fields=(
-                                        'usuarios_idusuario', 'bloques_idbloque'))
+                                     through_fields=(
+                                         'usuarios_idusuario', 'bloques_idbloque'))
     roles = models.ManyToManyField(Rol, related_name='rol', through='RolesUsuarios',
                                    through_fields=('usuarios_idusuario', 'roles_idrol'))
 
@@ -71,7 +71,7 @@ class Usuario(models.Model):
 
 class TareasUsuarios(models.Model):
     tareas_idtarea = models.ForeignKey(Tarea, on_delete=models.DO_NOTHING)
-    usuarios_idusuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
+    usuarios_idusuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         db_table = 'tareas_usuario'
@@ -84,7 +84,7 @@ class TareasUsuarios(models.Model):
 
 class ProyectosUsuarios(models.Model):
     proyectos_idproyecto = models.ForeignKey(Proyecto, on_delete=models.DO_NOTHING)
-    usuarios_idusuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
+    usuarios_idusuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         db_table = 'proyectos_usuario'
@@ -97,7 +97,7 @@ class ProyectosUsuarios(models.Model):
 
 class BloquesUsuarios(models.Model):
     bloques_idbloque = models.ForeignKey(Bloque, on_delete=models.DO_NOTHING)
-    usuarios_idusuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
+    usuarios_idusuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         db_table = 'bloques_usuario'

@@ -76,33 +76,39 @@ class GetUserByState(APIView):
         return Response(serializer.data)
 
 
-class CreateUser(APIView):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
-
-    def post(self, request):
-        serializer = UsuarioSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 class UpdateUser(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
 
-    def get_object(self, user_id):
+    def getUsuario(self, user_id):
         try:
             return Usuario.objects.get(idusuario=user_id)
         except Usuario.DoesNotExist:
             raise Http404
 
+    def getUser(self, user_id):
+        try:
+            return User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            raise Http404
+
+    def updateUser(self, request, user_id):
+        user = self.getUser(user_id)
+        setattr(user, 'username', request.data['email'])
+        setattr(user, 'first_name', request.data['nombre'])
+        setattr(user, 'last_name', request.data['primerapellido'])
+        setattr(user, 'email', request.data['email'])
+        if user.save() is not None:
+            return Response({'error': 'Usuario no guardado.'}, status=status.HTTP_400_BAD_REQUEST)
+
     def put(self, request, user_id):
         """Crear un nuevo elemento o reemplazar un proyecto."""
-        user = self.get_object(user_id)
-        serializer = UsuarioSerializer(user, data=request.data)
+
+        self.updateUser(request, user_id)
+
+        usuario = self.getUsuario(user_id)
+
+        serializer = UsuarioSerializer(usuario, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -115,17 +121,26 @@ class DeleteUser(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
 
-    def get_object(self, user_id):
+    def getUsuario(self, user_id):
         try:
             return Usuario.objects.get(idusuario=user_id)
         except Usuario.DoesNotExist:
             raise Http404
 
+    def getUser(self, user_id):
+        try:
+            return User.objects.get(id=user_id)
+        except Usuario.DoesNotExist:
+            raise Http404
+
     def delete(self, request, user_id):
 
-        user = self.get_object(user_id)
-        user.delete()
-        return Response(status=status.HTTP_200_OK)
+        usuario = self.getUsuario(user_id)
+        user = self.getUser(user_id)
+        if usuario.delete() and user.delete():
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'Error al eliminar usuario.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 # REGISTRO DE ACCESO DE LOS USUARIOS
@@ -279,7 +294,7 @@ class RegisterNewUser(APIView):
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response({'error':'El usuario ya existe.'}, status = status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'El usuario ya existe.'}, status=status.HTTP_400_BAD_REQUEST)
 
     def createUser(self, request):
         user = User()
@@ -291,13 +306,12 @@ class RegisterNewUser(APIView):
         user.is_active = True
         user.is_staff = False
         if user.save() is not None:
-            return Response({'error':'Usuario no guardado.'}, status=status.HTTP_400_BAD_REQUEST)
-
+            return Response({'error': 'Usuario no guardado.'}, status=status.HTTP_400_BAD_REQUEST)
 
     def validateIfUserExists(self, email):
 
         try:
-            user = User.objects.get(username = email)
+            user = User.objects.get(username=email)
         except User.DoesNotExist:
             user = None
 
