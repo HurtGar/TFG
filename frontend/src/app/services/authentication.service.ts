@@ -21,7 +21,8 @@ export class AuthenticationService {
           console.log('Entro en el map.');
           const tok = 'token';
           const userId = 'userId';
-          this.saveToken(resp[tok], resp[userId]);
+          const superuser = 'superuser';
+          this.saveToken(resp[tok], resp[userId], resp[superuser]);
           return resp;
         })
       );
@@ -31,10 +32,11 @@ export class AuthenticationService {
     localStorage.clear();
   }
 
-  private saveToken(userToken: string, userId: string): any {
+  private saveToken(userToken: string, userId: string, superuser: boolean): any {
     this.userToken = userToken;
     localStorage.setItem('token', userToken);
     localStorage.setItem('userId', userId);
+    localStorage.setItem('superuser', superuser.toString());
 
     // Expiración token.
     const today = new Date();

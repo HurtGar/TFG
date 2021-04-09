@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminPanelComponent } from './components/administration/admin-panel/admin-panel.component';
+import { AdminViewComponent } from './components/administration/admin-panel/components/admin-view/admin-view.component';
+import { AdminDetailComponent } from './components/administration/admin-panel/containers/admin-detail/admin-detail.component';
 import { BlocksComponent } from './components/blocks/blocks.component';
 import { BlockDetailComponent } from './components/blocks/containers/block-detail/block-detail.component';
 import { BlockFormComponent } from './components/blocks/containers/block-form/block-form.component';
@@ -74,7 +77,17 @@ export const APP_ROUTES: Routes = [
     component: TaskDetailComponent,
     canActivate: [AuthGuard],
   },
-  { path: '**', pathMatch: 'full', redirectTo: 'login' },
+  {
+    path: 'administration-panel',
+    component: AdminPanelComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'users/user/:idUser',
+    component: AdminDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];
 
 @NgModule({
