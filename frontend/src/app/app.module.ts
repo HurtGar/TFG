@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 // Services
 import { ProjectsService } from './services/projects.service';
@@ -52,6 +53,12 @@ import { TaskHistoryComponent } from './components/tasks/components/task-history
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterService } from './services/register-service.service';
+import { AdminPanelComponent } from './components/administration/admin-panel/admin-panel.component';
+import { AdminListComponent } from './components/administration/admin-panel/containers/admin-list/admin-list.component';
+import { AdminRowComponent } from './components/administration/admin-panel/components/admin-row/admin-row.component';
+import { AdminViewComponent } from './components/administration/admin-panel/components/admin-view/admin-view.component';
+import { AdminDetailComponent } from './components/administration/admin-panel/containers/admin-detail/admin-detail.component';
+import { UpdateAdminComponent } from './components/administration/admin-panel/components/update-admin/update-admin.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +99,12 @@ import { RegisterService } from './services/register-service.service';
     TaskHistoryComponent,
     RegistrationComponent,
     LoginComponent,
+    AdminPanelComponent,
+    AdminListComponent,
+    AdminRowComponent,
+    AdminViewComponent,
+    AdminDetailComponent,
+    UpdateAdminComponent,
   ],
   imports: [
     FormsModule,
@@ -100,6 +113,7 @@ import { RegisterService } from './services/register-service.service';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgbModule
   ],
   providers: [
     ProjectsService,

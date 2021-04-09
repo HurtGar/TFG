@@ -20,4 +20,24 @@ export class UserService {
   getUsersFromApp(): Observable<User[]>{
     return this.getQuery(`list_users`);
   }
+
+  getUserById(idUser): Observable<User>{
+    return this.getQuery(`user/${idUser}`);
+  }
+
+  updateUser(user: any, idUser: number): Observable<any> {
+    return this.http.put(
+      environment.baseurl.concat(`/users/update/${idUser}`),
+      user,
+      { headers }
+    );
+  }
+
+  deleteUser(idUser: number): Observable<any> {
+    const blockUrl = environment.baseurl.concat(
+      `/users/delete/${idUser}`
+    );
+    return this.http.delete(blockUrl, { headers });
+  }
+
 }

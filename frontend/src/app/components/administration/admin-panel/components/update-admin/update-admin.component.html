@@ -1,0 +1,27 @@
+<form [formGroup]="data" (ngSubmit)="updateUser()">
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre">
+    </div>
+    <div class="form-group">
+        <label for="primerApellido">Primer apellido</label>
+        <input type="text" class="form-control" id="primerApellido" formControlName="primerapellido">
+    </div>
+    <div class="form-group" *ngIf="user.segundoapellido">
+        <label for="segundoApellido">Segundo apellido</label>
+        <input type="text" class="form-control" id="segundoApellido" formControlName="segundoapellido">
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email">
+    </div>
+    <div class="form-group" *ngIf="user.telefono">
+        <label for="telefono">Teléfono</label>
+        <input type="text" class="form-control" id="telefono" formControlName="telefono">
+    </div>
+    <div class="form-group">
+        <label for="fecharegistro">Fecha registro</label>
+        <input type="text" class="form-control" id="fecharegistro" formControlName="fecharegistro">
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Actualizar</button>
+</form>

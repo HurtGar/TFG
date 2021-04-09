@@ -11,6 +11,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class NavbarComponent implements OnInit {
   
   user: UserLogin;
+  superuser: string;
+  
 
   constructor(private authService: AuthenticationService, private router: Router) {}
 
@@ -18,6 +20,7 @@ export class NavbarComponent implements OnInit {
     this.user = new UserLogin();
     this.user.username = localStorage.getItem('email');
     this.user.idusuario = Number(localStorage.getItem('userId'));
+    this.superuser = localStorage.getItem('superuser');
   }
 
   logout() {

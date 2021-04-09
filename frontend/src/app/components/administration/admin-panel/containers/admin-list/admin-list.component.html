@@ -1,0 +1,10 @@
+<div class="container-fluid">
+    <h2>Usuarios</h2>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a [routerLink]="['/users/create-user']" style="text-decoration: none;" class="text-white"><button
+                class="btn btn-primary">Nuevo usuario</button></a>
+    </div>
+    <div class="list-group mt-3" *ngFor="let user of users;">
+        <app-admin-row [user]="user"></app-admin-row>
+    </div>
+</div>
