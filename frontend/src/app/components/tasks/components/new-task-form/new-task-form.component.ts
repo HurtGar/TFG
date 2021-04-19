@@ -108,37 +108,27 @@ export class NewTaskFormComponent implements OnInit {
   }
 
   selectProject(e): any {
-    console.log(e.target.value);
-
     this.idProject.setValue(e.target.value, {
       onlySelf: true,
     });
     this.loadBlocks();
   }
   selectBlock(e): any {
-    console.log(e.target.value);
-
     this.idBlock.setValue(e.target.value, {
       onlySelf: true,
     });
   }
   selectStatus(e): any {
-    console.log(e.target.value);
-
     this.idStatus.setValue(e.target.value, {
       onlySelf: true,
     });
   }
   selectPriority(e): any {
-    console.log(e.target.value);
-
     this.idPriority.setValue(e.target.value, {
       onlySelf: true,
     });
   }
   selectUser(e): any {
-    console.log(e.target.value);
-
     this.idUser.setValue(e.target.value, {
       onlySelf: true,
     });
@@ -146,7 +136,6 @@ export class NewTaskFormComponent implements OnInit {
 
   loadProjects(): void {
     this.projectService.getAllProjectFromAnUser(this.userId).subscribe((p) => {
-      console.log(p);
       this.projects = p;
     });
   }
@@ -171,7 +160,6 @@ export class NewTaskFormComponent implements OnInit {
   loadUsers(): void {
     this.userService.getUsersFromApp().subscribe((s) => {
       this.users = s;
-      console.log(s);
     });
   }
 
@@ -238,7 +226,6 @@ export class NewTaskFormComponent implements OnInit {
   }
 
   addTask(): any {
-    console.log(this.data);
     if (this.data.invalid) {
       return Object.values(this.data.controls).forEach((control) => {
         control.markAsTouched();
@@ -298,22 +285,14 @@ export class NewTaskFormComponent implements OnInit {
     ) {
       delete formObject.horasrestantes;
     }
-    console.log(formObject);
-    console.log(userTaskObject);
-    console.log(recordTask);
 
     this.taskService.createTask(formObject).subscribe((t: Task) => {
-      console.log(t);
       this.taskService
         .createAssignment(userTaskObject)
-        .subscribe((ut: UserTask) => {
-          console.log(ut);
-        });
+        .subscribe((ut: UserTask) => {});
       this.recordModificationService
         .insertNewRecordModificationTask(recordTask, this.lastTask.idtarea + 1)
         .subscribe((rt) => {
-          console.log(rt);
-
           this.router.navigate(['task/user/', this.userId]);
         });
     });
@@ -328,7 +307,7 @@ export class NewTaskFormComponent implements OnInit {
     if (finalDateB < finalDateA) {
       correct = false;
     }
-    console.log(correct);
+
     return correct;
   }
 }

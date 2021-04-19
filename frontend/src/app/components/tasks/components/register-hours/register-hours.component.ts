@@ -35,6 +35,7 @@ export class RegisterHoursComponent implements OnInit {
       horasactuales: [''],
       horasregistradas: [''],
     });
+    this.data.get('horasregistradas').disable();
   }
 
   loadHours(): any {
@@ -46,7 +47,6 @@ export class RegisterHoursComponent implements OnInit {
   }
 
   registerHours(): any {
-    console.log(this.data);
     if (this.data.invalid) {
       return Object.values(this.data.controls).forEach((control) => {
         control.markAsTouched();
@@ -56,11 +56,8 @@ export class RegisterHoursComponent implements OnInit {
     const formObject = this.data.getRawValue();
     JSON.stringify(formObject);
 
-    console.log(formObject);
-
     this.taskService.registerTaskHours(this.task.idtarea, formObject).subscribe(
       (t: Task) => {
-        console.log(t);
         window.location.reload();
       },
       (error: any) => {

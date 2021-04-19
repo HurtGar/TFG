@@ -19,7 +19,6 @@ export class AdminListComponent implements OnInit {
 
   getUsersFromApp(): any {
     this.userService.getUsersFromApp().subscribe((u) => {
-      console.log(u);
       this.users = u;
     });
   }

@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-update-block-form',
   templateUrl: './update-block-form.component.html',
-  styleUrls: ['./update-block-form.component.scss']
+  styleUrls: ['./update-block-form.component.scss'],
 })
 export class UpdateBlockFormComponent implements OnInit {
   projects: Project[] = [];
@@ -27,7 +27,7 @@ export class UpdateBlockFormComponent implements OnInit {
     this.createForm();
     this.loadProjects();
   }
-  
+
   ngOnInit(): void {
     this.loadBlock(this.block);
   }
@@ -44,8 +44,6 @@ export class UpdateBlockFormComponent implements OnInit {
   }
 
   selectProject(e: any): any {
-    console.log(e.target.value);
-
     this.idProject.setValue(e.target.value, {
       onlySelf: true,
     });
@@ -64,8 +62,6 @@ export class UpdateBlockFormComponent implements OnInit {
 
   loadProjects(): void {
     this.projectService.getAllProjectFromAnUser('1').subscribe((p) => {
-      console.log(p);
-
       this.projects = p;
     });
   }
@@ -81,7 +77,7 @@ export class UpdateBlockFormComponent implements OnInit {
     });
   }
 
-  loadBlock(block: Block):any{
+  loadBlock(block: Block): any {
     this.data.setValue({
       nombrebloque: block.nombrebloque,
       descbloque: block.descbloque,
@@ -131,8 +127,7 @@ export class UpdateBlockFormComponent implements OnInit {
       if (!datesOk) {
         Swal.fire({
           icon: 'error',
-          text:
-            'Error en las fechas.',
+          text: 'Error en las fechas.',
         });
       }
     }
@@ -152,19 +147,17 @@ export class UpdateBlockFormComponent implements OnInit {
       delete formObject.finbloque;
     }
 
-    console.log(formObject);
-
-    this.blockService.updateBlock(formObject,this.block.idbloque).subscribe((b: Block) => {
-      console.log(b);
-      window.location.reload();
-    },
-    (error: any)=> {
-      Swal.fire({
-        icon: 'error',
-        text:
-          'No se ha podido actualizar la información del bloque. Inténtelo de nuevo.',
-      });
-    }
+    this.blockService.updateBlock(formObject, this.block.idbloque).subscribe(
+      (b: Block) => {
+        window.location.reload();
+      },
+      (error: any) => {
+        Swal.fire({
+          icon: 'error',
+          text:
+            'No se ha podido actualizar la información del bloque. Inténtelo de nuevo.',
+        });
+      }
     );
   }
 
@@ -177,8 +170,7 @@ export class UpdateBlockFormComponent implements OnInit {
     if (finalDateB < finalDateA) {
       correct = false;
     }
-    console.log(correct);
+
     return correct;
   }
-
 }

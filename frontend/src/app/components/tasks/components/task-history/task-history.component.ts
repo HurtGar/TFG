@@ -21,7 +21,6 @@ export class TaskHistoryComponent implements OnInit {
   getAllRecordsTask(idTask: number) {
     this.recordsService.getAllRecordsTask(idTask).subscribe((t) => {
       this.modifications = t;
-      console.log(t);
     });
   }
 }

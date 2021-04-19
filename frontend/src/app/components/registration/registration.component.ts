@@ -66,8 +66,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit(): any {
-    console.log(this.data);
-
     if (this.data.invalid) {
       return Object.values(this.data.controls).forEach((control) => {
         control.markAsTouched();
@@ -76,8 +74,6 @@ export class RegistrationComponent implements OnInit {
 
     const formObject = this.data.getRawValue();
     JSON.stringify(formObject);
-
-    console.log(formObject);
 
     this.registrationService.registerNewUser(formObject).subscribe(
       (u: any) => {

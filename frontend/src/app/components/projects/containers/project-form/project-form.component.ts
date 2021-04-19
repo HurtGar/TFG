@@ -26,7 +26,6 @@ export class ProjectFormComponent implements OnInit {
   public getOneProjectFromAnUser(idUser: string, idProject: string): void {
     this.projectsService.getOneProjectFromAnUser('1', '1').subscribe((pro) => {
       this.project = pro;
-      console.log(pro);
     });
   }
 }

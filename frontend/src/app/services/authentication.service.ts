@@ -9,16 +9,13 @@ import { map } from 'rxjs/operators';
 })
 export class AuthenticationService {
   userToken: string;
-  constructor(private http: HttpClient) {
-    console.log('Servicio autenticacion listo para usarse.');
-  }
+  constructor(private http: HttpClient) {}
 
   getToken(credentials: UserLogin): any {
     return this.http
       .post(environment.baseurl.concat(`/get_token`), credentials, { headers })
       .pipe(
         map((resp) => {
-          console.log('Entro en el map.');
           const tok = 'token';
           const userId = 'userId';
           const superuser = 'superuser';
@@ -32,7 +29,11 @@ export class AuthenticationService {
     localStorage.clear();
   }
 
-  private saveToken(userToken: string, userId: string, superuser: boolean): any {
+  private saveToken(
+    userToken: string,
+    userId: string,
+    superuser: boolean
+  ): any {
     this.userToken = userToken;
     localStorage.setItem('token', userToken);
     localStorage.setItem('userId', userId);
@@ -60,7 +61,6 @@ export class AuthenticationService {
     return this.expiredDate(Number(localStorage.getItem('expires')));
   }
 
-  
   public expiredDate(expires: number): boolean {
     const expiresDate = new Date();
     expiresDate.setTime(expires);

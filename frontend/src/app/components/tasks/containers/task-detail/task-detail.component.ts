@@ -25,7 +25,6 @@ export class TaskDetailComponent implements OnInit {
   public getOneTaskFromAUser(idUser: string, idTask: string): void {
     this.taskService.getOneTaskFromAnUser(idUser, idTask).subscribe((t) => {
       this.tasks = t;
-      console.log(t);
     });
   }
 }

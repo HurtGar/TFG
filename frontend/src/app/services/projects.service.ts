@@ -18,7 +18,7 @@ export class ProjectsService {
     return this.http.get(projectUrl, { headers });
   }
 
-  getAllUsers(): Observable<User[]>{
+  getAllUsers(): Observable<User[]> {
     return this.getQuery(`users`);
   }
 
@@ -26,7 +26,7 @@ export class ProjectsService {
     return this.getQuery(`user/${idUsuario}`);
   }
 
-  getAllUsersFromAProject(idProject: string): Observable<User[]>{
+  getAllUsersFromAProject(idProject: string): Observable<User[]> {
     return this.getQuery(`${idProject}/list-users`);
   }
 
@@ -60,8 +60,6 @@ export class ProjectsService {
   }
 
   createProject(project: any): Observable<any> {
-    console.log(project);
-
     return this.http.post(
       environment.baseurl.concat(`/project/create`),
       project,
@@ -89,7 +87,6 @@ export class ProjectsService {
   }
 
   setAssignmentProject(assign: any): Observable<any> {
-    console.log(assign);
     return this.http.post(
       environment.baseurl.concat(`/project/assignment`),
       assign,

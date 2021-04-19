@@ -10,9 +10,7 @@ import { User } from '../models/user.model';
   providedIn: 'root',
 })
 export class TaskService {
-  constructor(private http: HttpClient) {
-    console.log('Servicio tareas listo para usarse.');
-  }
+  constructor(private http: HttpClient) {}
 
   getQuery(url: string): Observable<any> {
     const projectUrl = environment.baseurl.concat(`/task/${url}`);
@@ -27,7 +25,7 @@ export class TaskService {
     return this.getQuery(`${idTask}/user/${idUser}`);
   }
 
-  getAllUsersFromATask(idTask: string): Observable<User[]>{
+  getAllUsersFromATask(idTask: string): Observable<User[]> {
     return this.getQuery(`${idTask}/list-users`);
   }
 

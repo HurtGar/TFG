@@ -54,8 +54,6 @@ export class NewBlockFormComponent implements OnInit {
   }
 
   selectProject(e): any {
-    console.log(e.target.value);
-
     this.idProject.setValue(e.target.value, {
       onlySelf: true,
     });
@@ -63,8 +61,6 @@ export class NewBlockFormComponent implements OnInit {
 
   loadProjects(): void {
     this.projectService.getAllProjectFromAnUser(this.userId).subscribe((p) => {
-      console.log(p);
-
       this.projects = p;
     });
   }
@@ -128,7 +124,6 @@ export class NewBlockFormComponent implements OnInit {
     JSON.stringify(formObject);
     const recordBlock = this.dataRecordBlock.getRawValue();
     JSON.stringify(recordBlock);
-    console.log(recordBlock);
 
     // Comprobar si la fecha de fin es anterior a la de inicio del proyecto.
     if (
@@ -142,8 +137,7 @@ export class NewBlockFormComponent implements OnInit {
       if (!datesOk) {
         Swal.fire({
           icon: 'error',
-          text:
-            'Error en las fechas.',
+          text: 'Error en las fechas.',
         });
       }
     }
@@ -169,15 +163,12 @@ export class NewBlockFormComponent implements OnInit {
     };
     this.blockService.createBlock(formObject).subscribe(
       (b: Block) => {
-        this.blockService.setAssignmentBlock(assign).subscribe((b) => {
-          console.log(assign);
-        });
+        this.blockService.setAssignmentBlock(assign).subscribe((b) => {});
       },
       (error: any) => {
         Swal.fire({
           icon: 'error',
-          text:
-            'No se ha podido crear el bloque. Inténtelo de nuevo.',
+          text: 'No se ha podido crear el bloque. Inténtelo de nuevo.',
         });
       }
     );
@@ -201,7 +192,7 @@ export class NewBlockFormComponent implements OnInit {
     if (finalDateB < finalDateA) {
       correct = false;
     }
-    console.log(correct);
+
     return correct;
   }
 }

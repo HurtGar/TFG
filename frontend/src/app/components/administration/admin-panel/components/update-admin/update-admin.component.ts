@@ -27,7 +27,7 @@ export class UpdateAdminComponent implements OnInit {
   }
 
   get nombreUsuarioNoValido(): any {
-    return (this.data.get('nombre').invalid && this.data.get('nombre').touched);
+    return this.data.get('nombre').invalid && this.data.get('nombre').touched;
   }
   get primerApellidoNoValido(): any {
     return (
@@ -36,7 +36,7 @@ export class UpdateAdminComponent implements OnInit {
     );
   }
   get emailNoValido(): any {
-    return (this.data.get('email').invalid && this.data.get('email').touched);
+    return this.data.get('email').invalid && this.data.get('email').touched;
   }
 
   createForm(): any {
@@ -63,8 +63,6 @@ export class UpdateAdminComponent implements OnInit {
   }
 
   updateUser(): void {
-    console.log(this.data);
-    
     if (this.data.invalid) {
       return Object.values(this.data.controls).forEach((control) => {
         control.markAsTouched();
@@ -84,8 +82,7 @@ export class UpdateAdminComponent implements OnInit {
       (error: any) => {
         Swal.fire({
           icon: 'error',
-          text:
-            'Error al actualizar usuario. Inténtelo de nuevo.',
+          text: 'Error al actualizar usuario. Inténtelo de nuevo.',
         });
       }
     );

@@ -88,9 +88,6 @@ export class NewUserAdminComponent implements OnInit {
     ) {
       delete formObject.telefono;
     }
-    console.log(this.data);
-
-    console.log(formObject);
 
     this.userService.createUser(formObject).subscribe((u: User) => {
       this.router.navigate(['administration-panel']);

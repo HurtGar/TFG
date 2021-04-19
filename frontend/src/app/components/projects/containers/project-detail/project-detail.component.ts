@@ -38,7 +38,6 @@ export class ProjectDetailComponent implements OnInit {
       .getOneProjectFromAnUser(idUser, idProject)
       .subscribe((pro) => {
         this.project = pro;
-        console.log(pro);
       });
   }
 
@@ -51,7 +50,6 @@ export class ProjectDetailComponent implements OnInit {
       .getAllBlocksFromAProject(idUser, idProject)
       .subscribe((block) => {
         this.blocks = block;
-        console.log(block);
       });
   }
 
@@ -60,8 +58,6 @@ export class ProjectDetailComponent implements OnInit {
       .getAllTasksFromAProject(idProject)
       .subscribe((task) => {
         this.tasks = task;
-        console.log(task);
       });
   }
-
 }

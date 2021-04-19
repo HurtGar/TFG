@@ -138,8 +138,6 @@ export class NewProjectFormComponent implements OnInit {
       delete formObject.finproyecto;
     }
 
-    console.log(formObject);
-
     this.projectService.createProject(formObject).subscribe(
       (p: Project) => {},
       (error: any) => {
@@ -157,9 +155,7 @@ export class NewProjectFormComponent implements OnInit {
 
     // Creamos objeto a enviar para la asignación
 
-    this.projectService.setAssignmentProject(assign).subscribe((a) => {
-      console.log(assign);
-    });
+    this.projectService.setAssignmentProject(assign).subscribe((a) => {});
 
     this.recordModificationService
       .insertNewRecordModificationProject(
@@ -180,7 +176,7 @@ export class NewProjectFormComponent implements OnInit {
     if (finalDateB < finalDateA) {
       correct = false;
     }
-    console.log(correct);
+
     return correct;
   }
 }

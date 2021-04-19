@@ -91,7 +91,6 @@ export class UpdateTaskFormComponent implements OnInit {
 
   loadProjects(): void {
     this.projectService.getAllProjectFromAnUser(this.userId).subscribe((p) => {
-      console.log(p);
       this.projects = p;
     });
   }
@@ -178,7 +177,6 @@ export class UpdateTaskFormComponent implements OnInit {
   }
 
   updateTask() {
-    console.log(this.data);
     if (this.data.invalid) {
       return Object.values(this.data.controls).forEach((control) => {
         control.markAsTouched();
@@ -233,11 +231,8 @@ export class UpdateTaskFormComponent implements OnInit {
       delete formObject.horasrestantes;
     }
 
-    console.log(formObject);
-
     this.taskService.updateTask(formObject, this.task.idtarea).subscribe(
       (t: Task) => {
-        console.log(t);
         window.location.reload();
       },
       (error: any) => {
@@ -258,7 +253,7 @@ export class UpdateTaskFormComponent implements OnInit {
     if (finalDateB < finalDateA) {
       correct = false;
     }
-    console.log(correct);
+
     return correct;
   }
 }

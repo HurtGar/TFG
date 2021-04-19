@@ -75,7 +75,7 @@ export class UpdateProjectFormComponent implements OnInit {
     if (finalDateB < finalDateA) {
       correct = false;
     }
-    console.log(correct);
+
     return correct;
   }
 
@@ -124,7 +124,6 @@ export class UpdateProjectFormComponent implements OnInit {
       .updateProject(formObject, this.project.idproyecto)
       .subscribe(
         (p: Project) => {
-          console.log(p);
           // Recargamos la página para mostrar los nuevos cambios.
           window.location.reload();
         },

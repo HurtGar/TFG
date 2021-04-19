@@ -7,12 +7,12 @@
                 <p>horas</p>
         </div>
     </div>
-    <small *ngIf="horasEstimacion" class="form-text text-danger">No se permiten caracteres. Introduzca un número</small>
+    <small *ngIf="horasEstimacion" class="form-text text-danger">Campo obligatorio. Introduzca un número</small>
     <div class="form-group row">
         <div class="col">
             <label for="exampleSelect1" class="form-label">Horas registradas</label>
             <input class="form-control" [ngModel]="task.horasactuales" type="number" min="0"
-                formControlName="horasregistradas" disabled style="width: 100px;"> <p>horas</p>
+                formControlName="horasregistradas" style="width: 100px;"> <p>horas</p>
         </div>
         <div class="form-group col">
             <label for="exampleSelect1" class="form-label">Horas a introducir</label>

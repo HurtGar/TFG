@@ -10,9 +10,7 @@ import { User } from '../models/user.model';
   providedIn: 'root',
 })
 export class BlockService {
-  constructor(private http: HttpClient) {
-    console.log('Servicio bloque listo para usarse.');
-  }
+  constructor(private http: HttpClient) {}
 
   getQuery(url: string): Observable<any> {
     const projectUrl = environment.baseurl.concat(`/block/${url}`);
@@ -23,7 +21,7 @@ export class BlockService {
     return this.getQuery(`${idBlock}/tasks`);
   }
 
-  getAllUsersFromABlock(idBlock: string): Observable<User[]>{
+  getAllUsersFromABlock(idBlock: string): Observable<User[]> {
     return this.getQuery(`${idBlock}/list-users`);
   }
 
@@ -38,13 +36,11 @@ export class BlockService {
     return this.getQuery(`user/${idUser}`);
   }
 
-  lastInsertedBlock(): Observable<any>{
+  lastInsertedBlock(): Observable<any> {
     return this.getQuery(`last_inserted`);
   }
 
   createBlock(block: any): Observable<any> {
-    console.log(block);
-
     return this.http.post(environment.baseurl.concat(`/block/create`), block, {
       headers,
     });
@@ -59,13 +55,11 @@ export class BlockService {
   }
 
   deleteBlock(idBlock: number): Observable<any> {
-    const blockUrl = environment.baseurl.concat(
-      `/block/delete/${idBlock}`
-    );
+    const blockUrl = environment.baseurl.concat(`/block/delete/${idBlock}`);
     return this.http.delete(blockUrl, { headers });
   }
 
-  getTotalBlockHours(idBlock: string): Observable<any>{
+  getTotalBlockHours(idBlock: string): Observable<any> {
     return this.getQuery(`${idBlock}/hours`);
   }
 

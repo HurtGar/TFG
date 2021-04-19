@@ -32,13 +32,12 @@ export class ProjectsListComponent implements OnInit {
       .getAllProjectFromAnUser(idUsuario)
       .subscribe((project) => {
         this.projects = project;
-        console.log(project);
+
         if (project.length > 0) {
           this.recordService
             .getRecordsChangesFromProject(project[i].idproyecto)
             .subscribe((record) => {
               this.lastModification = record;
-              console.log(record);
             });
           i += 1;
         }
