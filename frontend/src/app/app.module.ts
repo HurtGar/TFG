@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Services
 import { ProjectsService } from './services/projects.service';
@@ -59,6 +59,7 @@ import { AdminRowComponent } from './components/administration/admin-panel/compo
 import { AdminViewComponent } from './components/administration/admin-panel/components/admin-view/admin-view.component';
 import { AdminDetailComponent } from './components/administration/admin-panel/containers/admin-detail/admin-detail.component';
 import { UpdateAdminComponent } from './components/administration/admin-panel/components/update-admin/update-admin.component';
+import { NewUserAdminComponent } from './components/administration/admin-panel/components/new-user-admin/new-user-admin.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +106,7 @@ import { UpdateAdminComponent } from './components/administration/admin-panel/co
     AdminViewComponent,
     AdminDetailComponent,
     UpdateAdminComponent,
+    NewUserAdminComponent,
   ],
   imports: [
     FormsModule,
@@ -113,7 +115,7 @@ import { UpdateAdminComponent } from './components/administration/admin-panel/co
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [
     ProjectsService,
@@ -123,7 +125,7 @@ import { UpdateAdminComponent } from './components/administration/admin-panel/co
     PriorityService,
     UserService,
     AuthenticationService,
-    RegisterService
+    RegisterService,
   ],
   bootstrap: [AppComponent],
 })

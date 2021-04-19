@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Task } from 'src/app/models/task.model';
 import { TaskService } from 'src/app/services/task.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register-hours',
@@ -32,16 +33,16 @@ export class RegisterHoursComponent implements OnInit {
     this.data = this.formBuilder.group({
       horasestimacion: ['', Validators.required],
       horasactuales: [''],
-      horasregistradas: ['']
+      horasregistradas: [''],
     });
   }
 
-  loadHours(): any{
+  loadHours(): any {
     this.data.setValue({
       horasregistradas: this.task.horasactuales,
       horasestimacion: this.task.horasestimacion,
-      horasactuales: this.task.horasactuales
-    })
+      horasactuales: this.task.horasactuales,
+    });
   }
 
   registerHours(): any {
@@ -62,7 +63,12 @@ export class RegisterHoursComponent implements OnInit {
         console.log(t);
         window.location.reload();
       },
-      (error: any) => console.log(error)
+      (error: any) => {
+        Swal.fire({
+          icon: 'error',
+          text: 'Error al registrar horas. Inténtelo de nuevo.',
+        });
+      }
     );
   }
 }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment, headers } from 'src/environments/environment';
 import { Block } from '../models/block.model';
 import { Task } from '../models/task.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,10 @@ export class BlockService {
 
   getAllTasksFromABlock(idBlock: string): Observable<Task> {
     return this.getQuery(`${idBlock}/tasks`);
+  }
+
+  getAllUsersFromABlock(idBlock: string): Observable<User[]>{
+    return this.getQuery(`${idBlock}/list-users`);
   }
 
   getOneBlockFromAProjectAndUser(
@@ -62,5 +67,13 @@ export class BlockService {
 
   getTotalBlockHours(idBlock: string): Observable<any>{
     return this.getQuery(`${idBlock}/hours`);
+  }
+
+  setAssignmentBlock(assign: any): Observable<any> {
+    return this.http.post(
+      environment.baseurl.concat(`/block/assignment`),
+      assign,
+      { headers }
+    );
   }
 }

@@ -5,6 +5,7 @@ import { Block } from 'src/app/models/block.model';
 import { Project } from 'src/app/models/project.model';
 import { BlockService } from 'src/app/services/block.service';
 import { ProjectsService } from 'src/app/services/projects.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-block-form',
@@ -128,7 +129,11 @@ export class UpdateBlockFormComponent implements OnInit {
         this.data.get('finbloque').value
       );
       if (!datesOk) {
-        throw Error();
+        Swal.fire({
+          icon: 'error',
+          text:
+            'Error en las fechas.',
+        });
       }
     }
 
@@ -153,7 +158,13 @@ export class UpdateBlockFormComponent implements OnInit {
       console.log(b);
       window.location.reload();
     },
-    (error: any)=> console.log(error)
+    (error: any)=> {
+      Swal.fire({
+        icon: 'error',
+        text:
+          'No se ha podido actualizar la información del bloque. Inténtelo de nuevo.',
+      });
+    }
     );
   }
 

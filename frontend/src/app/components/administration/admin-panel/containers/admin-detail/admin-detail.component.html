@@ -1,3 +1,5 @@
 <div class="container-fluid">
-    <app-admin-view [user]="users"></app-admin-view>
+    <div *ngFor="let user of users">
+        <app-admin-view [user]="user"></app-admin-view>
+    </div>
 </div>

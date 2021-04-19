@@ -65,7 +65,6 @@ export class LoginComponent implements OnInit {
           title: 'Error al autenticar',
           text: 'Usuario o contraseña erronea',
         });
-        console.log(err.error);
       }
     );
   }

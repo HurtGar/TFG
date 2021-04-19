@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment, headers } from 'src/environments/environment';
 import { Task } from '../models/task.model';
 import { UserTask } from '../models/user-task.component';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,10 @@ export class TaskService {
 
   getOneTaskFromAnUser(idUser: string, idTask: string): Observable<Task> {
     return this.getQuery(`${idTask}/user/${idUser}`);
+  }
+
+  getAllUsersFromATask(idTask: string): Observable<User[]>{
+    return this.getQuery(`${idTask}/list-users`);
   }
 
   createTask(task: any): Observable<any> {
@@ -51,7 +56,7 @@ export class TaskService {
 
   createAssignment(userTask: any): Observable<any> {
     return this.http.post(
-      environment.baseurl.concat(`/task/create/assignment`),
+      environment.baseurl.concat(`/task/assignment`),
       userTask,
       {
         headers,
@@ -70,6 +75,14 @@ export class TaskService {
     return this.http.post(
       environment.baseurl.concat(`/task/register_hours/${idTask}`),
       json,
+      { headers }
+    );
+  }
+
+  setAssignmentTask(assign: any): Observable<any> {
+    return this.http.post(
+      environment.baseurl.concat(`/task/assignment`),
+      assign,
       { headers }
     );
   }

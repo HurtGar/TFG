@@ -6,23 +6,32 @@ import { User } from '../models/user.model';
 import { UserTask } from '../models/user-task.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getQuery(url: string): Observable<any> {
     const userUrl = environment.baseurl.concat(`/users/${url}`);
     return this.http.get(userUrl, { headers });
   }
 
-  getUsersFromApp(): Observable<User[]>{
+  getUsersFromApp(): Observable<User[]> {
     return this.getQuery(`list_users`);
   }
 
-  getUserById(idUser): Observable<User>{
+  getUserById(idUser): Observable<User> {
     return this.getQuery(`user/${idUser}`);
+  }
+
+  createUser(user: any): Observable<any> {
+    return this.http.post(
+      environment.baseurl.concat(`/users/create-user`),
+      user,
+      {
+        headers,
+      }
+    );
   }
 
   updateUser(user: any, idUser: number): Observable<any> {
@@ -34,10 +43,7 @@ export class UserService {
   }
 
   deleteUser(idUser: number): Observable<any> {
-    const blockUrl = environment.baseurl.concat(
-      `/users/delete/${idUser}`
-    );
+    const blockUrl = environment.baseurl.concat(`/users/delete/${idUser}`);
     return this.http.delete(blockUrl, { headers });
   }
-
 }

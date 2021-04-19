@@ -6,25 +6,25 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-admin-detail',
   templateUrl: './admin-detail.component.html',
-  styleUrls: ['./admin-detail.component.scss']
+  styleUrls: ['./admin-detail.component.scss'],
 })
 export class AdminDetailComponent implements OnInit {
-
   users: User;
 
-  constructor(private userService: UserService, private router: ActivatedRoute) {
-    this.router.params.subscribe((param)=>{
+  constructor(
+    private userService: UserService,
+    private router: ActivatedRoute
+  ) {
+    this.router.params.subscribe((param) => {
       this.getUserById(param.idUser);
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  getUserById(idUser){
-    this.userService.getUserById(idUser).subscribe((u)=>{
+  getUserById(idUser): any {
+    this.userService.getUserById(idUser).subscribe((u) => {
       this.users = u;
-    })
+    });
   }
-
 }

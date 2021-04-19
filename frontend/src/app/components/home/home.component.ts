@@ -12,6 +12,8 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class HomeComponent implements OnInit {
   tasks: Task[] = [];
+  currentDate = new Date();
+  userId = localStorage.getItem('userId');
 
   constructor(
     private projectService: ProjectsService,
@@ -32,6 +34,8 @@ export class HomeComponent implements OnInit {
       this.tasks = task;
       console.log(task);
     });
-    this.tasks.sort((a, b) => (new Date(a.fechafin) as any) - (new Date(b.fechafin) as any));
+    this.tasks.sort(
+      (a, b) => (new Date(a.fechafin) as any) - (new Date(b.fechafin) as any)
+    );
   }
 }

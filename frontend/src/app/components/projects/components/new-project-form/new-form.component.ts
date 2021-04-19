@@ -4,6 +4,7 @@ import { ProjectsService } from 'src/app/services/projects.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RecordModificationService } from 'src/app/services/record-modification.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new-form',
@@ -115,7 +116,10 @@ export class NewProjectFormComponent implements OnInit {
         this.data.get('finproyecto').value
       );
       if (!datesOk) {
-        throw Error();
+        Swal.fire({
+          icon: 'error',
+          text: 'Error en las fechas.',
+        });
       }
     }
 
@@ -138,8 +142,24 @@ export class NewProjectFormComponent implements OnInit {
 
     this.projectService.createProject(formObject).subscribe(
       (p: Project) => {},
-      (error: any) => console.log(error)
+      (error: any) => {
+        Swal.fire({
+          icon: 'error',
+          text: 'Error al insertar proyecto. Inténtelo de nuevo.',
+        });
+      }
     );
+
+    var assign = {
+      idusuario: this.userId,
+      idproyecto: this.lastProject.idproyecto + 1,
+    };
+
+    // Creamos objeto a enviar para la asignación
+
+    this.projectService.setAssignmentProject(assign).subscribe((a) => {
+      console.log(assign);
+    });
 
     this.recordModificationService
       .insertNewRecordModificationProject(

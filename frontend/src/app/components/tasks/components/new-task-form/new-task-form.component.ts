@@ -15,6 +15,7 @@ import { RecordModificationService } from 'src/app/services/record-modification.
 import { StatusService } from 'src/app/services/status.service';
 import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new-task-form',
@@ -48,7 +49,6 @@ export class NewTaskFormComponent implements OnInit {
   ) {
     this.createUserTask();
     this.createForm();
-    this.loadProjects();
     this.loadStatus();
     this.loadPriorities();
     this.loadUsers();
@@ -60,6 +60,7 @@ export class NewTaskFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('userId');
+    this.loadProjects();
   }
 
   get nombreTareaNoValido(): any {
@@ -144,7 +145,7 @@ export class NewTaskFormComponent implements OnInit {
   }
 
   loadProjects(): void {
-    this.projectService.getAllProjectFromAnUser('1').subscribe((p) => {
+    this.projectService.getAllProjectFromAnUser(this.userId).subscribe((p) => {
       console.log(p);
       this.projects = p;
     });
@@ -152,7 +153,7 @@ export class NewTaskFormComponent implements OnInit {
 
   loadBlocks(): void {
     this.projectService
-      .getAllBlocksFromAProjectForTasks('1', this.idProject.value)
+      .getAllBlocksFromAProjectForTasks(this.userId, this.idProject.value)
       .subscribe((b) => {
         this.blocks = b;
       });
@@ -263,7 +264,10 @@ export class NewTaskFormComponent implements OnInit {
         this.data.get('fechafin').value
       );
       if (!datesOk) {
-        throw Error();
+        Swal.fire({
+          icon: 'error',
+          text: 'Error en las fechas.',
+        });
       }
     }
 
@@ -300,20 +304,19 @@ export class NewTaskFormComponent implements OnInit {
 
     this.taskService.createTask(formObject).subscribe((t: Task) => {
       console.log(t);
+      this.taskService
+        .createAssignment(userTaskObject)
+        .subscribe((ut: UserTask) => {
+          console.log(ut);
+        });
+      this.recordModificationService
+        .insertNewRecordModificationTask(recordTask, this.lastTask.idtarea + 1)
+        .subscribe((rt) => {
+          console.log(rt);
+
+          this.router.navigate(['task/user/', this.userId]);
+        });
     });
-    
-    this.recordModificationService
-    .insertNewRecordModificationTask(recordTask, this.lastTask.idtarea + 1)
-    .subscribe((rt) => {
-      console.log(rt);
-      
-      this.router.navigate(['task/user/', this.userId]);
-    });
-    this.taskService
-      .createAssignment(userTaskObject)
-      .subscribe((ut: UserTask) => {
-        console.log(ut);
-      });
   }
 
   private checkDates(dateA: string, dateB: string): boolean {

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/models/project.model';
 import { ProjectsService } from 'src/app/services/projects.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-form',
@@ -97,7 +98,10 @@ export class UpdateProjectFormComponent implements OnInit {
         this.data.get('finproyecto').value
       );
       if (!datesOk) {
-        throw Error();
+        Swal.fire({
+          icon: 'error',
+          text: 'Error en las fechas.',
+        });
       }
     }
 
@@ -124,7 +128,12 @@ export class UpdateProjectFormComponent implements OnInit {
           // Recargamos la página para mostrar los nuevos cambios.
           window.location.reload();
         },
-        (error: any) => console.log(error)
+        (error: any) => {
+          Swal.fire({
+            icon: 'error',
+            text: 'Error al actualizar proyecto. Inténtelo de nuevo.',
+          });
+        }
       );
   }
 }
