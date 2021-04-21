@@ -11,6 +11,7 @@ import { PriorityService } from 'src/app/services/priority.service';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { StatusService } from 'src/app/services/status.service';
 import { TaskService } from 'src/app/services/task.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-task-form',
@@ -25,6 +26,7 @@ export class UpdateTaskFormComponent implements OnInit {
   priorities: Priority[] = [];
   data: FormGroup;
   error: any = { isError: false };
+  userId = localStorage.getItem('userId');
 
   constructor(
     private taskService: TaskService,
@@ -66,45 +68,36 @@ export class UpdateTaskFormComponent implements OnInit {
   }
 
   selectProject(e): any {
-    console.log(e.target.value);
-
     this.idProject.setValue(e.target.value, {
       onlySelf: true,
     });
     this.loadBlocks();
   }
   selectBlock(e): any {
-    console.log(e.target.value);
-
     this.idBlock.setValue(e.target.value, {
       onlySelf: true,
     });
   }
   selectStatus(e): any {
-    console.log(e.target.value);
-
     this.idStatus.setValue(e.target.value, {
       onlySelf: true,
     });
   }
   selectPriority(e): any {
-    console.log(e.target.value);
-
     this.idPriority.setValue(e.target.value, {
       onlySelf: true,
     });
   }
 
   loadProjects(): void {
-    this.projectService.getAllProjectFromAnUser('1').subscribe((p) => {
-      console.log(p);
+    this.projectService.getAllProjectFromAnUser(this.userId).subscribe((p) => {
       this.projects = p;
     });
   }
 
   loadBlocks(): void {
     this.projectService
-      .getAllBlocksFromAProjectForTasks('1', this.idProject.value)
+      .getAllBlocksFromAProjectForTasks(this.userId, this.idProject.value)
       .subscribe((b) => {
         this.blocks = b;
       });
@@ -184,7 +177,6 @@ export class UpdateTaskFormComponent implements OnInit {
   }
 
   updateTask() {
-    console.log(this.data);
     if (this.data.invalid) {
       return Object.values(this.data.controls).forEach((control) => {
         control.markAsTouched();
@@ -204,7 +196,10 @@ export class UpdateTaskFormComponent implements OnInit {
         this.data.get('fechafin').value
       );
       if (!datesOk) {
-        throw Error();
+        Swal.fire({
+          icon: 'error',
+          text: 'Error en las fechas.',
+        });
       }
     }
 
@@ -236,14 +231,16 @@ export class UpdateTaskFormComponent implements OnInit {
       delete formObject.horasrestantes;
     }
 
-    console.log(formObject);
-
     this.taskService.updateTask(formObject, this.task.idtarea).subscribe(
       (t: Task) => {
-        console.log(t);
         window.location.reload();
       },
-      (error: any) => console.log(error)
+      (error: any) => {
+        Swal.fire({
+          icon: 'error',
+          text: 'Error al actualizar tarea. Inténtelo de nuevo.',
+        });
+      }
     );
   }
 
@@ -256,7 +253,7 @@ export class UpdateTaskFormComponent implements OnInit {
     if (finalDateB < finalDateA) {
       correct = false;
     }
-    console.log(correct);
+
     return correct;
   }
 }

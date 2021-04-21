@@ -23,7 +23,7 @@
         <div class="col">
             <label for="exampleFormControlTextarea1" class="form-label">Asignar a</label>
             <select class="form-control form-control-sm" (change)="selectUser($event)">
-                <option value="">Selecciona el bloque</option>
+                <option value="">Seleccione una asignación</option>
                 <option *ngFor="let u of users" [value]="u.idusuario">
                     {{u.nombre}} {{u.primerapellido}}</option>
             </select>
@@ -31,7 +31,7 @@
     </div>
     <div class="form-group row">
         <div class="col">
-            <label for="exampleFormControlInput1" class="form-label">Nombre bloque</label>
+            <label for="exampleFormControlInput1" class="form-label">Nombre tarea</label>
             <input class="form-control" type="text" placeholder="Nombre proyecto" formControlName="nombretarea"
                 [class.is-invalid]="nombreTareaNoValido">
             <small *ngIf="nombreTareaNoValido" class="form-text text-danger">Introduzca un nombre para el
@@ -41,7 +41,7 @@
 
     <div class="form-group row">
         <div class="col">
-            <label for="exampleFormControlTextarea1" class="form-label">Descripción del bloque</label>
+            <label for="exampleFormControlTextarea1" class="form-label">Descripción de la tarea</label>
             <textarea class="form-control" formControlName="desctarea" placeholder="Descripción"></textarea>
         </div>
     </div>

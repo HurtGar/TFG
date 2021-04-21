@@ -9,7 +9,7 @@ import { BlockService } from 'src/app/services/block.service';
   styleUrls: ['./block-available.component.scss'],
 })
 export class BlockAvailableComponent implements OnInit {
-  @Input() blocks: Block[] = [];
+  @Input() blocks: Block[];
   userId: string;
 
   constructor(private blockService: BlockService) {}

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserLogin } from 'src/app/models/user-login.model';
 import { RegisterService } from 'src/app/services/register-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registration',
@@ -12,17 +13,17 @@ export class RegistrationComponent implements OnInit {
   user: UserLogin;
   data: FormGroup;
   error: any = { isError: false };
-  constructor(private registrationService: RegisterService, private formBuilder: FormBuilder) {
+  constructor(
+    private registrationService: RegisterService,
+    private formBuilder: FormBuilder
+  ) {
     this.createForm();
   }
 
   ngOnInit(): void {}
 
   get userNameNoValid(): any {
-    return (
-      this.data.get('nombre').invalid &&
-      this.data.get('nombre').touched
-    );
+    return this.data.get('nombre').invalid && this.data.get('nombre').touched;
   }
   get firstSurnameNoValid(): any {
     return (
@@ -31,10 +32,7 @@ export class RegistrationComponent implements OnInit {
     );
   }
   get emailNoValid(): any {
-    return (
-      this.data.get('email').invalid &&
-      this.data.get('email').touched
-    );
+    return this.data.get('email').invalid && this.data.get('email').touched;
   }
 
   setCreationTime(): string {
@@ -54,7 +52,7 @@ export class RegistrationComponent implements OnInit {
     return dateStr;
   }
 
-  createForm(): any{
+  createForm(): any {
     this.data = this.formBuilder.group({
       nombre: ['', [Validators.required]],
       primerapellido: ['', [Validators.required]],
@@ -63,15 +61,12 @@ export class RegistrationComponent implements OnInit {
       password: ['', [Validators.required]],
       fecharegistro: [this.setCreationTime(), Validators.required],
       confirmPassword: ['', [Validators.required]],
-      estado:[1, [Validators.required]]
-    }); 
+      estado: [1, [Validators.required]],
+    });
   }
 
-
   onSubmit(): any {
-    console.log(this.data);
-
-    if(this.data.invalid){
+    if (this.data.invalid) {
       return Object.values(this.data.controls).forEach((control) => {
         control.markAsTouched();
       });
@@ -80,13 +75,16 @@ export class RegistrationComponent implements OnInit {
     const formObject = this.data.getRawValue();
     JSON.stringify(formObject);
 
-    console.log(formObject);
-    
-    this.registrationService.registerNewUser(formObject).subscribe((u: any)=>{
-      localStorage.setItem('token', u.token);
-    },
-    (error: any) => console.log(error));
+    this.registrationService.registerNewUser(formObject).subscribe(
+      (u: any) => {
+        localStorage.setItem('token', u.token);
+      },
+      (error: any) => {
+        Swal.fire({
+          icon: 'error',
+          text: 'Error al insertar nuevo. Inténtelo de nuevo.',
+        });
+      }
+    );
   }
-
-
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminPanelComponent } from './components/administration/admin-panel/admin-panel.component';
 import { AdminViewComponent } from './components/administration/admin-panel/components/admin-view/admin-view.component';
+import { NewUserAdminComponent } from './components/administration/admin-panel/components/new-user-admin/new-user-admin.component';
 import { AdminDetailComponent } from './components/administration/admin-panel/containers/admin-detail/admin-detail.component';
 import { BlocksComponent } from './components/blocks/blocks.component';
 import { BlockDetailComponent } from './components/blocks/containers/block-detail/block-detail.component';
@@ -14,6 +15,7 @@ import { ProjectDetailComponent } from './components/projects/containers/project
 import { ProjectFormComponent } from './components/projects/containers/project-form/project-form.component';
 import { ProjectsListComponent } from './components/projects/containers/projects-list/projects-list.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { SearchComponent } from './components/search/search.component';
 import { NewTaskFormComponent } from './components/tasks/components/new-task-form/new-task-form.component';
 import { TaskDetailComponent } from './components/tasks/containers/task-detail/task-detail.component';
 import { TaskFormComponent } from './components/tasks/containers/task-form/task-form.component';
@@ -83,11 +85,25 @@ export const APP_ROUTES: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'users/create-user',
+    component: NewUserAdminComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'users/user/:idUser',
     component: AdminDetailComponent,
     canActivate: [AuthGuard],
   },
-  { path: '**', pathMatch: 'full', redirectTo: 'home' },
+  {
+    path: 'search/:search',
+    component: SearchComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: `home/${localStorage.getItem('userId')}`,
+  },
 ];
 
 @NgModule({

@@ -12,6 +12,8 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class HomeComponent implements OnInit {
   tasks: Task[] = [];
+  currentDate = new Date();
+  userId = localStorage.getItem('userId');
 
   constructor(
     private projectService: ProjectsService,
@@ -22,7 +24,6 @@ export class HomeComponent implements OnInit {
     this.router.params.subscribe((param) => {
       this.getTasksWithAnUpcomingDate(param.idUser);
     });
-    console.log(this.tasks.length);
   }
 
   ngOnInit(): void {}
@@ -30,8 +31,9 @@ export class HomeComponent implements OnInit {
   public getTasksWithAnUpcomingDate(idUser: string): void {
     this.taskService.getAllTasksFromAnUser(idUser).subscribe((task) => {
       this.tasks = task;
-      console.log(task);
     });
-    this.tasks.sort((a, b) => (new Date(a.fechafin) as any) - (new Date(b.fechafin) as any));
+    this.tasks.sort(
+      (a, b) => (new Date(a.fechafin) as any) - (new Date(b.fechafin) as any)
+    );
   }
 }

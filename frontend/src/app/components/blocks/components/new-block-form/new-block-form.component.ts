@@ -7,6 +7,7 @@ import { Project } from 'src/app/models/project.model';
 import { BlockService } from 'src/app/services/block.service';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { RecordModificationService } from 'src/app/services/record-modification.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new-block-form',
@@ -30,7 +31,6 @@ export class NewBlockFormComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.createForm();
-    this.loadProjects();
     this.blockService.lastInsertedBlock().subscribe((lb) => {
       this.lastBlock = lb;
     });
@@ -39,6 +39,7 @@ export class NewBlockFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('userId');
+    this.loadProjects();
   }
 
   get nombreBloqueNoValido(): any {
@@ -53,17 +54,13 @@ export class NewBlockFormComponent implements OnInit {
   }
 
   selectProject(e): any {
-    console.log(e.target.value);
-
     this.idProject.setValue(e.target.value, {
       onlySelf: true,
     });
   }
 
   loadProjects(): void {
-    this.projectService.getAllProjectFromAnUser('1').subscribe((p) => {
-      console.log(p);
-
+    this.projectService.getAllProjectFromAnUser(this.userId).subscribe((p) => {
       this.projects = p;
     });
   }
@@ -127,7 +124,6 @@ export class NewBlockFormComponent implements OnInit {
     JSON.stringify(formObject);
     const recordBlock = this.dataRecordBlock.getRawValue();
     JSON.stringify(recordBlock);
-    console.log(recordBlock);
 
     // Comprobar si la fecha de fin es anterior a la de inicio del proyecto.
     if (
@@ -139,7 +135,10 @@ export class NewBlockFormComponent implements OnInit {
         this.data.get('finbloque').value
       );
       if (!datesOk) {
-        throw Error();
+        Swal.fire({
+          icon: 'error',
+          text: 'Error en las fechas.',
+        });
       }
     }
 
@@ -158,7 +157,21 @@ export class NewBlockFormComponent implements OnInit {
       delete formObject.finbloque;
     }
 
-    this.blockService.createBlock(formObject).subscribe((b: Block) => {});
+    var assign = {
+      idbloque: this.lastBlock.idbloque + 1,
+      idusuario: this.userId,
+    };
+    this.blockService.createBlock(formObject).subscribe(
+      (b: Block) => {
+        this.blockService.setAssignmentBlock(assign).subscribe((b) => {});
+      },
+      (error: any) => {
+        Swal.fire({
+          icon: 'error',
+          text: 'No se ha podido crear el bloque. Inténtelo de nuevo.',
+        });
+      }
+    );
 
     this.recordModificationService
       .insertNewRecordModificationBlock(
@@ -179,7 +192,7 @@ export class NewBlockFormComponent implements OnInit {
     if (finalDateB < finalDateA) {
       correct = false;
     }
-    console.log(correct);
+
     return correct;
   }
 }

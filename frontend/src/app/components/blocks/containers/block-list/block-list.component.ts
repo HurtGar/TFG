@@ -13,6 +13,7 @@ import { RecordModificationService } from 'src/app/services/record-modification.
 export class BlockListComponent implements OnInit {
   blocks: Block[] = [];
   lastModification: Record[] = [];
+  permissions = '';
 
   constructor(
     private blockService: BlockService,
@@ -24,20 +25,21 @@ export class BlockListComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.permissions = localStorage.getItem('permission');
+  }
 
   //Mirar project-list para la última fecha de modificación.
   public getAllBlocksFromAnUser(idUsuario: string): void {
     let i = 0;
     this.blockService.getAllBlocksFromAnUser(idUsuario).subscribe((block) => {
       this.blocks = block;
-      console.log(block);
+
       this.recordService
         .getRecordsChangesFromBlock(block[i].idbloque)
         .subscribe((record) => {
           this.lastModification = record;
           i += 1;
-          console.log(record);
         });
     });
   }

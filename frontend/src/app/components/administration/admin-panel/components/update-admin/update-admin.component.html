@@ -1,26 +1,29 @@
 <form [formGroup]="data" (ngSubmit)="updateUser()">
     <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input type="text" class="form-control" id="nombre" formControlName="nombre">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre" [class.is-invalid]="nombreUsuarioNoValido">
+        <small *ngIf="nombreUsuarioNoValido" class="form-text text-danger">Introduzca un nombre para el usuario.</small>
     </div>
     <div class="form-group">
-        <label for="primerApellido">Primer apellido</label>
-        <input type="text" class="form-control" id="primerApellido" formControlName="primerapellido">
-    </div>
-    <div class="form-group" *ngIf="user.segundoapellido">
-        <label for="segundoApellido">Segundo apellido</label>
-        <input type="text" class="form-control" id="segundoApellido" formControlName="segundoapellido">
+        <label for="primerApellido" class="form-label">Primer apellido</label>
+        <input type="text" class="form-control" formControlName="primerapellido" [class.is-invalid]="primerApellidoNoValido">
+        <small *ngIf="primerApellidoNoValido" class="form-text text-danger">Introduzca un apellido para el usuario</small>
     </div>
     <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email">
+        <label for="segundoApellido" class="form-label">Segundo apellido</label>
+        <input type="text" class="form-control" formControlName="segundoapellido">
     </div>
-    <div class="form-group" *ngIf="user.telefono">
-        <label for="telefono">Teléfono</label>
+    <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email" [class.is-invalid]="emailNoValido">
+        <small *ngIf="emailNoValido" class="form-text text-danger">Introduzca un email para el usuario.</small>
+    </div>
+    <div class="form-group">
+        <label for="telefono" class="form-label">Teléfono</label>
         <input type="text" class="form-control" id="telefono" formControlName="telefono">
     </div>
     <div class="form-group">
-        <label for="fecharegistro">Fecha registro</label>
+        <label for="fecharegistro" class="form-label">Fecha registro</label>
         <input type="text" class="form-control" id="fecharegistro" formControlName="fecharegistro">
     </div>
     <button type="submit" class="btn btn-primary btn-block">Actualizar</button>

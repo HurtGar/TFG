@@ -1,0 +1,95 @@
+<div class="container-flex">
+    <h2>Buscando: {{termino}}</h2>
+    <div class="col">
+        <div class="row">
+            <div class="fixedHeightContainer">
+                <h3>Proyectos</h3>
+                <div class="content">
+                    <div class="card-columns">
+                        <div class="card animated fadeIn fast" *ngFor="let p of projectsToReturn">
+                            <a [routerLink]="['/projects/user/', userId,p.idproyecto]">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ p.nombreproyecto }}</h4>
+                                    <p class="card-text"> {{ p.descproyecto | slice:0:200 }} </p>
+                                    <p class="card-text"><small class="text-muted">Fecha creación: {{p.fechacreacion |
+                                            date:'dd-MM-yyyy'}}</small></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixedHeightContainer">
+                <h3>Bloques</h3>
+                <div class="content">
+                    <div class="card-columns">
+                        <div class="card animated fadeIn fast" *ngFor="let b of blocksToReturn">
+                            <a [routerLink]="['/blocks/',b.idbloque,'user', userId]">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ b.nombrebloque }}</h4>
+                                    <p class="card-text"> {{ b.descbloque | slice:0:200 }} </p>
+                                    <p class="card-text"><small class="text-muted">Fecha creación: {{b.fechacreacion
+                                            |
+                                            date:'dd-MM-yyyy'}}</small></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixedHeightContainer">
+                <h3>Tareas</h3>
+                <div class="content">
+                    <div class="card-columns">
+                        <div class="card animated fadeIn fast" *ngFor="let task of tasksToReturn">
+                            <a [routerLink]="['/task/', task.idtarea, 'user',userId]">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ task.nombretarea }}</h4>
+                                    <p class="card-text"> {{ task.desctarea | slice:0:200 }} </p>
+                                    <p class="card-text"><small class="text-muted">Creada:
+                                            {{task.fechaactualizacion |
+                                            date:'dd-MM-yyyy'
+                                            }}</small></p>
+                                    <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 1">
+                                        <p class="card-text"><small class="text-muted">Prioridad: <span
+                                                    class="badge nothing rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small>
+                                        </p>
+                                    </div>
+                                    <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 2">
+                                        <p class="card-text"><small class="text-muted">Prioridad: <span
+                                                    class="badge verylow rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small>
+                                        </p>
+                                    </div>
+                                    <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 3">
+                                        <p class="card-text"><small class="text-muted">Prioridad: <span
+                                                    class="badge low rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small>
+                                        </p>
+                                    </div>
+                                    <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 4">
+                                        <p class="card-text"><small class="text-muted">Prioridad: <span
+                                                    class="badge mid rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small>
+                                        </p>
+                                    </div>
+                                    <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 5">
+                                        <p class="card-text"><small class="text-muted">Prioridad: <span
+                                                    class="badge high rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small>
+                                        </p>
+                                    </div>
+                                    <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 6">
+                                        <p class="card-text"><small class="text-muted">Prioridad: <span
+                                                    class="badge veryhigh rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

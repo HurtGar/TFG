@@ -28,40 +28,100 @@
         <div class="col container-flex">
             <div class="row">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    <button *ngIf="permissions.includes('7')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         Modificar tarea
                     </button>
-                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                    <button *ngIf="permissions.includes('10')" type="button" class="btn btn-danger" data-toggle="modal"
                         data-target="#exampleModalCenter">Eliminar
                         tarea</button>
                 </div>
             </div>
-            <div class="row dates mt-2" style="display: inline-block">
-                <p>Creado: {{task.fechacreacion | date:'dd-MM-yyyy'}}</p>
-                <p *ngIf="task.fechainicio!=null">Inicio: {{task.fechainicio}}</p>
-                <p *ngIf="task.fechafin!=null">Fin: {{task.fechafin}}</p>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item mt-2">
+                    <h3 class="accordion-header" id="fechas">
+                        <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapsefechas" aria-expanded="false" aria-controls="collapsefechas">
+                            Fechas
+                        </button>
+                    </h3>
+                    <div id="collapsefechas" class="accordion-collapse collapse show" aria-labelledby="fechas"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="container row" style="display: inline-block">
+                                <p>Creado: {{task.fechacreacion | date:'dd-MM-yyyy HH:mm:ss'}}</p>
+                                <p *ngIf="task.fechainicio">Inicio: {{task.fechainicio | date:'dd-MM-yyyy'}}
+                                </p>
+                                <p *ngIf="task.fechafin">Fin: {{task.fechafin | date:'dd-MM-yyyy'}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <hr style="text-align:left;margin-left:0">
+            <div class="accordion" id="accordionExample2">
+                <div class="accordion-item mt-2">
+                    <h3 class="accordion-header" id="horas">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapsehoras" aria-expanded="false" aria-controls="collapsehoras">
+                            Horas
+                        </button>
+                    </h3>
+                    <div id="collapsehoras" class="accordion-collapse collapse show" aria-labelledby="horas"
+                        data-bs-parent="#accordionExample2">
+                        <div class="accordion-body">
 
-            <div class="container row" style="display: inline-block">
-                <h1>Registro horario</h1>
-                Horas estimadas:
-                <div class="progress mb-1">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="0"
-                        aria-valuemin="0" aria-valuemax="100">{{task.horasestimacion}} h</div>
+                            <div class="container row" style="display: inline-block">
+                                Horas estimadas:
+                                <div class="progress mb-1">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
+                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">{{task.horasestimacion}}
+                                        h</div>
+                                </div>
+                                Horas actuales:
+                                <div class="progress mb-1 ">
+                                    <div class="progress-bar bg-info" role="progressbar"
+                                        [style.width]="currentHours(task)" aria-valuenow="0" aria-valuemin="0"
+                                        aria-valuemax="100">{{task.horasactuales}} h</div>
+                                </div>
+                                Horas restantes:
+                                <div class="progress mb-1">
+                                    <div class="progress-bar bg-warning" role="progressbar"
+                                        [style.width]="remainingHours(task)" aria-valuenow="0" aria-valuemin="0"
+                                        aria-valuemax="100">{{task.horasrestantes}} h</div>
+                                </div>
+                                <button type="button" class="btn btn-primary mt-3" data-toggle="modal"
+                                    data-target="#registerHours">
+                                    Registrar horas
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                Horas actuales:
-                <div class="progress mb-1 ">
-                    <div class="progress-bar bg-info" role="progressbar" [style.width]="currentHours(task)"
-                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">{{task.horasactuales}} h</div>
+            </div>
+            <hr style="text-align:left;margin-left:0">
+            <div class="accordion" id="accordionExample3">
+                <div class="accordion-item mt-2">
+                    <h3 class="accordion-header" id="usuarios">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseusuarios" aria-expanded="true" aria-controls="collapseusuarios">
+                            Usuarios
+                        </button>
+                    </h3>
+                    <div id="collapseusuarios" class="accordion-collapse collapse show" aria-labelledby="usuarios"
+                        data-bs-parent="#accordionExample3">
+                        <div class="accordion-body">
+                            <div class="container row" style="display: inline-block">
+                                <div *ngFor="let u of users">
+                                    <p class="m-0">{{u.nombre}} {{u.primerapellido}}</p>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                    data-target="#assignUser">
+                                    Asignar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                Horas restantes:
-                <div class="progress mb-1">
-                    <div class="progress-bar bg-warning" role="progressbar" [style.width]="remainingHours(task)"
-                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">{{task.horasrestantes}} h</div>
-                </div>
-                <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#registerHours">
-                    Registrar horas
-                </button>
             </div>
         </div>
     </div>
@@ -128,6 +188,35 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for task assignment-->
+<div class="modal fade" id="assignUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">{{task.nombretarea}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-check">
+                    <label for="exampleFormControlTextarea1" class="form-label">Usuarios</label>
+                    <select class="form-control form-control-sm" (change)="selectUser($event)">
+                        <option value="">Selecciona el usuario</option>
+                        <option *ngFor="let us of usersToAssign" [value]="us.idusuario">
+                            {{us.nombre}} - {{us.email}}</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="assignUser(task.idtarea)">Asignar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
             </div>
         </div>
     </div>

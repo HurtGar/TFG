@@ -22,7 +22,6 @@ export class ProjectHistoryComponent implements OnInit {
   getAllRecordsProject(idProject: number) {
     this.recordsService.getAllRecordsProject(idProject).subscribe((p) => {
       this.modifications = p;
-      console.log(p);
     });
   }
 }

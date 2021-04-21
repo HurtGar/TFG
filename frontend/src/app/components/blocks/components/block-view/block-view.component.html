@@ -2,8 +2,8 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item text-primary"><a [routerLink]="['/projects/user/',userId]">Proyectos</a> / <a
-                    [routerLink]="['/projects/user/',userId,block.proyecto_idproyecto.idproyecto]">{{block.proyecto_idproyecto.nombreproyecto}}</a> / <span
-                    class="text-secondary">{{block.nombrebloque}}</span> </li>
+                    [routerLink]="['/projects/user/',userId,block.proyecto_idproyecto.idproyecto]">{{block.proyecto_idproyecto.nombreproyecto}}</a>
+                / <span class="text-secondary">{{block.nombrebloque}}</span> </li>
         </ol>
     </nav>
     <div class="row">
@@ -17,6 +17,7 @@
                             </div>
                         </h3>
                     </div>
+
                     <div class="row">
                         <p>{{block.descbloque}}</p>
                     </div>
@@ -28,34 +29,92 @@
         <div class="col container-flex">
             <div class="row">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    <button *ngIf="permissions.includes('6')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         Modificar bloque
                     </button>
-                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                    <button *ngIf="permissions.includes('9')" type="button" class="btn btn-danger" data-toggle="modal"
                         data-target="#exampleModalCenter">Eliminar bloque</button>
                 </div>
             </div>
-            <div class="col dates" style="display: inline-block">
-                <p>Proyecto: <a class="text-primary"
-                        [routerLink]="['/projects/user/',userId,block.proyecto_idproyecto.idproyecto]">{{block.proyecto_idproyecto.nombreproyecto}}</a>
-                </p>
-                <p>Creado: {{block.fechacreacion | date:'dd-MM-yyyy HH:mm:ss'}}</p>
-                <p>Inicio: {{block.iniciobloque}}</p>
-                <p>Fin: {{block.finbloque}}</p>
-            </div>
-
-            <div class="container row" style="display: inline-block">
-                <h3>Horas proyecto</h3>
-                Horas estimadas:
-                <div class="progress mb-1">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="0"
-                        aria-valuemin="0" aria-valuemax="100">{{this.horasestimacion}} h</div>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item mt-2">
+                    <h3 class="accordion-header" id="fechas">
+                        <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapsefechas" aria-expanded="false" aria-controls="collapsefechas">
+                            Fechas
+                        </button>
+                    </h3>
+                    <div id="collapsefechas" class="accordion-collapse collapse show" aria-labelledby="fechas"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="container row" style="display: inline-block">
+                                <p>Creado: {{block.fechacreacion | date:'dd-MM-yyyy HH:mm:ss'}}</p>
+                                <p *ngIf="block.iniciobloque!=null">Inicio: {{block.iniciobloque | date:'dd-MM-yyyy'}}
+                                </p>
+                                <p *ngIf="block.finbloque!=null">Fin: {{block.finbloque | date:'dd-MM-yyyy'}}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                Horas actuales:
-                <div class="progress mb-1 ">
-                    <div class="progress-bar bg-info" role="progressbar"
-                        [style.width]="currentHours(this.horasactuales, this.horasestimacion)" aria-valuenow="0"
-                        aria-valuemin="0" aria-valuemax="100">{{this.horasactuales}} h</div>
+            </div>
+            <hr style="text-align:left;margin-left:0">
+            <div class="accordion" id="accordionExample2">
+                <div class="accordion-item mt-2">
+                    <h3 class="accordion-header" id="horas">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapsehoras" aria-expanded="false" aria-controls="collapsehoras">
+                            Horas
+                        </button>
+                    </h3>
+                    <div id="collapsehoras" class="accordion-collapse collapse show" aria-labelledby="horas"
+                        data-bs-parent="#accordionExample2">
+                        <div class="accordion-body">
+
+                            <div class="container row" style="display: inline-block">
+                                Horas estimadas:
+                                <div class="progress mb-1">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
+                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                        {{this.horasestimacion}}
+                                        h
+                                    </div>
+                                </div>
+                                Horas actuales:
+                                <div class="progress mb-1 ">
+                                    <div class="progress-bar bg-info" role="progressbar"
+                                        [style.width]="currentHours(this.horasactuales, this.horasestimacion)"
+                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                        {{this.horasactuales}} h
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr style="text-align:left;margin-left:0">
+            <div class="accordion" id="accordionExample3">
+                <div class="accordion-item mt-2">
+                    <h3 class="accordion-header" id="usuarios">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseusuarios" aria-expanded="true" aria-controls="collapseusuarios">
+                            Usuarios
+                        </button>
+                    </h3>
+                    <div id="collapseusuarios" class="accordion-collapse collapse show" aria-labelledby="usuarios"
+                        data-bs-parent="#accordionExample3">
+                        <div class="accordion-body">
+                            <div class="container row" style="display: inline-block">
+                                <div *ngFor="let u of users">
+                                    <p class="m-0">{{u.nombre}} {{u.primerapellido}}</p>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                    data-target="#assignUser">
+                                    Asignar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -102,6 +161,35 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for update project -->
+<div class="modal fade" id="assignUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">{{block.nombrebloque}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-check">
+                    <label for="exampleFormControlTextarea1" class="form-label">Usuarios</label>
+                    <select class="form-control form-control-sm" (change)="selectUser($event)">
+                        <option value="">Selecciona el usuario</option>
+                        <option *ngFor="let us of usersToAssign" [value]="us.idusuario">
+                            {{us.nombre}} - {{us.email}}</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="assignUser(block.idbloque)">Asignar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
             </div>
         </div>
     </div>

@@ -73,7 +73,6 @@ export class RecordModificationService {
     );
   }
   getAllRecordsBlock(idBlock: number): Observable<any> {
-    console.log(idBlock);
     return this.http.get(
       environment.baseurl.concat(`/block/${idBlock}/records`),
       { headers }

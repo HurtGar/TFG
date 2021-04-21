@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-admin',
@@ -23,6 +24,19 @@ export class UpdateAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUser(this.user);
+  }
+
+  get nombreUsuarioNoValido(): any {
+    return this.data.get('nombre').invalid && this.data.get('nombre').touched;
+  }
+  get primerApellidoNoValido(): any {
+    return (
+      this.data.get('primerapellido').invalid &&
+      this.data.get('primerapellido').touched
+    );
+  }
+  get emailNoValido(): any {
+    return this.data.get('email').invalid && this.data.get('email').touched;
   }
 
   createForm(): any {
@@ -65,7 +79,12 @@ export class UpdateAdminComponent implements OnInit {
       (u: User) => {
         window.location.reload();
       },
-      (error: any) => console.log(error)
+      (error: any) => {
+        Swal.fire({
+          icon: 'error',
+          text: 'Error al actualizar usuario. Inténtelo de nuevo.',
+        });
+      }
     );
   }
 }

@@ -1,85 +1,45 @@
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="fixedHeightContainer">
-                <h2>Tareas con proxima fecha de vencimiento</h2>
-                <div class="content">
-                    <table class="table table-sm table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Id</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Prioridad</th>
-                                <th scope="col">Fecha actualización</th>
-                            </tr>
-                        </thead>
-                        <tbody *ngFor="let task of tasks;">
-                            <tr>
-                                <th scope="row">{{task.idtarea}}</th>
-                                <td>{{task.nombretarea}}</td>
-                                <td>{{task.estados_idestado.descestado}}</td>
-                                <ng-container
-                                    *ngIf="task.prioridades_idprioridad.nivelprioridad>=0 && task.prioridades_idprioridad.nivelprioridad<=2">
-                                    <td class="badge bg-success text-wrap">
-                                        {{task.prioridades_idprioridad.descprioridad}}</td>
-                                </ng-container>
-                                <ng-container class="priority-level"
-                                    *ngIf="task.prioridades_idprioridad.nivelprioridad>=3 && task.prioridades_idprioridad.nivelprioridad<=5">
-                                    <td class="badge bg-warning text-wrap">
-                                        {{task.prioridades_idprioridad.descprioridad}}</td>
-                                </ng-container>
-                                <ng-container class="priority-level"
-                                    *ngIf="task.prioridades_idprioridad.nivelprioridad>=6">
-                                    <td class="badge bg-danger text-wrap">{{task.prioridades_idprioridad.descprioridad}}
-                                    </td>
-                                </ng-container>
-                                <td>{{task.fechaactualizacion | date:'dd-MM-yyyy HH:mm:ss' }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+<div class="container-flex">
+    <div class="fixedHeightContainer">
+        <h2>Próximas tareas</h2>
+        <div class="content">
+            <div *ngIf="tasks.length>0; else elseBlock">
+                <div class="card-columns">
+                    <div class="card animated fadeIn fast" *ngFor="let task of tasks">
+                        <a [routerLink]="['/task/', task.idtarea, 'user',userId]">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ task.nombretarea }}</h4>
+                                <p class="card-text"> {{ task.desctarea | slice:0:200 }} </p>
+                                <p class="card-text"><small class="text-muted">Creada: {{task.fechaactualizacion |
+                                        date:'dd-MM-yyyy'
+                                        }}</small></p>
+                                <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 1">
+                                    <p class="card-text"><small class="text-muted">Prioridad: <span class="badge nothing rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small></p>
+                                </div>
+                                <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 2">
+                                    <p class="card-text"><small class="text-muted">Prioridad: <span class="badge verylow rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small></p>
+                                </div>
+                                <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 3">
+                                    <p class="card-text"><small class="text-muted">Prioridad: <span class="badge low rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small></p>
+                                </div>
+                                <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 4">
+                                    <p class="card-text"><small class="text-muted">Prioridad: <span class="badge mid rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small></p>
+                                </div>
+                                <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 5">
+                                    <p class="card-text"><small class="text-muted">Prioridad: <span class="badge high rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small></p>
+                                </div>
+                                <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 6">
+                                    <p class="card-text"><small class="text-muted">Prioridad: <span class="badge veryhigh rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <ng-template #elseBlock>
         <div class="col">
-            <div class="fixedHeightContainer">
-                <h2>Title</h2>
-                <div class="Content">
-                    blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah
-                    blah
-                    blah...
-                    ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah
-                    blah...
-                    ..blah blah
-                    blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah
-                    blah
-                    blah...
-                    ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah
-                    blah...
-                    ..blah blah
-                    blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah
-                    blah
-                    blah...
-                    ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah
-                    blah...
-                    ..blah blah
-                    blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah
-                    blah
-                    blah...
-                    ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah
-                    blah...
-                    ..blah blah
-                    blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah
-                    blah
-                    blah...
-                    ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah blah... ..blah blah
-                    blah...
-                    ..blah blah
-                    blah...
-                </div>
-            </div>
+            <h2>No tienes tareas asignadas.</h2>
         </div>
-    </div>
+    </ng-template>
 </div>

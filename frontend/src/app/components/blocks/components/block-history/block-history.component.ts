@@ -15,15 +15,12 @@ export class BlockHistoryComponent implements OnInit {
   constructor(private recordsService: RecordModificationService) {}
 
   ngOnInit(): void {
-    console.log(this.block);
-
     this.getAllRecordsBlock(this.block.idbloque);
   }
 
   getAllRecordsBlock(idBlock: number): any {
     this.recordsService.getAllRecordsBlock(idBlock).subscribe((b) => {
       this.modifications = b;
-      console.log(b);
     });
   }
 }

@@ -2,7 +2,9 @@
   [routerLink]="['/task/',task.idtarea,'user',userId]">
   <div class="d-flex w-100 justify-content-between">
     <h3 class="mb-1"><small class="badge badge-primary badge-pill">{{task.idtarea}}</small>{{task.nombretarea}}</h3>
-    <small>{{task.proyectos_idproyecto.nombreproyecto}} - {{task.bloques_idbloque.nombrebloque}}<br>Última modificación: {{lastModification.fechahistorico | date:'dd-MM-yyyy HH:mm:ss'}}</small>
+    <small><div *ngIf="task.bloques_idbloque !== null">
+      {{task.bloques_idbloque.nombrebloque}}
+    </div>{{task.proyectos_idproyecto.nombreproyecto}} <br>Última modificación: {{lastModification.fechahistorico | date:'dd-MM-yyyy HH:mm:ss'}}</small>
   </div>
   <p class="mb-1">{{task.desctarea}}</p>
 </a>

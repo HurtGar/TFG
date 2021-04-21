@@ -15,6 +15,7 @@ import { RecordModificationService } from 'src/app/services/record-modification.
 import { StatusService } from 'src/app/services/status.service';
 import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new-task-form',
@@ -48,7 +49,6 @@ export class NewTaskFormComponent implements OnInit {
   ) {
     this.createUserTask();
     this.createForm();
-    this.loadProjects();
     this.loadStatus();
     this.loadPriorities();
     this.loadUsers();
@@ -60,6 +60,7 @@ export class NewTaskFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('userId');
+    this.loadProjects();
   }
 
   get nombreTareaNoValido(): any {
@@ -107,52 +108,41 @@ export class NewTaskFormComponent implements OnInit {
   }
 
   selectProject(e): any {
-    console.log(e.target.value);
-
     this.idProject.setValue(e.target.value, {
       onlySelf: true,
     });
     this.loadBlocks();
   }
   selectBlock(e): any {
-    console.log(e.target.value);
-
     this.idBlock.setValue(e.target.value, {
       onlySelf: true,
     });
   }
   selectStatus(e): any {
-    console.log(e.target.value);
-
     this.idStatus.setValue(e.target.value, {
       onlySelf: true,
     });
   }
   selectPriority(e): any {
-    console.log(e.target.value);
-
     this.idPriority.setValue(e.target.value, {
       onlySelf: true,
     });
   }
   selectUser(e): any {
-    console.log(e.target.value);
-
     this.idUser.setValue(e.target.value, {
       onlySelf: true,
     });
   }
 
   loadProjects(): void {
-    this.projectService.getAllProjectFromAnUser('1').subscribe((p) => {
-      console.log(p);
+    this.projectService.getAllProjectFromAnUser(this.userId).subscribe((p) => {
       this.projects = p;
     });
   }
 
   loadBlocks(): void {
     this.projectService
-      .getAllBlocksFromAProjectForTasks('1', this.idProject.value)
+      .getAllBlocksFromAProjectForTasks(this.userId, this.idProject.value)
       .subscribe((b) => {
         this.blocks = b;
       });
@@ -170,7 +160,6 @@ export class NewTaskFormComponent implements OnInit {
   loadUsers(): void {
     this.userService.getUsersFromApp().subscribe((s) => {
       this.users = s;
-      console.log(s);
     });
   }
 
@@ -237,7 +226,6 @@ export class NewTaskFormComponent implements OnInit {
   }
 
   addTask(): any {
-    console.log(this.data);
     if (this.data.invalid) {
       return Object.values(this.data.controls).forEach((control) => {
         control.markAsTouched();
@@ -263,7 +251,10 @@ export class NewTaskFormComponent implements OnInit {
         this.data.get('fechafin').value
       );
       if (!datesOk) {
-        throw Error();
+        Swal.fire({
+          icon: 'error',
+          text: 'Error en las fechas.',
+        });
       }
     }
 
@@ -294,26 +285,17 @@ export class NewTaskFormComponent implements OnInit {
     ) {
       delete formObject.horasrestantes;
     }
-    console.log(formObject);
-    console.log(userTaskObject);
-    console.log(recordTask);
 
     this.taskService.createTask(formObject).subscribe((t: Task) => {
-      console.log(t);
+      this.taskService
+        .createAssignment(userTaskObject)
+        .subscribe((ut: UserTask) => {});
+      this.recordModificationService
+        .insertNewRecordModificationTask(recordTask, this.lastTask.idtarea + 1)
+        .subscribe((rt) => {
+          this.router.navigate(['task/user/', this.userId]);
+        });
     });
-    
-    this.recordModificationService
-    .insertNewRecordModificationTask(recordTask, this.lastTask.idtarea + 1)
-    .subscribe((rt) => {
-      console.log(rt);
-      
-      this.router.navigate(['task/user/', this.userId]);
-    });
-    this.taskService
-      .createAssignment(userTaskObject)
-      .subscribe((ut: UserTask) => {
-        console.log(ut);
-      });
   }
 
   private checkDates(dateA: string, dateB: string): boolean {
@@ -325,7 +307,7 @@ export class NewTaskFormComponent implements OnInit {
     if (finalDateB < finalDateA) {
       correct = false;
     }
-    console.log(correct);
+
     return correct;
   }
 }

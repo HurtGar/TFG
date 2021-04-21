@@ -23,13 +23,13 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    console.log('Estoy en el guard.');
+    
     if (this.auth.isAuthenticate()) {
-      console.log('if');
+      
 
       return true;
     } else {
-      console.log('Else');
+      
 
       this.router.navigateByUrl(`/login`);
       return false;

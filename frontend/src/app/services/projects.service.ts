@@ -5,6 +5,7 @@ import { environment, headers } from 'src/environments/environment';
 import { Project } from '../models/project.model';
 import { Block } from '../models/block.model';
 import { Task } from '../models/task.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +18,16 @@ export class ProjectsService {
     return this.http.get(projectUrl, { headers });
   }
 
+  getAllUsers(): Observable<User[]> {
+    return this.getQuery(`users`);
+  }
+
   getAllProjectFromAnUser(idUsuario: string): Observable<Project[]> {
     return this.getQuery(`user/${idUsuario}`);
+  }
+
+  getAllUsersFromAProject(idProject: string): Observable<User[]> {
+    return this.getQuery(`${idProject}/list-users`);
   }
 
   getOneProjectFromAnUser(
@@ -51,8 +60,6 @@ export class ProjectsService {
   }
 
   createProject(project: any): Observable<any> {
-    console.log(project);
-
     return this.http.post(
       environment.baseurl.concat(`/project/create`),
       project,
@@ -75,7 +82,15 @@ export class ProjectsService {
     return this.http.delete(projectUrl, { headers });
   }
 
-  getTotalProjectHours(idProject: string): Observable<any>{
+  getTotalProjectHours(idProject: string): Observable<any> {
     return this.getQuery(`${idProject}/hours`);
+  }
+
+  setAssignmentProject(assign: any): Observable<any> {
+    return this.http.post(
+      environment.baseurl.concat(`/project/assignment`),
+      assign,
+      { headers }
+    );
   }
 }

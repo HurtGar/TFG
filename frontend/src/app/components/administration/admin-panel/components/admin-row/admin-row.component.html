@@ -1,17 +1,20 @@
-<!-- <li class="list-group-item mt-1">
-    {{user.nombre}} {{user.primerapellido}} - {{user.email}}
-    <div class="btn-group float-right" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-outline-secondary float-right" data-toggle="modal"
-            data-target="#exampleModal">
-            Modificar bloque
-        </button>
-        <button type="button" class="btn btn-outline-danger float-right" data-toggle="modal"
-            data-target="#exampleModalCenter">Eliminar bloque</button>
-    </div>
-</li> -->
+<a class="list-group-item list-group-item-action flex-column align-items-start"
+    [routerLink]="['/users/user',user.idusuario]">
+    <div class="d-flex w-100 justify-content-between row">
+        <div class="col-9">
+            <p>{{user.nombre}} {{user.primerapellido}} - {{user.email}}</p>
+        </div>
+        <div class="col">
+            <div class="row">
+                Activo
+                <div *ngIf="user.estado===1">
+                    <input class="m-1" type="checkbox" checked>
+                </div>
+                <div *ngIf="user.estado === 0">
+                    <input class="m-1" type="checkbox">
 
-<a class="list-group-item list-group-item-action flex-column align-items-start" [routerLink]="['/users/user',user.idusuario]">
-    <div class="d-flex w-100 justify-content-between">
-      <p>{{user.nombre}} {{user.primerapellido}} - {{user.email}}</p>
+                </div>
+            </div>
+        </div>
     </div>
 </a>

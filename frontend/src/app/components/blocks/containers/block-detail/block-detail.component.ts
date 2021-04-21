@@ -32,13 +32,11 @@ export class BlockDetailComponent implements OnInit {
       .getOneBlockFromAProjectAndUser(idBlock, idUser)
       .subscribe((block) => {
         this.blocks = block;
-        console.log(block);
       });
   }
   public getAllTasksFromABlock(idBlock: string): void {
     this.blockService.getAllTasksFromABlock(idBlock).subscribe((task) => {
       this.tasks = task;
-      console.log(task);
     });
   }
 }

@@ -1,31 +1,15 @@
 <div class="navbar-dark bg-dark">
   <!-- Sidebar -->
   <nav id="sidebar">
-    <div class="sidebar-header">
-      <h3>Nombre usuario</h3>
-    </div>
-
     <ul class="list-unstyled components">
       <li class="active">
-        <a [routerLink]="['home/', userId]" >Inicio</a>
+        <a [routerLink]="['home/', userId]">Inicio</a>
       </li>
       <li>
         <a href="#" [routerLink]="['projects/user/', userId]">Proyectos</a>
       </li>
       <li>
         <a href="#" [routerLink]="['blocks/user/', userId]">Bloques</a>
-        <!--<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Bloques</a>
-        <ul class="collapse list-unstyled" id="pageSubmenu">
-          <li>
-            <a href="#">Page 1</a>
-          </li>
-          <li>
-            <a href="#">Page 2</a>
-          </li>
-          <li>
-            <a href="#">Page 3</a>
-          </li>
-        </ul>-->
       </li>
       <li>
         <a href="#" [routerLink]="['task/user/', userId]">Tareas</a>
