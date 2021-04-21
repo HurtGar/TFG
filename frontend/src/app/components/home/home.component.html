@@ -12,6 +12,24 @@
                                 <p class="card-text"><small class="text-muted">Creada: {{task.fechaactualizacion |
                                         date:'dd-MM-yyyy'
                                         }}</small></p>
+                                <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 1">
+                                    <p class="card-text"><small class="text-muted">Prioridad: <span class="badge nothing rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small></p>
+                                </div>
+                                <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 2">
+                                    <p class="card-text"><small class="text-muted">Prioridad: <span class="badge verylow rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small></p>
+                                </div>
+                                <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 3">
+                                    <p class="card-text"><small class="text-muted">Prioridad: <span class="badge low rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small></p>
+                                </div>
+                                <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 4">
+                                    <p class="card-text"><small class="text-muted">Prioridad: <span class="badge mid rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small></p>
+                                </div>
+                                <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 5">
+                                    <p class="card-text"><small class="text-muted">Prioridad: <span class="badge high rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small></p>
+                                </div>
+                                <div *ngIf="task.prioridades_idprioridad.nivelprioridad === 6">
+                                    <p class="card-text"><small class="text-muted">Prioridad: <span class="badge veryhigh rounded-pill">{{task.prioridades_idprioridad.descprioridad}}</span></small></p>
+                                </div>
                             </div>
                         </a>
                     </div>

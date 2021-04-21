@@ -13,6 +13,7 @@ import { TaskService } from 'src/app/services/task.service';
 export class TaskListComponent implements OnInit {
   tasks: Task[] = [];
   lastModification: Record[] = [];
+  permissions = '';
 
   constructor(
     private taskService: TaskService,
@@ -24,7 +25,9 @@ export class TaskListComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.permissions = localStorage.getItem('permission');
+  }
 
   public getAllTaskFromAnUser(idUser: string): void {
     let i = 0;

@@ -60,6 +60,9 @@ import { AdminViewComponent } from './components/administration/admin-panel/comp
 import { AdminDetailComponent } from './components/administration/admin-panel/containers/admin-detail/admin-detail.component';
 import { UpdateAdminComponent } from './components/administration/admin-panel/components/update-admin/update-admin.component';
 import { NewUserAdminComponent } from './components/administration/admin-panel/components/new-user-admin/new-user-admin.component';
+import { RolService } from './services/rol.service';
+import { SearchComponent } from './components/search/search.component';
+import { SearchService } from './services/search.service';
 
 @NgModule({
   declarations: [
@@ -107,6 +110,7 @@ import { NewUserAdminComponent } from './components/administration/admin-panel/c
     AdminDetailComponent,
     UpdateAdminComponent,
     NewUserAdminComponent,
+    SearchComponent,
   ],
   imports: [
     FormsModule,
@@ -126,6 +130,8 @@ import { NewUserAdminComponent } from './components/administration/admin-panel/c
     UserService,
     AuthenticationService,
     RegisterService,
+    RolService,
+    SearchService
   ],
   bootstrap: [AppComponent],
 })

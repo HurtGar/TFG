@@ -23,7 +23,7 @@
         <div class="col">
             <label for="exampleFormControlTextarea1" class="form-label">Asignar a</label>
             <select class="form-control form-control-sm" (change)="selectUser($event)">
-                <option value="">Selecciona el bloque</option>
+                <option value="">Seleccione una asignación</option>
                 <option *ngFor="let u of users" [value]="u.idusuario">
                     {{u.nombre}} {{u.primerapellido}}</option>
             </select>

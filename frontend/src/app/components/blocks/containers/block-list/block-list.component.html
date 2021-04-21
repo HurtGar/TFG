@@ -1,8 +1,10 @@
 <div class="container-fluid">
     <h2>Bloques</h2>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a [routerLink]="['/blocks/new-block']" style="text-decoration: none;" class="text-white"><button
-                class="btn btn-primary">Nuevo bloque</button></a>
+        <div *ngIf="permissions.includes('3')">
+            <a [routerLink]="['/blocks/new-block']" style="text-decoration: none;" class="text-white"><button
+                    class="btn btn-primary">Nuevo bloque</button></a>
+        </div>
     </div>
     <div class="list-group" *ngFor="let blo of blocks;">
         <div *ngFor="let mod of lastModification;">

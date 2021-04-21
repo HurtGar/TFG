@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Rol } from 'src/app/models/rol.model';
 import { User } from 'src/app/models/user.model';
+import { RolService } from 'src/app/services/rol.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,13 +13,16 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class NewUserAdminComponent implements OnInit {
   data: FormGroup;
+  roles: Rol[] = [];
 
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
+    private rolService: RolService,
     private router: Router
   ) {
     this.createForm();
+    this.loadRol();
   }
 
   ngOnInit(): void {}
@@ -35,6 +40,26 @@ export class NewUserAdminComponent implements OnInit {
     return this.data.get('email').invalid && this.data.get('email').touched;
   }
 
+  get rolNoValido(): any {
+    return this.data.get('rol').invalid && this.data.get('rol').touched;
+  }
+
+  loadRol(): void {
+    this.rolService.listRoles().subscribe((r) => {
+      this.roles = r;
+    });
+  }
+
+  get rol(): any {
+    return this.data.get('rol');
+  }
+
+  selectRol(e): any {
+    this.rol.setValue(e.target.value, {
+      onlySelf: true,
+    });
+  }
+
   createForm() {
     this.data = this.formBuilder.group({
       nombre: ['', Validators.required],
@@ -45,6 +70,7 @@ export class NewUserAdminComponent implements OnInit {
       telefono: [''],
       administrador: [''],
       activar: [''],
+      rol: ['', Validators.required],
       fecharegistro: [this.setCreationTime(), [Validators.required]],
     });
   }
@@ -67,6 +93,8 @@ export class NewUserAdminComponent implements OnInit {
   }
 
   addUser() {
+    console.log(this.data);
+    
     if (this.data.invalid) {
       return Object.values(this.data.controls).forEach((control) => {
         control.markAsTouched();

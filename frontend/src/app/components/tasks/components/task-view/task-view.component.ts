@@ -17,6 +17,7 @@ export class TaskViewComponent implements OnInit {
   users: User[];
   usersToAssign: User[];
   idusuario;
+  permissions = '';
 
   constructor(
     private taskService: TaskService,
@@ -26,6 +27,7 @@ export class TaskViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('userId');
+    this.permissions = localStorage.getItem('permission');
     this.getUsersAssigned(this.task.idtarea.toString());
     this.getAllUsersOfAProject();
   }

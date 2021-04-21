@@ -19,7 +19,7 @@ export class BlockViewComponent implements OnInit {
   users: User[];
   usersToAssign: User[];
   idusuario;
-
+  permissions = '';
   constructor(
     private blockService: BlockService,
     private projectService: ProjectsService,
@@ -31,6 +31,7 @@ export class BlockViewComponent implements OnInit {
     this.getUsersAssigned(this.block.idbloque.toString());
     this.userId = localStorage.getItem('userId');
     this.getUsersForThisBlockFromAProject();
+    this.permissions = localStorage.getItem('permission');
   }
 
   deleteBlock(idbloque): void {
@@ -90,8 +91,7 @@ export class BlockViewComponent implements OnInit {
       (error: any) => {
         Swal.fire({
           icon: 'error',
-          text:
-            'No se ha podido asignar el usuario. Inténtelo de nuevo.',
+          text: 'No se ha podido asignar el usuario. Inténtelo de nuevo.',
         });
       }
     );

@@ -15,6 +15,7 @@ import { ProjectDetailComponent } from './components/projects/containers/project
 import { ProjectFormComponent } from './components/projects/containers/project-form/project-form.component';
 import { ProjectsListComponent } from './components/projects/containers/projects-list/projects-list.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { SearchComponent } from './components/search/search.component';
 import { NewTaskFormComponent } from './components/tasks/components/new-task-form/new-task-form.component';
 import { TaskDetailComponent } from './components/tasks/containers/task-detail/task-detail.component';
 import { TaskFormComponent } from './components/tasks/containers/task-form/task-form.component';
@@ -91,6 +92,11 @@ export const APP_ROUTES: Routes = [
   {
     path: 'users/user/:idUser',
     component: AdminDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'search/:search',
+    component: SearchComponent,
     canActivate: [AuthGuard],
   },
   {

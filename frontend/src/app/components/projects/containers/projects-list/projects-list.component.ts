@@ -13,6 +13,7 @@ import { RecordModificationService } from 'src/app/services/record-modification.
 export class ProjectsListComponent implements OnInit {
   projects: Project[] = [];
   lastModification: Record[] = [];
+  permissions = '';
 
   constructor(
     private projectsService: ProjectsService,
@@ -24,7 +25,9 @@ export class ProjectsListComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.permissions = localStorage.getItem('permission');
+  }
 
   public getAllProjectFromAnUser(idUsuario: string): void {
     let i = 0;

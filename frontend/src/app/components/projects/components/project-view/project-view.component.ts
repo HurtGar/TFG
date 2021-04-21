@@ -20,6 +20,7 @@ export class ProjectViewComponent implements OnInit {
   users: User[];
   usersToAssign: User[];
   idusuario;
+  permissions = '';
 
   constructor(
     private projectService: ProjectsService,
@@ -32,6 +33,7 @@ export class ProjectViewComponent implements OnInit {
     this.getUsersAssigned(this.project.idproyecto.toString());
     this.userId = localStorage.getItem('userId');
     this.getAllUsers();
+    this.permissions = localStorage.getItem('permission');
   }
 
   deleteProject(idProject): void {

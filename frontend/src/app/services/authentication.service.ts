@@ -19,7 +19,10 @@ export class AuthenticationService {
           const tok = 'token';
           const userId = 'userId';
           const superuser = 'superuser';
-          this.saveToken(resp[tok], resp[userId], resp[superuser]);
+          const roles = 'roles';
+          const permission = 'permission';
+
+          this.saveToken(resp[tok], resp[userId], resp[superuser], resp[roles], resp[permission]);
           return resp;
         })
       );
@@ -32,12 +35,16 @@ export class AuthenticationService {
   private saveToken(
     userToken: string,
     userId: string,
-    superuser: boolean
+    superuser: boolean,
+    rol: string,
+    permission: string
   ): any {
     this.userToken = userToken;
     localStorage.setItem('token', userToken);
     localStorage.setItem('userId', userId);
     localStorage.setItem('superuser', superuser.toString());
+    localStorage.setItem('roles', rol);
+    localStorage.setItem('permission', permission);
 
     // Expiración token.
     const today = new Date();
