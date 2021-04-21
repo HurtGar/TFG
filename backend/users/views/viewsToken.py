@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from ..models import Usuario
 from django.contrib.auth.models import User
+from users.models import RolesUsuarios, Rol, Permisos
+import json
 
 
 class GetToken(APIView):
@@ -25,8 +27,25 @@ class GetToken(APIView):
 class GetAuthToken(APIView):
     def post(self, request):
         getUser = User.objects.get(username=request.data['email'])
-        user = authenticate(username=getUser.username, password = request.data['password'])
+        getRolUser = Rol.objects.filter(rolesusuarios__usuarios_idusuario=getUser.id)
+        getPermissionUser = Permisos.objects.filter(permisos__roles_idrol__in=getRolUser)
+
+        response_rol = []
+        if getRolUser:
+            for rol in getRolUser:
+                #response_rol_object = {'rol': rol.nivelrol}
+                response_rol.append(rol.nivelrol)
+
+        response_permission = []
+        if getPermissionUser:
+            for permission in getPermissionUser:
+                response_permission.append(permission.idcodigo)
+
+        user = authenticate(username=getUser.username, password=request.data['password'])
         if user is None:
-            return Response({'error': 'Email or password incorrect.'}, status = status.HTTP_401_UNAUTHORIZED)
-        token = Token.objects.get(user= user)
-        return Response({'token': token.key, 'userId': getUser.id, 'superuser': getUser.is_superuser}, status=status.HTTP_200_OK)
+            return Response({'error': 'Email or password incorrect.'}, status=status.HTTP_401_UNAUTHORIZED)
+        token = Token.objects.get(user=user)
+        response = {'token': token.key, 'userId': getUser.id, 'superuser': getUser.is_superuser, 'roles': response_rol, 'permission':response_permission}
+        return Response(
+            response,
+            status=status.HTTP_200_OK)

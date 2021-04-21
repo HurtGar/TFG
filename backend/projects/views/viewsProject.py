@@ -29,7 +29,7 @@ class GetAllProjectFromAnUser(APIView):
         """
         try:
             return Proyecto.objects.filter(proyectosusuarios__usuarios_idusuario=id_user).distinct()
-            #return Proyecto.objects.filter(proyecto_tarea__tareasusuarios__usuarios_idusuario=id_user).distinct()
+            # return Proyecto.objects.filter(proyecto_tarea__tareasusuarios__usuarios_idusuario=id_user).distinct()
         except Proyecto.DoesNotExist:
             raise Http404
 
@@ -96,12 +96,12 @@ class GetAllUsersFromAProject(APIView):
         """
         # También se puede usar queries directamente con el código de BD usando .raw(query).
         try:
-            return Usuario.objects.raw('''select distinct(idusuario) from gestion.usuarios u 
-            inner join gestion.tareas_usuario tu on u.idusuario = tu.usuarios_idusuario_id 
-            inner join gestion.tareas t on t.idtarea = tu.tareas_idtarea_id 
-            inner join gestion.proyectos p on t.proyectos_idproyecto = p.idproyecto where p.idproyecto = %s order by idusuario''',
-                                       [id_project])
-
+            # return Usuario.objects.raw('''select distinct(idusuario) from gestion.usuarios u
+            # inner join gestion.tareas_usuario tu on u.idusuario = tu.usuarios_idusuario_id
+            # inner join gestion.tareas t on t.idtarea = tu.tareas_idtarea_id
+            # inner join gestion.proyectos p on t.proyectos_idproyecto = p.idproyecto where p.idproyecto = %s order by idusuario''',
+            #                            [id_project])
+            return Usuario.objects.filter(proyectosusuarios__proyectos_idproyecto=id_project)
         except Proyecto.DoesNotExist:
             raise Http404
 
@@ -113,6 +113,28 @@ class GetAllUsersFromAProject(APIView):
         :return:
         """
         users = self.get_object(id_project)
+        serializer = UsuarioSerializer(users, many=True)
+        return Response(serializer.data)
+
+
+class GetAllUsers(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def get_object(self):
+        try:
+            return Usuario.objects.all()
+        except Usuario.DoesNotExist:
+            raise Http404
+
+    def get(self, format=None):
+        """
+        :param request:
+        :param id_project:
+        :param format:
+        :return:
+        """
+        users = self.get_object()
         serializer = UsuarioSerializer(users, many=True)
         return Response(serializer.data)
 
@@ -137,7 +159,7 @@ class GetAllBlocksFromAProjectAndUser(APIView):
     authentication_classes = [TokenAuthentication]
 
     def get_object(self, id_project, id_user):
-        return Bloque.objects.filter(proyecto_idproyecto=id_project,bloque__tareas__idusuario=id_user).distinct()
+        return Bloque.objects.filter(proyecto_idproyecto_id=id_project).distinct()
 
     def get(self, request, id_project, id_user, format=None):
         bloque = self.get_object(id_project, id_user)
@@ -176,7 +198,6 @@ class GetLastInsertedProject(APIView):
         project = self.get_object()
         serializer = ProyectoSerializer(project)
         return Response(serializer.data)
-
 
 
 class GetTotalHoursFromAProject(APIView):
@@ -349,3 +370,21 @@ class InsertRecord(APIView):
 
         except Proyecto.DoesNotExist:
             raise Http404
+
+
+class CreateAssignmentProject(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request):
+        project = Proyecto.objects.get(idproyecto=request.data['idproyecto'])
+        user = Usuario.objects.get(idusuario=request.data['idusuario'])
+
+        if project and user:
+            assignment = ProyectosUsuarios(proyectos_idproyecto_id=project.idproyecto,
+                                           usuarios_idusuario_id=user.idusuario)
+            if assignment:
+                assignment.save()
+                return Response(status=status.HTTP_200_OK)
+            else:
+                return Response({'error': 'Error al asignar proyecto-usuario.'}, status=status.HTTP_400_BAD_REQUEST)

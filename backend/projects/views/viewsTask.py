@@ -413,3 +413,17 @@ class RegisterHoursTask(APIView):
         else:
             return Response({'error': 'No se han podido registrar las horas.'},
                             status=status.HTTP_400_BAD_REQUEST)
+
+
+class CreateAssignmentTask(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request):
+        assignment = TareasUsuarios(tareas_idtarea_id=request.data['tareas_idtarea'],
+                                     usuarios_idusuario_id=request.data['usuarios_idusuario'])
+        if assignment:
+            assignment.save()
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'Error al asignar tarea-usuario.'}, status=status.HTTP_400_BAD_REQUEST)

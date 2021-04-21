@@ -7,7 +7,7 @@ urlpatterns = [
     path('user/<int:id_user>', viewsBlock.GetAllBlocsFromAnUser().as_view(), name='listar_bloques_usuario'),
     path('<int:id_block>/user/<int:id_user>', viewsBlock.GetOneBlocFromAnUser().as_view(),
          name='obtener_bloque_usuario'),
-    path('<int:id_block>/list_users', viewsBlock.GetUsersFromABlock.as_view(), name='bloques_proyecto'),
+    path('<int:id_block>/list-users', viewsBlock.GetUsersFromABlock.as_view(), name='bloques_proyecto'),
     path('<int:id_block>/tasks', viewsBlock.GetAllTaskFromABlock.as_view(), name='listar_tareas_bloque'),
     path('<int:id_block>/hours', viewsBlock.GetHoursFromABlock.as_view(), name='horas_bloque'),
     path('search', viewsBlock.GetBlocksBetweenTwoDates.as_view(), name='bloques_fechas'),
@@ -21,5 +21,6 @@ urlpatterns = [
     path('<int:id_block>/last_modification', viewsBlock.GetLastModificationFromABlock.as_view(),
          name='last_modification_record'),
     path('last_inserted', viewsBlock.GetLastInsertedBlock.as_view(), name='ultima_insercion'),
+    path('assignment', viewsBlock.CreateAssignmentBlock.as_view(), name='asignar_bloque'),
 
 ]
