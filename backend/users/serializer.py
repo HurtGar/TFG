@@ -82,3 +82,9 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
+
+
+class ProyectosUsuarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProyectosUsuarios
+        fields = '__all__'

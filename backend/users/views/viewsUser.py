@@ -16,6 +16,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from users.models import Usuario, Rol
 
 from users.serializer import *
 
@@ -50,13 +51,13 @@ class GetUserById(APIView):
 
     def get_object(self, user_id):
         try:
-            return Usuario.objects.get(idusuario=user_id)
+            return Usuario.objects.filter(idusuario=user_id)
         except Usuario.DoesNotExist:
             raise Http404
 
     def get(self, request, user_id):
         user = self.get_object(user_id)
-        serializer = UsuarioSerializer(user)
+        serializer = UsuarioSerializer(user, many=True)
         return Response(serializer.data)
 
 
@@ -74,6 +75,91 @@ class GetUserByState(APIView):
         users = self.get_objetc(state)
         serializer = UsuarioSerializer(users, many=True)
         return Response(serializer.data)
+
+
+class CreateUser(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request):
+
+        if self.validateIfUserExists(request.data['email']):
+            self.createUser(request)
+            self.createUsuario(request)
+
+            if Usuario.objects.get(email=request.data['email']):
+                self.assignRol(request.data['rol'], Usuario.objects.get(email=request.data['email']).idusuario)
+                user_id = User.objects.get(username__exact=request.data['email'])
+                token = Token.objects.create(user=user_id)
+                return Response({'token': token.key}, status=status.HTTP_201_CREATED)
+            else:
+                return Response({'error': 'Usuario no insertado.'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'error': 'El usuario ya existe.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    def createUsuario(self, request):
+        usuario = Usuario()
+        setattr(usuario, 'nombre', request.data['nombre'])
+        setattr(usuario, 'primerapellido', request.data['primerapellido'])
+        if 'segundoapellido' in request.data:
+            setattr(usuario, 'segundoapellido', request.data['segundoapellido'])
+        setattr(usuario, 'email', request.data['email'])
+        if 'telefono' in request.data:
+            setattr(usuario, 'telefono', request.data['telefono'])
+        setattr(usuario, 'fecharegistro', request.data['fecharegistro'])
+        setattr(usuario, 'password', User.objects.get(username=request.data['email']).password)
+        if request.data['activar'] is True:
+            setattr(usuario, 'estado', 1)
+        else:
+            setattr(usuario, 'estado', 0)
+
+        if usuario.save() is not None:
+            return Response({'error': 'Usuario no guardado.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    def createUser(self, request):
+        user = User()
+        setattr(user, 'username', request.data['email'])
+        setattr(user, 'first_name', request.data['nombre'])
+        setattr(user, 'last_name', request.data['primerapellido'])
+        setattr(user, 'email', request.data['email'])
+        user.set_password(request.data['password'])
+        if request.data['activar'] is True:
+            user.is_active = True
+        else:
+            user.is_active = False
+
+        if request.data['administrador'] is True:
+            user.is_superuser = True
+        else:
+            user.is_superuser = False
+
+        user.is_staff = False
+        if user.save() is not None:
+            return Response({'error': 'Usuario no guardado.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    def assignRol(self, idrol, idusuario):
+        roles_user = RolesUsuarios()
+        setattr(roles_user, 'roles_idrol', Rol.objects.get(idrol__exact=idrol))
+        setattr(roles_user, 'usuarios_idusuario',Usuario.objects.get(idusuario__exact=idusuario))
+        if roles_user.save() is not None:
+            return Response({'error': 'Rol no asignado.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    def validateIfUserExists(self, email):
+
+        try:
+            user = User.objects.get(username=email)
+        except User.DoesNotExist:
+            user = None
+
+        try:
+            usuario = Usuario.objects.get(email=email)
+        except Usuario.DoesNotExist:
+            usuario = None
+
+        if user is None and usuario is None:
+            return True
+        else:
+            return False
 
 
 class UpdateUser(APIView):
@@ -203,6 +289,9 @@ class GetAccessByUserId(APIView):
 
 
 class ListarPermisosRoles(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
     def get_object(self):
         try:
             return PermisosRoles.objects.all()
@@ -217,6 +306,9 @@ class ListarPermisosRoles(APIView):
 
 
 class ListarPermisos(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
     def get_object(self):
         try:
             return Permisos.objects.all()
@@ -230,6 +322,9 @@ class ListarPermisos(APIView):
 
 
 class ListarRoles(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
     def get_object(self):
         try:
             return Rol.objects.all()

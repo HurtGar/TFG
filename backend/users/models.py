@@ -9,6 +9,7 @@ class Permisos(models.Model):
     idpermiso = models.AutoField(primary_key=True)
     nombrepermiso = models.CharField(max_length=100)
     codigonombre = models.CharField(max_length=100)
+    idcodigo = models.IntegerField()
 
     class Meta:
         db_table = 'permisos'

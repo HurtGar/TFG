@@ -109,7 +109,7 @@ class Tarea(models.Model):
                                                 null=True,
                                                 db_column='prioridades_idprioridad')
     bloques_idbloque = models.ForeignKey(Bloque, related_name='bloque', on_delete=models.CASCADE,
-                                         db_column='bloques_idbloque')
+                                         db_column='bloques_idbloque', null=True)
     proyectos_idproyecto = models.ForeignKey(Proyecto, related_name='proyecto_tarea', on_delete=models.CASCADE,
                                              db_column='proyectos_idproyecto')
     modificaciones = models.ManyToManyField(HistorialModificaciones, through='HistorialModificacionTarea',
