@@ -184,6 +184,10 @@ class UpdateUser(APIView):
         setattr(user, 'first_name', request.data['nombre'])
         setattr(user, 'last_name', request.data['primerapellido'])
         setattr(user, 'email', request.data['email'])
+        if request.data['activar'] == 1:
+            user.is_active = True
+        else:
+            user.is_active = False
         if user.save() is not None:
             return Response({'error': 'Usuario no guardado.'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -195,8 +199,13 @@ class UpdateUser(APIView):
         usuario = self.getUsuario(user_id)
 
         serializer = UsuarioSerializer(usuario, data=request.data)
+
         if serializer.is_valid():
-            serializer.save()
+            if request.data['activar'] == 1:
+                myState = 1
+            else:
+                myState = 0
+            serializer.save(estado=myState)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

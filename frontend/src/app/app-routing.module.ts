@@ -4,6 +4,7 @@ import { AdminPanelComponent } from './components/administration/admin-panel/adm
 import { AdminViewComponent } from './components/administration/admin-panel/components/admin-view/admin-view.component';
 import { NewUserAdminComponent } from './components/administration/admin-panel/components/new-user-admin/new-user-admin.component';
 import { AdminDetailComponent } from './components/administration/admin-panel/containers/admin-detail/admin-detail.component';
+import { UserPanelComponent } from './components/administration/user-panel/user-panel.component';
 import { BlocksComponent } from './components/blocks/blocks.component';
 import { BlockDetailComponent } from './components/blocks/containers/block-detail/block-detail.component';
 import { BlockFormComponent } from './components/blocks/containers/block-form/block-form.component';
@@ -82,6 +83,11 @@ export const APP_ROUTES: Routes = [
   {
     path: 'administration-panel',
     component: AdminPanelComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'user-panel',
+    component: UserPanelComponent,
     canActivate: [AuthGuard],
   },
   {
