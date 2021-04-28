@@ -14,6 +14,7 @@ export class UpdateAdminComponent implements OnInit {
   @Input() user: User;
   data: FormGroup;
   error: any = { isError: false };
+  userId: string;
 
   constructor(
     private userService: UserService,
@@ -23,6 +24,7 @@ export class UpdateAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userId = localStorage.getItem('userId');
     this.loadUser(this.user);
   }
 
@@ -47,6 +49,7 @@ export class UpdateAdminComponent implements OnInit {
       telefono: [''],
       email: ['', [Validators.required]],
       fecharegistro: ['', [Validators.required]],
+      activar: ['']
     });
   }
 
@@ -58,7 +61,11 @@ export class UpdateAdminComponent implements OnInit {
       telefono: user.telefono,
       email: user.email,
       fecharegistro: formatDate(user.fecharegistro, 'dd-MM-yyyy', 'en'),
+      activar: user.estado
     });
+    if(this.userId!='1'){
+      this.data.controls.activar.disable();
+    }
     this.data.controls.fecharegistro.disable();
   }
 
@@ -74,7 +81,7 @@ export class UpdateAdminComponent implements OnInit {
 
     //Eliminamos fecha registro porque nunca se cambia.
     delete formObject.fecharegistro;
-
+    
     this.userService.updateUser(formObject, this.user.idusuario).subscribe(
       (u: User) => {
         window.location.reload();

@@ -63,6 +63,9 @@ import { NewUserAdminComponent } from './components/administration/admin-panel/c
 import { RolService } from './services/rol.service';
 import { SearchComponent } from './components/search/search.component';
 import { SearchService } from './services/search.service';
+import { UserPanelComponent } from './components/administration/user-panel/user-panel.component';
+import { UserViewComponent } from './components/administration/user-panel/components/user-view/user-view.component';
+import { UserDataComponent } from './components/administration/user-panel/containers/user-data/user-data.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +114,9 @@ import { SearchService } from './services/search.service';
     UpdateAdminComponent,
     NewUserAdminComponent,
     SearchComponent,
+    UserPanelComponent,
+    UserViewComponent,
+    UserDataComponent,
   ],
   imports: [
     FormsModule,

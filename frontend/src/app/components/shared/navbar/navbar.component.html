@@ -17,18 +17,14 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <form class="form-inline navbar-nav ml-auto mt-2 mt-md-0">
+        <form class="form-inline navbar-nav ml-auto mt-2 mt-md-0 mr-4">
             <input #buscarTexto class="form-control mr-sm-2" type="search" placeholder="Buscar..." (keyup.enter)="searchApp(buscarTexto.value)">
             <button class="btn btn-outline-primary my-2 my-sm-0" (click)="searchApp(buscarTexto.value)" type="button">Buscar</button>
         </form>
-
-
-
-
-
-
-        <div class="container-flex">
-            <span class="text-white mx-2">{{user.username}}</span>
+        <div class="container-flex m-1">
+            <button type="button" class="btn btn-primary" [routerLink]="['user-panel/']"><span class="text-white mx-2">
+            <i class="fas fa-user"></i>
+            {{user.username}}</span></button>
         </div>
 
         <div *ngIf="rol.includes('1')">
