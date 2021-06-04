@@ -1,42 +1,40 @@
-<div class="container">
-    <h2>Datos de usuario</h2>
-    <div class="col">
-        <div class="row">
-            <form [formGroup]="data">
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" formControlName="nombre">
-                </div>
-                <div class="form-group">
-                    <label for="primerApellido">Primer apellido</label>
-                    <input type="text" class="form-control" formControlName="primerapellido">
-                </div>
-                <div class="form-group" *ngIf="user.segundoapellido">
-                    <label for="segundoApellido">Segundo apellido</label>
-                    <input type="text" class="form-control" formControlName="segundoapellido">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" formControlName="email" aria-describedby="emailHelp">
-                </div>
-                <div class="form-group" *ngIf="user.telefono">
-                    <label for="telefono">Teléfono</label>
-                    <input type="text" class="form-control" formControlName="telefono">
-                </div>
-                <div class="form-group">
-                    <label for="fecharegistro">Fecha registro</label>
-                    <input type="text" class="form-control" formControlName="fecharegistro">
-                </div>
-            </form>
-        </div>
+<h2>Datos de usuario</h2>
+<div class="col">
+    <div class="row">
+        <form [formGroup]="data">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" formControlName="nombre">
+            </div>
+            <div class="form-group">
+                <label for="primerApellido">Primer apellido</label>
+                <input type="text" class="form-control" formControlName="primerapellido">
+            </div>
+            <div class="form-group" *ngIf="user.segundoapellido">
+                <label for="segundoApellido">Segundo apellido</label>
+                <input type="text" class="form-control" formControlName="segundoapellido">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" formControlName="email" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group" *ngIf="user.telefono">
+                <label for="telefono">Teléfono</label>
+                <input type="text" class="form-control" formControlName="telefono">
+            </div>
+            <div class="form-group">
+                <label for="fecharegistro">Fecha registro</label>
+                <input type="text" class="form-control" formControlName="fecharegistro">
+            </div>
+        </form>
     </div>
+</div>
 
-    <div class="col">
-        <div class="row">
-            <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="#exampleModal">
-                Modificar usuario
-            </button>
-        </div>
+<div class="col">
+    <div class="row">
+        <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="#exampleModal">
+            Modificar usuario
+        </button>
     </div>
 </div>
 

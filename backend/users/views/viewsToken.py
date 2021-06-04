@@ -1,12 +1,11 @@
 from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from ..models import Usuario
-from django.contrib.auth.models import User
-from users.models import RolesUsuarios, Rol, Permisos
-import json
+
+from users.models import Rol, Permisos
 
 
 class GetToken(APIView):
