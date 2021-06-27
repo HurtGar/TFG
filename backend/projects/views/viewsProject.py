@@ -377,14 +377,18 @@ class CreateAssignmentProject(APIView):
     authentication_classes = [TokenAuthentication]
 
     def post(self, request):
-        project = Proyecto.objects.get(idproyecto=request.data['idproyecto'])
-        user = Usuario.objects.get(idusuario=request.data['idusuario'])
+        try:
 
-        if project and user:
-            assignment = ProyectosUsuarios(proyectos_idproyecto_id=project.idproyecto,
-                                           usuarios_idusuario_id=user.idusuario)
-            if assignment:
-                assignment.save()
-                return Response(status=status.HTTP_200_OK)
-            else:
-                return Response({'error': 'Error al asignar proyecto-usuario.'}, status=status.HTTP_400_BAD_REQUEST)
+            project = Proyecto.objects.get(idproyecto=request.data['idproyecto'])
+            user = Usuario.objects.get(idusuario=request.data['idusuario'])
+
+            if project and user:
+                assignment = ProyectosUsuarios(proyectos_idproyecto_id=project.idproyecto,
+                                               usuarios_idusuario_id=user.idusuario)
+                if assignment:
+                    assignment.save()
+                    return Response(status=status.HTTP_200_OK)
+                else:
+                    return Response({'error': 'Error al asignar proyecto-usuario.'}, status=status.HTTP_400_BAD_REQUEST)
+        except Proyecto.DoesNotExist:
+            raise Http404
