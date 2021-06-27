@@ -37,18 +37,29 @@ export class ProjectViewComponent implements OnInit {
   }
 
   deleteProject(idProject): void {
-    this.projectService.deleteProject(this.project.idproyecto).subscribe(
-      (p: Project) => {
-        this.router.navigate(['projects/user/', this.userId]);
-      },
-      (error: any) => {
-        Swal.fire({
-          icon: 'error',
-          text:
-            'Este proyecto tiene tareas asociadas. Elimine las tareas para eliminar el proyecto.',
-        });
-      }
-    );
+    this.projectService
+      .deleteProjectAssignment(this.project.idproyecto)
+      .subscribe(
+        (p: Project) => {
+          this.projectService.deleteProject(this.project.idproyecto).subscribe(
+            (p: Project) => {
+              this.router.navigate(['projects/user/', this.userId]);
+            },
+            (error: any) => {
+              Swal.fire({
+                icon: 'error',
+                text: 'Error al eliminar proyecto. Este proyecto tiene bloques pendientes.',
+              });
+            }
+          );
+        },
+        (error: any) => {
+          Swal.fire({
+            icon: 'error',
+            text: 'Error al eliminar asignación del usuario. Inténtelo de nuevo.',
+          });
+        }
+      );
   }
 
   getAllProjectHours(idProject: string): void {

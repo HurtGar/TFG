@@ -70,4 +70,11 @@ export class BlockService {
       { headers }
     );
   }
+
+  deleteBlockAssignment(idBlock: number): Observable<any> {
+    const blockUrl = environment.baseurl.concat(
+      `/block/delete/assignment/${idBlock}`
+    );
+    return this.http.delete(blockUrl, { headers });
+  }
 }

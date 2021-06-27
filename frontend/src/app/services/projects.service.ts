@@ -93,4 +93,11 @@ export class ProjectsService {
       { headers }
     );
   }
+
+  deleteProjectAssignment(idProject: number): Observable<any> {
+    const taskUrl = environment.baseurl.concat(
+      `/project/delete/assignment/${idProject}`
+    );
+    return this.http.delete(taskUrl, { headers });
+  }
 }
