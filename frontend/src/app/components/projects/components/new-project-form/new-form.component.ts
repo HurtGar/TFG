@@ -139,7 +139,25 @@ export class NewProjectFormComponent implements OnInit {
     }
 
     this.projectService.createProject(formObject).subscribe(
-      (p: Project) => {},
+      (p: Project) => {
+        var assign = {
+          idusuario: this.userId,
+          idproyecto: this.lastProject.idproyecto + 1,
+        };
+
+        // Creamos objeto a enviar para la asignación
+
+        this.projectService.setAssignmentProject(assign).subscribe((a) => {});
+
+        this.recordModificationService
+          .insertNewRecordModificationProject(
+            recordProject,
+            this.lastProject.idproyecto + 1
+          )
+          .subscribe((rt) => {
+            this.router.navigate(['projects/user/', this.userId]);
+          });
+      },
       (error: any) => {
         Swal.fire({
           icon: 'error',
@@ -147,24 +165,6 @@ export class NewProjectFormComponent implements OnInit {
         });
       }
     );
-
-    var assign = {
-      idusuario: this.userId,
-      idproyecto: this.lastProject.idproyecto + 1,
-    };
-
-    // Creamos objeto a enviar para la asignación
-
-    this.projectService.setAssignmentProject(assign).subscribe((a) => {});
-
-    this.recordModificationService
-      .insertNewRecordModificationProject(
-        recordProject,
-        this.lastProject.idproyecto + 1
-      )
-      .subscribe((rt) => {
-        this.router.navigate(['projects/user/', this.userId]);
-      });
   }
 
   private checkDates(dateA: string, dateB: string): boolean {
