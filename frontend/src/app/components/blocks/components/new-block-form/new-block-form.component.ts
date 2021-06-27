@@ -157,13 +157,21 @@ export class NewBlockFormComponent implements OnInit {
       delete formObject.finbloque;
     }
 
-    var assign = {
-      idbloque: this.lastBlock.idbloque + 1,
-      idusuario: this.userId,
-    };
     this.blockService.createBlock(formObject).subscribe(
       (b: Block) => {
+        var assign = {
+          idbloque: this.lastBlock.idbloque + 1,
+          idusuario: this.userId,
+        };
         this.blockService.setAssignmentBlock(assign).subscribe((b) => {});
+        this.recordModificationService
+          .insertNewRecordModificationBlock(
+            recordBlock,
+            this.lastBlock.idbloque + 1
+          )
+          .subscribe((rb) => {
+            this.router.navigate(['blocks/user/', this.userId]);
+          });
       },
       (error: any) => {
         Swal.fire({
@@ -172,15 +180,6 @@ export class NewBlockFormComponent implements OnInit {
         });
       }
     );
-
-    this.recordModificationService
-      .insertNewRecordModificationBlock(
-        recordBlock,
-        this.lastBlock.idbloque + 1
-      )
-      .subscribe((rb) => {
-        this.router.navigate(['blocks/user/', this.userId]);
-      });
   }
 
   private checkDates(dateA: string, dateB: string): boolean {
