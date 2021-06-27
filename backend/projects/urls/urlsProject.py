@@ -26,5 +26,6 @@ urlpatterns = [
     path('last_inserted', viewsProject.GetLastInsertedProject.as_view(), name='ultima_insercion'),
     path('assignment', viewsProject.CreateAssignmentProject.as_view(), name='asignar_proyecto'),
     path('users', viewsProject.GetAllUsers.as_view(), name='usuarios_app'),
+    path('delete/assignment/<int:id_project>', viewsProject.DeleteProjectAssignment.as_view(), name='eliminar_asignacion'),
 
 ]

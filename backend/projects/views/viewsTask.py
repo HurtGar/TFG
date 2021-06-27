@@ -340,12 +340,20 @@ class DeleteTask(APIView):
         except Tarea.DoesNotExist:
             raise Http404
 
+    def delete_object(self, id_task):
+        try:
+            return HistorialModificacionTarea.objects.get(tareas_idtarea_id=id_task)
+        except HistorialModificacionTarea.DoesNotExist:
+            raise Http404
+
     def delete(self, request, id_task, format=None):
         """ Remove a task with de id = id_task
             :param id_task: Unique identifier of the task
             :param request:
             :returns Response --> Respuesta del servidor con código 204.
         """
+        history = self.delete_object(id_task)
+        history.delete()
         task = self.get_object(id_task)
         task.delete()
         return Response(status=status.HTTP_200_OK)

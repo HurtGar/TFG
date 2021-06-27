@@ -230,6 +230,22 @@ class UpdateBlock(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class DeleteAssignmentBlock(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def get_object(self, id_block):
+        try:
+            return BloquesUsuarios.objects.filter(bloques_idbloque_id=id_block)
+        except BloquesUsuarios.DoesNotExist:
+            raise Http404
+
+    def delete(self, request, id_block):
+        block = self.get_object(id_block)
+        block.delete()
+        return Response(status=status.HTTP_200_OK)
+
+
 class DeleteBlock(APIView):
     """"""
     permission_classes = [IsAuthenticated]
@@ -241,12 +257,20 @@ class DeleteBlock(APIView):
         except Bloque.DoesNotExist:
             raise Http404
 
+    def delete_object(self, id_block):
+        try:
+            return HistorialModificacionBloque.objects.get(bloques_idbloque_id=id_block)
+        except HistorialModificacionBloque.DoesNotExist:
+            raise Http404
+
     def delete(self, request, id_block, format=None):
         """ Remove a project with de id = id_project
             :param id_project: Unique identifier of the project
             :param request:
             :returns Response --> Respuesta del servidor con código 204.
         """
+        history = self.delete_object(id_block)
+        history.delete()
         block = self.get_object(id_block)
         block.delete()
         return Response(status=status.HTTP_200_OK)

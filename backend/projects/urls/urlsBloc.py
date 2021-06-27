@@ -22,5 +22,5 @@ urlpatterns = [
          name='last_modification_record'),
     path('last_inserted', viewsBlock.GetLastInsertedBlock.as_view(), name='ultima_insercion'),
     path('assignment', viewsBlock.CreateAssignmentBlock.as_view(), name='asignar_bloque'),
-
+    path('delete/assignment/<int:id_block>', viewsBlock.DeleteAssignmentBlock.as_view(), name='borrar_asignacion_bloque'),
 ]

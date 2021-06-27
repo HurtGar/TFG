@@ -325,6 +325,22 @@ class UpdateProject(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class DeleteProjectAssignment(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def get_object(self, id_project):
+        try:
+            return ProyectosUsuarios.objects.filter(proyectos_idproyecto_id=id_project)
+        except ProyectosUsuarios.DoesNotExist:
+            raise Http404
+
+    def delete(self, request, id_project):
+        project = self.get_object(id_project)
+        project.delete()
+        return Response(status=status.HTTP_200_OK)
+
+
 
 class DeleteProject(APIView):
     """"""
@@ -337,12 +353,20 @@ class DeleteProject(APIView):
         except Proyecto.DoesNotExist:
             raise Http404
 
+    def delete_object(self, id_project):
+            try:
+                return HistorialModificacionProyecto.objects.get(proyectos_idproyecto_id=id_project)
+            except HistorialModificacionProyecto.DoesNotExist:
+                raise Http404
+
     def delete(self, request, id_project, format=None):
         """ Remove a project with de id = id_project
             :param id_project: Unique identifier of the project
             :param request:
             :returns Response --> Respuesta del servidor con código 200-OK.
         """
+        history = self.delete_object(id_project)
+        history.delete()
         proyecto = self.get_object(id_project)
         proyecto.delete()
         return Response(status=status.HTTP_200_OK)
