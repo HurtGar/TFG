@@ -5,6 +5,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.db import connection
 
 from users.serializer import *
 from projects.serializer import *
@@ -136,14 +137,21 @@ class GetLastInsertedTask(APIView):
 
     def get_object(self):
         try:
-            return Tarea.objects.latest('idtarea')
+            cursor = connection.cursor()
+            cursor.execute('''SELECT last_value from "gestion".tareas_idtarea_seq''')
+            return cursor
         except Tarea.DoesNotExist:
             raise Http404
 
     def get(self, request):
         task = self.get_object()
-        serializer = TareaSerializer(task)
-        return Response(serializer.data)
+        for i in task:
+            for j in i:
+                if j == 1:
+                    return Response(0)
+                else:
+                    return Response(j)
+
 
 
 class GetRecordsFromATask(APIView):
