@@ -19,7 +19,7 @@ export class NewBlockFormComponent implements OnInit {
   block: Block;
   data: FormGroup;
   dataRecordBlock: FormGroup;
-  lastBlock: Block;
+  lastBlock: number;
   error: any = { isError: false };
   userId: string;
 
@@ -160,14 +160,14 @@ export class NewBlockFormComponent implements OnInit {
     this.blockService.createBlock(formObject).subscribe(
       (b: Block) => {
         var assign = {
-          idbloque: this.lastBlock.idbloque + 1,
+          idbloque: this.lastBlock + 1,
           idusuario: this.userId,
         };
         this.blockService.setAssignmentBlock(assign).subscribe((b) => {});
         this.recordModificationService
           .insertNewRecordModificationBlock(
             recordBlock,
-            this.lastBlock.idbloque + 1
+            this.lastBlock + 1
           )
           .subscribe((rb) => {
             this.router.navigate(['blocks/user/', this.userId]);

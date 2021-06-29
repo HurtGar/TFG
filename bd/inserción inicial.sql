@@ -326,7 +326,10 @@ insert
 values ('Muy alta',
 5);
 
---ALTER SEQUENCE gestion.proyectos_idproyecto_seq RESTART WITH 4;
+--ALTER SEQUENCE gestion.usuarios_idusuario_seq RESTART WITH 2;
 
+
+--SELECT nextval('gestion.tareas_idtarea_seq');
+--SELECT last_value from "gestion".usuarios_idusuario_seq;
 
 

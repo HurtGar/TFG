@@ -86,9 +86,10 @@ export class TaskViewComponent implements OnInit {
 
   assignUser(idTask: number): void {
     const assign = JSON.stringify({
-      idtarea: idTask,
-      idusuario: this.idusuario,
+      tareas_idtarea: idTask,
+      usuarios_idusuario: this.idusuario,
     });
+    console.log(assign);
 
     this.taskService.setAssignmentTask(assign).subscribe(
       (asig) => {

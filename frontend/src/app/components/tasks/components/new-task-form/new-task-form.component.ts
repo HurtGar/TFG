@@ -32,7 +32,7 @@ export class NewTaskFormComponent implements OnInit {
   dataUserTask: FormGroup;
   dataRecordTask: FormGroup;
   userTask: UserTask;
-  lastTask: Task;
+  lastTask: number;
   error: any = { isError: false };
   userId: string;
 
@@ -232,7 +232,7 @@ export class NewTaskFormComponent implements OnInit {
       });
     }
     // Asignar siguiente tarea para insertar en tareas_usuarios
-    this.dataUserTask.get('tareas_idtarea').setValue(this.lastTask.idtarea + 1);
+    this.dataUserTask.get('tareas_idtarea').setValue(this.lastTask + 1);
 
     const formObject = this.data.getRawValue();
     JSON.stringify(formObject);
@@ -291,7 +291,7 @@ export class NewTaskFormComponent implements OnInit {
         .createAssignment(userTaskObject)
         .subscribe((ut: UserTask) => {});
       this.recordModificationService
-        .insertNewRecordModificationTask(recordTask, this.lastTask.idtarea + 1)
+        .insertNewRecordModificationTask(recordTask, this.lastTask + 1)
         .subscribe((rt) => {
           this.router.navigate(['task/user/', this.userId]);
         });
