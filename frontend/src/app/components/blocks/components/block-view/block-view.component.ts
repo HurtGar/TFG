@@ -35,15 +35,24 @@ export class BlockViewComponent implements OnInit {
   }
 
   deleteBlock(idbloque): void {
-    this.blockService.deleteBlock(this.block.idbloque).subscribe(
+    this.blockService.deleteBlockAssignment(this.block.idbloque).subscribe(
       (b: Block) => {
-        this.router.navigate(['blocks/user/', this.userId]);
+        this.blockService.deleteBlock(this.block.idbloque).subscribe(
+          (b: Block) => {
+            this.router.navigate(['blocks/user/', this.userId]);
+          },
+          (error: any) => {
+            Swal.fire({
+              icon: 'error',
+              text: 'Error al eliminar proyecto. Este proyecto tiene bloques pendientes.',
+            });
+          }
+        );
       },
       (error: any) => {
         Swal.fire({
           icon: 'error',
-          text:
-            'Este bloque tiene tareas asociadas. No se puede borrar. Borre las tareas asociadas previamente.',
+          text: 'Error al eliminar asignación del usuario. Inténtelo de nuevo.',
         });
       }
     );

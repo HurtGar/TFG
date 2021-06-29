@@ -15,7 +15,7 @@ export class NewProjectFormComponent implements OnInit {
   project: Project;
   data: FormGroup;
   dataRecord: FormGroup;
-  lastProject: Project;
+  lastProject: number;
   error: any = { isError: false };
   userId: string;
   constructor(
@@ -142,7 +142,7 @@ export class NewProjectFormComponent implements OnInit {
       (p: Project) => {
         var assign = {
           idusuario: this.userId,
-          idproyecto: this.lastProject.idproyecto + 1,
+          idproyecto: this.lastProject + 1,
         };
 
         // Creamos objeto a enviar para la asignación
@@ -152,7 +152,7 @@ export class NewProjectFormComponent implements OnInit {
         this.recordModificationService
           .insertNewRecordModificationProject(
             recordProject,
-            this.lastProject.idproyecto + 1
+            this.lastProject + 1
           )
           .subscribe((rt) => {
             this.router.navigate(['projects/user/', this.userId]);

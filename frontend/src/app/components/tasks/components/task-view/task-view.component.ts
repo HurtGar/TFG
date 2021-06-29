@@ -34,24 +34,24 @@ export class TaskViewComponent implements OnInit {
 
   deleteTask(idTask): void {
     this.taskService.deleteTaskAssignment(this.task.idtarea).subscribe(
-      (t: Task) => {},
-      (error: any) => {
-        Swal.fire({
-          icon: 'error',
-          text: 'Error al eliminar asignación del usuario. Inténtelo de nuevo.',
-        });
-      }
-    );
-
-    this.taskService.deleteTask(this.task.idtarea).subscribe(
       (t: Task) => {
-        this.router.navigate(['task/user/', this.userId]);
+        this.taskService.deleteTask(this.task.idtarea).subscribe(
+          (t: Task) => {
+            this.router.navigate(['task/user/', this.userId]);
+          },
+          (error: any) => {
+            Swal.fire({
+              icon: 'error',
+              text:
+                'Error al eliminar tarea. Inténtelo de nuevo.',
+            });
+          }
+        );
       },
       (error: any) => {
         Swal.fire({
           icon: 'error',
-          text:
-            'Error al eliminar tarea. Inténtelo de nuevo.',
+          text: 'Error al eliminar asignación del usuario. Inténtelo de nuevo.',
         });
       }
     );
@@ -86,9 +86,10 @@ export class TaskViewComponent implements OnInit {
 
   assignUser(idTask: number): void {
     const assign = JSON.stringify({
-      idtarea: idTask,
-      idusuario: this.idusuario,
+      tareas_idtarea: idTask,
+      usuarios_idusuario: this.idusuario,
     });
+    console.log(assign);
 
     this.taskService.setAssignmentTask(assign).subscribe(
       (asig) => {
