@@ -46,11 +46,9 @@ INSERT INTO gestion.estados (descestado) VALUES ('Cerrada');
 INSERT INTO gestion.prioridades (descprioridad ,nivelprioridad) VALUES ('Ninguna',0);
 INSERT INTO gestion.prioridades (descprioridad,nivelprioridad) VALUES ('Muy baja',1);
 INSERT INTO gestion.prioridades (descprioridad,nivelprioridad) VALUES ('Baja',2);
-INSERT INTO gestion.prioridades (descprioridad,nivelprioridad) VALUES ('Media-Baja',3);
-INSERT INTO gestion.prioridades (descprioridad,nivelprioridad) VALUES ('Media',4);
-INSERT INTO gestion.prioridades (descprioridad,nivelprioridad) VALUES ('Media-Alta',5);
-INSERT INTO gestion.prioridades (descprioridad,nivelprioridad) VALUES ('Alta',6);
-INSERT INTO gestion.prioridades (descprioridad,nivelprioridad) VALUES ('Muy alta',7);
+INSERT INTO gestion.prioridades (descprioridad,nivelprioridad) VALUES ('Media',3);
+INSERT INTO gestion.prioridades (descprioridad,nivelprioridad) VALUES ('Alta',4);
+INSERT INTO gestion.prioridades (descprioridad,nivelprioridad) VALUES ('Muy alta',5);
 
 -- TAREAS
 INSERT INTO gestion.tareas
