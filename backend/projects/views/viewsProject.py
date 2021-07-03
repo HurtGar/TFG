@@ -5,6 +5,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.db import connection
 
 from users.serializer import *
 from projects.serializer import *
@@ -185,19 +186,23 @@ class GetAllTaskFromAProject(APIView):
 
 
 class GetLastInsertedProject(APIView):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
 
     def get_object(self):
         try:
-            return Proyecto.objects.latest('idproyecto')
+            cursor = connection.cursor()
+            cursor.execute('''SELECT last_value from "gestion".proyectos_idproyecto_seq''')
+            return cursor
         except Proyecto.DoesNotExist:
             raise Http404
 
     def get(self, request):
         project = self.get_object()
-        serializer = ProyectoSerializer(project)
-        return Response(serializer.data)
+        for i in project:
+            for j in i:
+                if j == 1:
+                    return Response(0)
+                else:
+                    return Response(j)
 
 
 class GetTotalHoursFromAProject(APIView):

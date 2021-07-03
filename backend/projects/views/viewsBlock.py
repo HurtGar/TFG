@@ -5,6 +5,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.db import connection
 
 from projects.serializer import *
 from users.serializer import *
@@ -306,14 +307,20 @@ class GetLastInsertedBlock(APIView):
 
     def get_object(self):
         try:
-            return Bloque.objects.latest('idbloque')
+            cursor = connection.cursor()
+            cursor.execute('''SELECT last_value from "gestion".bloques_idbloque_seq''')
+            return cursor
         except Bloque.DoesNotExist:
             raise Http404
 
     def get(self, request):
         block = self.get_object()
-        serializer = BloqueSerializer(block)
-        return Response(serializer.data)
+        for i in block:
+            for j in i:
+                if j == 1:
+                    return Response(0)
+                else:
+                    return Response(j)
 
 
 class CreateAssignmentBlock(APIView):
